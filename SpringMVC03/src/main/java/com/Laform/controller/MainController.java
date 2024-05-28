@@ -21,17 +21,24 @@ public class MainController {
 	private CorperationMapper corpMapper;
 
 	@RequestMapping("/") // 메인 화면
-	public String main(Model model) {
+	public String index() {
+		return "redirect:/main.do";
+	}
+	
+	@RequestMapping("main.do") // 메인 화면
+	public String main() {
 		return "Main";
 	}
 
 	@PostMapping("/login.do") // 로그인
-	public String login(String corp_key, RedirectAttributes rttr, HttpSession session) {
+	public String login(String corp_key, RedirectAttributes rttr, HttpSession session,Model model) {
 
 		// System.out.println("기업 로그인 키 : "+corp_key);
 
 		// 관리자일때 , 관리자 페이지로 이동
 		if (corp_key.equals("admin")) {
+			List<tb_corperation> list = corpMapper.corpList();
+			model.addAttribute("list",list);
 			return "Manager";
 		}
 
@@ -54,10 +61,21 @@ public class MainController {
 
 		// session.removeAttribute("mem");
 		session.invalidate();
-
+		//System.out.println("로그아웃");
 		return "redirect:/";
 	}
 
+	
+	
+	//기업 등록하기
+	@PostMapping("/corpInsert")
+	public String corpInsert(tb_corperation corp, Model model) {
+		System.out.println(corp.toString());
+		corpMapper.corpInsert(corp);
+		List<tb_corperation> list = corpMapper.corpList();
+		model.addAttribute("list",list);
+		return "Manager";
+	}
 
 	
 	

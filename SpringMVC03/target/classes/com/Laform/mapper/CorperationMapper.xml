@@ -19,7 +19,7 @@
 	
 	<!-- 기업 추가  -->
 	<insert id="corpInsert" parameterType="com.Laform.entity.tb_corperation">
-		
+	insert into tb_corperation (corp_name,corp_tel,corp_email,corp_addr,joined_at) VALUES(#{corp_name},#{corp_tel},#{corp_email},#{corp_addr},NOW())
 	</insert>
 	
 	<!-- 기업 삭제 -->
@@ -29,7 +29,6 @@
 	
 	<!-- 기업 정보 수정 -->
 	<update id="corpUpdate" parameterType="com.Laform.entity.tb_corperation">
-	
 	</update>
 
 

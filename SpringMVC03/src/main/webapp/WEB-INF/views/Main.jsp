@@ -47,7 +47,7 @@
 	<!-- Header -->
 	<header id="header" class="alt">
 		<div class="logo">
-			<a href="Main.html">La Form
+			<a href="main.do">La Form
 				<span> by Hodadak</span>
 			</a>
 		</div>

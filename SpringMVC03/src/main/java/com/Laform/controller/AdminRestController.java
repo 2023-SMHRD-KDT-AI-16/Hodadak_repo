@@ -21,17 +21,13 @@ public class AdminRestController {
 	private CorperationMapper corpMapper;
 
 	// 기업 전체보기
-	@GetMapping("/all") // board/all
+	@GetMapping("corpList.do") // board/all
 	public List<tb_corperation> corpList() {
 		List<tb_corperation> list = corpMapper.corpList();
 		return list;
 	}
 
-	//기업 등록하기
-	@PostMapping("/new")
-	public void corpInsert(tb_corperation corp) {
-		corpMapper.corpInsert(corp);
-	}
+
 
 	// 기업 상세보기
 	@GetMapping("/{corp_key}") // board/{idx}
