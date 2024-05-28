@@ -2,13 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Laform.mapper.CorperationMapper">
 
-<select id="corpList" resultType="com.Laform.entity.tb_corperation">
-		select * from tb_corperation order by joined_at desc
-</select>
+	<!-- 로그인 -->
+	<select id="login" parameterType="String" resultType="com.Laform.entity.tb_corperation">
+	select * from tb_corperation where corp_key = #{corp_key}
+	</select>
+	
+	<!-- 기업 목록 출력 -->
+	<select id="corpList" resultType="com.Laform.entity.tb_corperation">
+			select * from tb_corperation order by joined_at desc
+	</select>
+	
+	<!-- 기업 정보 -->
+	<select id="corpDetail" resultType="com.Laform.entity.tb_corperation" parameterType="String">
+		SELECT * FROM tb_corperation WHERE corp_key = #{corp_key}
+	</select>
+	
+	<!-- 기업 추가  -->
+	<insert id="corpInsert" parameterType="com.Laform.entity.tb_corperation">
+		
+	</insert>
+	
+	<!-- 기업 삭제 -->
+	<delete id="corpDelete" parameterType="String">
+		DELETE FROM corp_key WHERE corp_key = #{corp_key}
+	</delete>
+	
+	<!-- 기업 정보 수정 -->
+	<update id="corpUpdate" parameterType="com.Laform.entity.tb_corperation">
+	
+	</update>
 
-<select id="login" parameterType="String" resultType="com.Laform.entity.tb_corperation">
-select * from tb_corperation where corp_key = #{corp_key}
-</select>
 
 
 
