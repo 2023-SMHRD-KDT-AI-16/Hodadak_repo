@@ -148,43 +148,43 @@
 		})
 	}
 	
-	function makeView(data){ //data = [{key:value},{},{},...]
-		console.log(data)
-		var listHtml = "<table>"
-			listHtml +="<thead>"
-			listHtml +="<tr>"
-			listHtml +="<th>번호</th>"
-			listHtml +="<th>기업코드</th>"
-			listHtml +="<th>기업명</th>"
-			listHtml +="<th>전화번호</th>"
-			listHtml +="<th>이메일</th>"
-			listHtml +="<th>주소</th>"
-			listHtml +="<th>수정</th>"
-			listHtml +="<th>삭제</th>"
-			listHtml +="</tr>"
-			listHtml +="</thead>"
-			
-			listHtml +="</tbody>"
-		$.each(data,function(index,obj){
-			listHtml +="<tr>"
-			listHtml+= "<td>"+(index+1)+"</td>";
-			listHtml +="<td>"+obj.corp_key+"</td>"
-			listHtml +="<td id='t"+obj.corp_key+"'>"+obj.corp_name+"</td>"
-			listHtml +="<td>"+obj.corp_tel+"</td>"
-			listHtml +="<td>"+obj.corp_addr+"</td>"
-			listHtml +="<td>"+obj.corp_email+"</td>"
-			listHtml +="<td><button class='btn btn-sm' onclick='goUpdateForm("+obj.corp_tel+")'>수정</button></td>"
-			listHtml +="<td><button class='btn btn-sm' onclick='goDelete("+obj.corp_key+")'>삭제</button></td>"
-			listHtml +="</tr>"
-	})
-			listHtml +="</tbody>"
-			listHtml += "</table>"
-			
+	function makeView(data) { // data = [{key:value}, {}, {}, ...]
+	    console.log(data);
+	    var listHtml = "<table>";
+	    listHtml += "<thead>";
+	    listHtml += "<tr>";
+	    listHtml += "<th>번호</th>";
+	    listHtml += "<th>기업코드</th>";
+	    listHtml += "<th>기업명</th>";
+	    listHtml += "<th>전화번호</th>";
+	    listHtml += "<th>이메일</th>";
+	    listHtml += "<th>주소</th>";
+	    listHtml += "<th>수정</th>";
+	    listHtml += "<th>삭제</th>";
+	    listHtml += "</tr>";
+	    listHtml += "</thead>";
 
-		//view라는 id값을 가진 요소를 가지고 온 다음에 
-		//그 태그 안쪽에 html형식으로 뿌려주겠다 
-		$("#view").html(listHtml);
-		
+	    listHtml += "<tbody>"; // 여기에 tbody 시작 태그 추가
+
+	    $.each(data, function(index, obj) {
+	        listHtml += "<tr>";
+	        listHtml += "<td>" + (index + 1) + "</td>";
+	        listHtml += "<td>" + obj.corp_key + "</td>";
+	        listHtml += "<td id='t" + obj.corp_key + "'>" + obj.corp_name + "</td>";
+	        listHtml += "<td>" + obj.corp_tel + "</td>";
+	        listHtml += "<td>" + obj.corp_email + "</td>";
+	        listHtml += "<td>" + obj.corp_addr + "</td>";
+	        listHtml += "<td><button class='btn btn-sm' onclick='goUpdateForm(\"" + obj.corp_key + "\")'>수정</button></td>";
+	        listHtml += "<td><button class='btn btn-sm' onclick='goDelete(\"" + obj.corp_key + "\")'>삭제</button></td>";
+	        listHtml += "</tr>";
+	    });
+
+	    listHtml += "</tbody>"; // 여기서 tbody 종료 태그 추가
+	    listHtml += "</table>";
+
+	    // view라는 id값을 가진 요소를 가지고 온 다음에
+	    // 그 태그 안쪽에 html형식으로 뿌려주겠다
+	    $("#view").html(listHtml);
 	}
 	
 	
@@ -195,7 +195,7 @@
 	
 	//게시글 수정하는 화면 (Form) 만들어주는 함수 
 	function goUpdateForm(key){
-		console.log(key)	
+		console.log(key)
 	}
 	
 	</script>
