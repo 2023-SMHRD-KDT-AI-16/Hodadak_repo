@@ -64,8 +64,11 @@
 
 	<!-- Input Wrapper -->
 	<div class="input-wrapper">
-		<input type="password" id="input-code" placeholder="코드를 입력하세요." onkeypress="handleKeyPress(event)">
-	</div>
+			         <form action="login.do" method="post">
+        <input type="password" id="input-code" name="corp_key" placeholder="코드를 입력하세요." onkeypress="handleKeyPress(event)">
+        <button type="submit" id="corp_login" style="visibility: hidden"></button>
+    	</form>
+    </div>
 
 	<!-- Banner -->
 	<section class="banner full">
@@ -106,30 +109,59 @@
 			</div>
 		</article>
 	</section>
+	
+	
+	<!-- 다이얼로그창(모달) -->
+	<!-- 회원가입 실패시 나오게될 모달창 -->
+	<!-- Modal -->
+	  <div class="modal fade" id="myMessage" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div id="messageType" class="modal-content panel-info">
+	        <div class="modal-header panel-heading">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">${msgType}</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p id="">${msg}</p>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	
+	
+	
+	
 	<!-- Scripts -->
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery.scrollex.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/skel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-	<script>
-		function checkCode() {
-			var inputCode = document.getElementById("input-code").value;
-			if (inputCode === "123") { // 입력값이 "123"인 경우
-				window.location.href = "/Dashboard.html"; // 기업회원 대시보드 페이지로 이동
-			} else if (inputCode === "456") { // 입력값이 "456"인 경우
-				window.location.href = "/Manager.html"; // 관리자 전용 페이지로 이동
-			} else {
-				alert("올바르지 않은 코드입니다. 다시 시도해주세요."); // 올바르지 않은 코드일 경우 경고 메시지 출력
-				document.getElementById("input-code").value = ""; // 입력칸 비우기
-			}
-		}
-
-		function handleKeyPress(event) {
-			if (event.keyCode === 13) { // 만약 누른 키가 엔터 키라면
-				checkCode(); // 코드 확인 함수 호출
-			}
-		}
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+  		if(${not empty msgType}){
+  			if(${msgType eq "실패 메세지"}){
+  				$("#messageType").attr("class", "modal-content panel-warning");
+  			}
+  			$("#myMessage").modal("show");
+  		}
+  	});
+  
+	
+  function handleKeyPress(event) {
+      if (event.keyCode === 13) { // 만약 누른 키가 엔터 키라면
+    	  $("#corp_login").trigger("click"); // 코드 확인 함수 호출
+      }
+  }
 	</script>
 
 </body>
