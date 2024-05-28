@@ -5,11 +5,11 @@
 
 <head>
 	<title>La Form</title>
-	<link href="./assets/img/프리지아.png" rel="icon" type="image/png">
+	<link href="${pageContext.request.contextPath}/resources/img/프리지아.png" rel="icon" type="image/png">
 	<meta charset="utf-8">
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 	<style>
 		/* 입력 필드 가운데 정렬을 위한 스타일 */
 		.input-wrapper {
