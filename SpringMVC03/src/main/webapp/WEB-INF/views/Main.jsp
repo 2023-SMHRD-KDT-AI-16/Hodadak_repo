@@ -3,6 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 
+
 <head>
 	<title>La Form</title>
 	<link href="${pageContext.request.contextPath}/resources/img/프리지아.png" rel="icon" type="image/png">
