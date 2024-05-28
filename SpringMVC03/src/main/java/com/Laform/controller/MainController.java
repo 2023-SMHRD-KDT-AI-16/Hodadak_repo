@@ -30,7 +30,7 @@ public class MainController {
 	@PostMapping("/login.do") //로그인 
 	public String login(String corp_key, RedirectAttributes rttr, HttpSession session) {
 		
-		System.out.println("기업 로그인 키 : "+corp_key);
+		//System.out.println("기업 로그인 키 : "+corp_key);
 		tb_corperation login_corp =corpMapper.login(corp_key);
 	
 		if(login_corp == null) {
@@ -48,6 +48,13 @@ public class MainController {
 	}
 	
 }
+	
+	
+	
+	@RequestMapping("/Main") //메인 화면 
+	public String Main() {
+		return "Main";
+	}
 
 
 }

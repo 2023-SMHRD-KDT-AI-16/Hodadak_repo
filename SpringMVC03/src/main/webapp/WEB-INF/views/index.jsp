@@ -41,9 +41,7 @@
 </head>
 <body>
 
-  
-<div class="container">
-	<jsp:include page="common/header.jsp"></jsp:include>
+
 	
 	
   <h3>Spring MVC03</h3>
