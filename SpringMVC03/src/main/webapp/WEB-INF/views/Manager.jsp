@@ -5,12 +5,12 @@
 
 <head>
 	<title>La Form</title>
-	<link href="./assets/img/프리지아.png" rel="icon" type="image/png">
+	<link href="${pageContext.request.contextPath}/resources/img/프리지아.png" rel="icon" type="image/png">
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main1.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main1.css" />
 	<noscript>
-		<link rel="stylesheet" href="assets/css/noscript.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noscript.css" />
 	</noscript>
 </head>
 
@@ -27,16 +27,19 @@
 			<div class="content">
 				<div class="inner">
 					<h1>manager</h1>
-					<p>A fully responsive site template designed by <a href="https://html5up.net">HTML5 UP</a> and
-						released<br />
-						for free under the <a href="https://html5up.net/license">Creative Commons</a> license.</p>
+					<p>Su su su Supernova Nova Can't stop hyperstellar 
+						<br/>
+						Bring the light of a dying star Supernova
+						<br/>
+						for free under the Creative Commons
+					</p>
 				</div>
 			</div>
 			<nav>
 				<ul>
-					<li><a href="#about">회원수정</a></li>
 					<li><a href="#contact">회원추가</a></li>
 					<li><a href="#elements">기업목록</a></li>
+					<li><a href="${pageContext.request.contextPath}/Main.jsp">로그아웃</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -44,14 +47,7 @@
 		<!-- Main -->
 		<div id="main">
 
-			<!-- About -->
-			<article id="about">
-				<h2 class="major">회원정보수정</h2>
-				<span class="image main1"><img src="assets/img/pic03.jpg" alt="" /></span>
-				<p>ss</p>
-			</article>
-
-			<!-- Contact -->
+			<!-- 회원추가 -->
 			<article id="contact">
 				<h2 class="major">회원추가</h2>
 				<form method="post" action="#">
@@ -86,7 +82,8 @@
 				</ul>
 			</article>
 
-			<!-- Elements -->
+
+			<!-- 기업목록 -->
 			<article id="elements">
 				<h2 class="major">기업목록</h2>
 
@@ -119,48 +116,6 @@
 										<td>홍길동</td>
 										<td>서울특별시 강남구 역삼동 736-1 한솔빌딩 2층</td>
 									</tr>
-									<tr>
-										<td>삼성화재</td>
-										<td>010-1234-1234</td>
-										<td>홍길동</td>
-										<td>서울특별시 강남구 역삼동 736-1 한솔빌딩 2층</td>
-									</tr>
-									<tr>
-										<td>삼양홀딩스</td>
-										<td>010-1234-1234</td>
-										<td>홍길동</td>
-										<td>서울특별시 강남구 역삼동 736-1 한솔빌딩 2층</td>
-									</tr>
-									<tr>
-										<td>LG전자</td>
-										<td>010-1234-1234</td>
-										<td>홍길동</td>
-										<td>서울특별시 강남구 역삼동 736-1 한솔빌딩 2층</td>
-									</tr>
-									<tr>
-										<td>LG전자</td>
-										<td>010-1234-1234</td>
-										<td>absd@naver.com</td>
-										<td>서울특별시 강남구 역삼동 736-1 한솔빌딩 2층</td>
-									</tr>
-									<tr>
-										<td>LG전자</td>
-										<td>010-1234-1234</td>
-										<td>홍길동</td>
-										<td>서울특별시 강남구 역삼동 736-1 한솔빌딩 2층</td>
-									</tr>
-									<tr>
-										<td>LG전자</td>
-										<td>010-1234-1234</td>
-										<td>홍길동</td>
-										<td>서울특별시 강남구 역삼동 736-1 한솔빌딩 2층</td>
-									</tr>
-									<tr>
-										<td>LG전자</td>
-										<td>010-1234-1234</td>
-										<td>홍길동</td>
-										<td>서울특별시 강남구 역삼동 736-1 한솔빌딩 2층</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -181,11 +136,11 @@
 	<div id="bg"></div>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min2.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util2.js"></script>
-	<script src="assets/js/main1.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.min2.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/browser.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/breakpoints.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/util2.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main1.js"></script>
 
 </body>
 
