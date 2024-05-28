@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Laform.mapper.CorperationMapper">
+
+<select id="corpList" resultType="com.Laform.entity.tb_corperation">
+		select * from tb_corperation order by joined_at desc
+</select>
+
+<select id="login" parameterType="String" resultType="com.Laform.entity.tb_corperation">
+select * from tb_corperation where corp_key = #{corp_key}
+</select>
+
+
+
+
+
+
+</mapper>
