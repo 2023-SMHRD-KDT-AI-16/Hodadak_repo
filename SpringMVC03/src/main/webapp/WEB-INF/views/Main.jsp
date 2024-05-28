@@ -70,7 +70,7 @@
 	<!-- Banner -->
 	<section class="banner full">
 		<article>
-			<img src="assets/img/slide01.jpg" alt="" width="1440" height="961">
+			<img src="${pageContext.request.contextPath}/resources/img/slide01.jpg" alt="" width="1440" height="961">
 			<div class="inner">
 				<header>
 					<p>We recommend good products<a href="https://templated.co"> La Form</a></p>
@@ -79,7 +79,7 @@
 			</div>
 		</article>
 		<article>
-			<img src="assets/img/slide02.jpg" alt="" width="1440" height="961">
+			<img src="${pageContext.request.contextPath}/resources/img/slide02.jpg" alt="" width="1440" height="961">
 			<div class="inner">
 				<header>
 					<p>Mind, thoughts and expressions</p>
@@ -88,7 +88,7 @@
 			</div>
 		</article>
 		<article>
-			<img src="assets/img/slide03.jpg" alt="" width="1440" height="962">
+			<img src="${pageContext.request.contextPath}/resources/img/slide03.jpg" alt="" width="1440" height="962">
 			<div class="inner">
 				<header>
 					<p>A brand born to improve your daily condition with delicious and scientific products</p>
@@ -97,7 +97,7 @@
 			</div>
 		</article>
 		<article>
-			<img src="assets/img/slide05.jpg" alt="" width="1440" height="962">
+			<img src="${pageContext.request.contextPath}/resources/img/slide05.jpg" alt="" width="1440" height="962">
 			<div class="inner">
 				<header>
 					<p>Project Management</p>
@@ -107,11 +107,11 @@
 		</article>
 	</section>
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.scrollex.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/skel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<script>
 		function checkCode() {
 			var inputCode = document.getElementById("input-code").value;
