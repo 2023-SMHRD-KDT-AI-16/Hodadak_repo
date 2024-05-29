@@ -39,12 +39,14 @@ public class AdminRestController {
 	// 기업 삭제하기
 	@DeleteMapping("/{corp_key}") // board/{idx}
 	public void corpDelete(@PathVariable("corp_key") String corp_key) {
+	//	System.out.println(corp_key);
 		corpMapper.corpDelete(corp_key);
 	}
 
 	// 기업 수정하기
-	@PutMapping("/update")
+	@PutMapping("update")
 	public void corpUpdate(@RequestBody tb_corperation corp) { // idx, title, content
+		System.out.println(corp.toString());
 		corpMapper.corpUpdate(corp);
 	}
 }

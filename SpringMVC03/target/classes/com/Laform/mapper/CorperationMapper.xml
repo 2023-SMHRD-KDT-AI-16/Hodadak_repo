@@ -24,11 +24,12 @@
 	
 	<!-- 기업 삭제 -->
 	<delete id="corpDelete" parameterType="String">
-		DELETE FROM corp_key WHERE corp_key = #{corp_key}
+		DELETE FROM tb_corperation WHERE corp_key = #{corp_key}
 	</delete>
 	
 	<!-- 기업 정보 수정 -->
 	<update id="corpUpdate" parameterType="com.Laform.entity.tb_corperation">
+	  update tb_corperation set corp_name=#{corp_name},corp_tel=#{corp_tel},corp_email=#{corp_email},corp_addr=#{corp_addr} where corp_key = #{corp_key}
 	</update>
 
 

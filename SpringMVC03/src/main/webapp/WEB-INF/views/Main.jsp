@@ -57,7 +57,7 @@
 	<!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
-			<li><a href="Non_members.html">비회원</a></li>
+			<li><a href="nonMembers.do">비회원</a></li>
 			<li><a href="https://www.instagram.com/">관리자 요청하기</a></li>
 		</ul>
 	</nav>

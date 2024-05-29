@@ -10,14 +10,14 @@
     La Form
   </title>
   <!-- Favicon -->
-  <link href="${pageContext.request.contextPath}/img/프리지아.png" rel="icon" type="image/png">
+  <link href="${pageContext.request.contextPath}/resources/img/프리지아.png" rel="icon" type="image/png">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
-  <link href="./assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
-  <link href="./assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <link href="${pageContext.request.contextPath}/resources/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="${pageContext.request.contextPath}/resources/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link href="./assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+  <link href="${pageContext.request.contextPath}/resources/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -29,50 +29,34 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./Dashboard.html">
-        <img src="./assets/img/𝑳𝒂 𝑭𝒐𝒓𝒎_newtitle1.png" class="navbar-brand-img" alt="...">
+      <a class="navbar-brand pt-0" href="nonMembers.do">
+        <img src="${pageContext.request.contextPath}/resources/img/𝑳𝒂 𝑭𝒐𝒓𝒎_newtitle1.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
+          </a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="./assets/img/차은우.jpg
-">
+                <img alt="Image placeholder" src="${pageContext.request.contextPath}/resources/img/프리지아.png" ">
               </span>
             </div>
           </a>
-          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-            <div class=" dropdown-header noti-title">
-              <h6 class="text-overflow m-0">Welcome!</h6>
+          <div class=" dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                <div class=" dropdown-header noti-title">
+                  <h6 class="text-overflow m-0">Welcome!</h6>
+                </div>
+                <div class="dropdown-divider"></div>
+                <a href="main.do" class="dropdown-item">
+                  <i class="ni ni-user-run"></i>
+                  <span>Logout</span>
+                </a>
             </div>
-            <a href="./examples/profile.html" class="dropdown-item">
-              <i class="ni ni-single-02"></i>
-              <span>My profile</span>
-            </a>
-            <a href="./examples/profile.html" class="dropdown-item">
-              <i class="ni ni-settings-gear-65"></i>
-              <span>Settings</span>
-            </a>
-            <a href="./examples/profile.html" class="dropdown-item">
-              <i class="ni ni-calendar-grid-58"></i>
-              <span>Activity</span>
-            </a>
-            <a href="./examples/profile.html" class="dropdown-item">
-              <i class="ni ni-support-16"></i>
-              <span>Support</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="Main.html" class="dropdown-item">
-              <i class="ni ni-user-run"></i>
-              <span>Logout</span>
-            </a>
-          </div>
         </li>
       </ul>
       <!-- Collapse -->
@@ -81,8 +65,8 @@
         <div class="navbar-collapse-header d-md-none">
           <div class="row">
             <div class="col-6 collapse-brand">
-              <a href="./Dashboard.html">
-                <img src="assets/img/𝑳𝒂 𝑭𝒐𝒓𝒎_newtitle1.png">
+              <a href="nonMembers">
+                <img src="${pageContext.request.contextPath}/resources/img/𝑳𝒂 𝑭𝒐𝒓𝒎_newtitle1.png">
               </a>
             </div>
             <div class="col-6 collapse-close">
@@ -97,48 +81,17 @@
         <!-- Form -->
         <form class="mt-4 mb-3 d-md-none">
           <div class="input-group input-group-rounded input-group-merge">
-            <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search"
-              aria-label="Search">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <span class="fa fa-search"></span>
-              </div>
-            </div>
+
           </div>
-        </form>
-        <!-- Navigation -->
-        <ul class="navbar-nav">
-          <li class="nav-item  active ">
-            <a class="nav-link  active " href="./Dashboard.html">
-              <i class="ni ni-chart-bar-32 text-primary"></i> Dashboard
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="./examples/Check'O.html">
-              <i class="ni ni-check-bold text-blue"></i> Check'O
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="./examples/Suggest.html">
-              <i class="ni ni-basket text-orange"></i> Suggest
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="./examples/Profile.html">
-              <i class="ni ni-single-02 text-yellow"></i> Profile
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="./examples/upgrade.html">
-              <i class="ni ni-fat-add text-black"></i> 임시 추가 페이지
-            </a>
-          </li>
-          <ul class="navbar-nav">
-            <li class="nav-item active active-pro">
-              </a>
-            </li>
-          </ul>
       </div>
+    </div>
+    </form>
+    <ul class="navbar-nav">
+      <li class="nav-item active active-pro">
+        </a>
+      </li>
+    </ul>
+    </div>
     </div>
   </nav>
   <div class="main-content">
@@ -146,15 +99,13 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./Dashboard.html">Dashboard</a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="nonMembers.do">Trend Data</a>
         <!-- Form -->
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
           <div class="form-group mb-0">
-            <div class="input-group input-group-alternative">
+            <div class="input-group input-group-alternatdive">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
               </div>
-              <input class="form-control" placeholder="Search" type="text">
             </div>
           </div>
         </form>
@@ -165,10 +116,10 @@
               aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="./assets/img/차은우.jpg">
+                  <img alt="Image placeholder" src="${pageContext.request.contextPath}/resources/img/프리지아.png">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">김건형</span>
+                  <span class="mb-0 text-sm  font-weight-bold">User</span>
                 </div>
               </div>
             </a>
@@ -176,24 +127,8 @@
               <div class=" dropdown-header noti-title">
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
-              <a href="./examples/profile.html" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
-                <span>My profile</span>
-              </a>
-              <a href="./examples/profile.html" class="dropdown-item">
-                <i class="ni ni-settings-gear-65"></i>
-                <span>Settings</span>
-              </a>
-              <a href="./examples/profile.html" class="dropdown-item">
-                <i class="ni ni-calendar-grid-58"></i>
-                <span>Activity</span>
-              </a>
-              <a href="./examples/profile.html" class="dropdown-item">
-                <i class="ni ni-support-16"></i>
-                <span>Support</span>
-              </a>
               <div class="dropdown-divider"></div>
-              <a href="Main.html" class="dropdown-item">
+              <a href="main.do" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
               </a>
@@ -586,23 +521,24 @@
         <div class="row align-items-center justify-content-xl-between">
           <div class="col-xl-6">
             <div class="copyright text-center text-xl-left text-muted">
-              &copy; 2024 <a href="https://www.naver.com" class="font-weight-bold ml-1" target="_blank">연락처
+              &copy; 2024 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">연락처
                 들어갈곳</a>
             </div>
           </div>
           <div class="col-xl-6">
             <ul class="nav nav-footer justify-content-center justify-content-xl-end">
               <li class="nav-item">
-                <a href="https://www.naver.com" class="nav-link" target="_blank">연락처 들어갈곳</a>
+                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">연락처 들어갈곳</a>
               </li>
               <li class="nav-item">
-                <a href="https://www.naver.com" class="nav-link" target="_blank">About Us</a>
+                <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
               </li>
               <li class="nav-item">
-                <a href="https://www.naver.com" class="nav-link" target="_blank">Blog</a>
+                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
               </li>
               <li class="nav-item">
-                <a href="https://www.naver.com" class="nav-link" target="_blank">MIT License</a>
+                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link"
+                  target="_blank">MIT License</a>
               </li>
             </ul>
           </div>
@@ -611,13 +547,13 @@
     </div>
   </div>
   <!--   Core   -->
-  <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
-  <script src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/jquery/dist/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!--   Optional JS   -->
-  <script src="./assets/js/plugins/chart.js/dist/Chart.min.js"></script>
-  <script src="./assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/chart.js/dist/Chart.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/chart.js/dist/Chart.extension.js"></script>
   <!--   Argon JS   -->
-  <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/argon-dashboard.min.js?v=1.1.2"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script>
     window.TrackJS &&

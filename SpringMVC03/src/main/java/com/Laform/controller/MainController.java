@@ -30,6 +30,11 @@ public class MainController {
 		return "Main";
 	}
 
+	@RequestMapping("nonMembers.do") //비회원
+	public String nonMember() {
+		return "nonMembers";
+	}
+	
 	@PostMapping("/login.do") // 로그인
 	public String login(String corp_key, RedirectAttributes rttr, HttpSession session,Model model) {
 

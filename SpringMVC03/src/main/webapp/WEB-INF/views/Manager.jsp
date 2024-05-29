@@ -149,7 +149,7 @@
 	}
 	
 	function makeView(data) { // data = [{key:value}, {}, {}, ...]
-	    console.log(data);
+	   // console.log(data);
 	    var listHtml = "<table>";
 	    listHtml += "<thead>";
 	    listHtml += "<tr>";
@@ -170,12 +170,12 @@
 	        listHtml += "<tr>";
 	        listHtml += "<td>" + (index + 1) + "</td>";
 	        listHtml += "<td>" + obj.corp_key + "</td>";
-	        listHtml += "<td id='t" + obj.corp_key + "'>" + obj.corp_name + "</td>";
-	        listHtml += "<td>" + obj.corp_tel + "</td>";
-	        listHtml += "<td>" + obj.corp_email + "</td>";
-	        listHtml += "<td>" + obj.corp_addr + "</td>";
-	        listHtml += "<td><button class='btn btn-sm' onclick='goUpdateForm(\"" + obj.corp_key + "\")'>수정</button></td>";
-	        listHtml += "<td><button class='btn btn-sm' onclick='goDelete(\"" + obj.corp_key + "\")'>삭제</button></td>";
+	        listHtml += "<td id='n" + obj.corp_key + "'>" + obj.corp_name + "</td>";
+	        listHtml += "<td id='t" + obj.corp_key + "'>" + obj.corp_tel + "</td>";
+	        listHtml += "<td id='e" + obj.corp_key + "'>" + obj.corp_email + "</td>";
+	        listHtml += "<td id='a" + obj.corp_key + "'>" + obj.corp_addr + "</td>";
+	        listHtml += "<td id='ud" + obj.corp_key + "'><button class='btn btn-sm' onclick='goUpdateForm(\"" + obj.corp_key + "\")'>수정</button></td>";
+	        listHtml += "<td id='de" + obj.corp_key + "'><button class='btn btn-sm' onclick='goDelete(\"" + obj.corp_key + "\")'>삭제</button></td>";
 	        listHtml += "</tr>";
 	    });
 
@@ -195,9 +195,60 @@
 	
 	//게시글 수정하는 화면 (Form) 만들어주는 함수 
 	function goUpdateForm(key){
+		var name=$("#n"+key).text();
+		var tell=$("#t"+key).text();
+		var email=$("#e"+key).text();
+		var addr=$("#a"+key).text();
+
 		console.log(key)
+		
+		var nameInput ="<input type='text' id ='ni"+key+"' value='"+name+"'> "
+		$("#n"+key).html(nameInput)
+		var tellInput ="<input type='text' id ='ti"+key+"' value='"+tell+"'> "
+		$("#t"+key).html(tellInput)
+		var emailInput ="<input type='text' id ='ei"+key+"' value='"+email+"'> "
+		$("#e"+key).html(emailInput)
+		var addrInput ="<input type='text' id ='ai"+key+"' value='"+addr+"'> "
+		$("#a"+key).html(addrInput)
+		
+		console.log(key)
+		
+		   var newButton = "<button class='btn btn-sm' onclick='goUpdate(\"" + key + "\")'>수정</button>";
+	    $("#ud" + key).html(newButton);
 	}
 	
+	
+	function goUpdate(key){
+		var corp_name = $("#ni"+key).val();
+		var corp_tel = $("#ti"+key).val();
+		var corp_email = $("#ei"+key).val();
+		var corp_addr = $("#ai"+key).val();
+		console.log(corp_name)
+		
+		$.ajax({
+			url: "update",
+			type:"put",
+			contentType: "application/json; charset=UTF-8",
+			data:JSON.stringify({"corp_name":corp_name,"corp_tel":corp_tel, "corp_email":corp_email, "corp_addr":corp_addr,"corp_key":key}),
+			success:corpList,
+			error:function(){
+				alert("error")
+			}
+		})
+	}
+	
+	
+	function goDelete(corp_key){
+		
+		$.ajax({
+			url: corp_key,
+			type:"delete",
+			success:corpList,
+			error:function(){
+				alert("error")
+				}
+		})
+	}
 	</script>
 </body>
 
