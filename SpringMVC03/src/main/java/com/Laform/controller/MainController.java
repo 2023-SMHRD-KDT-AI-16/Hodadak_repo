@@ -53,7 +53,7 @@ public class MainController {
 			// 로그인 실패
 			rttr.addFlashAttribute("msgType", "실패 메세지");
 			rttr.addFlashAttribute("msg", "아이디와 비밀번호를 다시 입력해주세요.");
-			return "redirect:/";
+			return "redirect:/main.do";
 		} else {
 			session.setAttribute("corp", login_corp);
 			return "Dashboard";
