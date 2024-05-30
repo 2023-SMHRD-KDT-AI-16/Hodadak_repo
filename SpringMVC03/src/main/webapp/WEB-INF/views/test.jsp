@@ -12,7 +12,7 @@ $(document).ready(function() {
         $.ajax({
             url: 'chat',
             type: 'POST',
-            contentType: 'application/json',
+            contentType: 'application/json;charset:UTF-8',
             data: JSON.stringify({ prompt: myData }),
             success: function(response) {
                 console.log("서버로부터의 응답:", response);

@@ -40,7 +40,7 @@ public class ChatGptService {
         headers.add("Authorization", "Bearer " + apiKey);
 
         String requestBody = String.format(
-            "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"%s\"}], \"max_tokens\": 150}",
+            "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"%s\"}], \"max_tokens\": 200}",
             prompt
         );
         HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
