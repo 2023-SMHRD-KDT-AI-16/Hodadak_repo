@@ -1,27 +1,34 @@
 package com.Laform.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import java.nio.charset.StandardCharsets;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Service
 public class ChatGptService {
-    private final RestTemplate restTemplate;
+    private RestTemplate restTemplate;
     private String apiKey;
+    private ObjectMapper objectMapper; // JSON 처리를 위한 ObjectMapper 추가
 
-    @Autowired
+    // RestTemplate을 인자로 받는 생성자
     public ChatGptService(RestTemplate restTemplate) {
+        restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         this.restTemplate = restTemplate;
+        this.objectMapper = new ObjectMapper(); // ObjectMapper 인스턴스화
     }
 
-    @Value("${chatgpt.api.key}")
+    // apiKey 세터
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
     }
@@ -29,7 +36,7 @@ public class ChatGptService {
     public String getResponse(String prompt) {
         String url = "https://api.openai.com/v1/chat/completions";
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));  // 인코딩 추가
         headers.add("Authorization", "Bearer " + apiKey);
 
         String requestBody = String.format(
@@ -37,18 +44,22 @@ public class ChatGptService {
             prompt
         );
         HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
-
+        System.out.println(entity);
         try {
             ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
-            return response.getBody();
+            JsonNode rootNode = objectMapper.readTree(response.getBody());
+            String content = rootNode.path("choices").get(0).path("message").path("content").asText();
+            return content; // content 값만 추출하여 리턴
         } catch (HttpClientErrorException e) {
-            // 400 Bad Request 또는 기타 클라이언트 오류에 대한 추가 디버깅 정보 출력
             System.err.println("HTTP Error: " + e.getStatusCode());
             System.err.println("Response Body: " + e.getResponseBodyAsString());
             return "Error: " + e.getMessage();
         } catch (RestClientException e) {
             e.printStackTrace();
             return "Error: " + e.getMessage();
+        } catch (Exception e) { // JSON 처리 중 예외 처리
+            e.printStackTrace();
+            return "Error parsing JSON response: " + e.getMessage();
         }
     }
 }

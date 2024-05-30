@@ -27,8 +27,9 @@ public class ChatGptController {
     @PostMapping("/chat")
     public ResponseEntity<String> chat(@RequestBody PromptRequest request) {
         String prompt = request.getPrompt();
-        System.out.println(prompt);
+        //System.out.println(prompt);
         String response = chatGptService.getResponse(prompt);
+        System.out.println("response :"+response);
         return ResponseEntity.ok(response);
     }
 
