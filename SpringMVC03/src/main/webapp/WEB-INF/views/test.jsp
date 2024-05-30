@@ -10,10 +10,10 @@ $(document).ready(function() {
     $("#submitButton").click(function() {
         var myData = $("#promptInput").val();
         $.ajax({
-            url: '/chat',
+            url: 'chat',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ data: myData }),
+            data: JSON.stringify({ prompt: myData }),
             success: function(response) {
                 console.log("서버로부터의 응답:", response);
             },
