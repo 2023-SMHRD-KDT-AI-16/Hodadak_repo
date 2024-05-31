@@ -102,6 +102,7 @@
 					<h3 class="major">목록</h3>
 
 
+					<div id="pagination"></div>
 
 					<section>
 						<div class="table-wrapper" id="view"></div>
@@ -136,17 +137,41 @@
 		corpList()
 	})
 	
-	function corpList(){
-		$.ajax({
-			url :"corpList.do",
-			type : "get", 
-			dataType : "json",
-			success: makeView,
-			error:function(){
-				alert("error")
-			}
-		})
-	}
+var currentPage = 1; // 현재 페이지 초기화
+var pageSize = 10; // 페이지 당 항목 수
+
+// 페이지네이션 정보를 포함해 기업목록 요청
+function corpList(pageNumber) {
+    currentPage = pageNumber || currentPage; // 페이지 번호 업데이트
+    $.ajax({
+        url: "corpList.do",
+        type: "get",
+        dataType: "json",
+        data: {
+            pageNum: currentPage,
+            amount: pageSize
+        },
+        success: function(data) {
+            makeView(data);
+            updatePaginationControls();
+        },
+        error: function() {
+            alert("error");
+        }
+    });
+}
+
+// 페이지네이션 컨트롤 업데이트
+function updatePaginationControls() {
+    var paginationHtml = '';
+    // 이전 페이지 링크
+    if (currentPage > 1) {
+        paginationHtml += '<a href="#" onclick="corpList(' + (currentPage - 1) + ')">&laquo;</a>';
+    }
+    // 다음 페이지 링크
+    paginationHtml += '<a href="#" onclick="corpList(' + (currentPage + 1) + ')">&raquo;</a>';
+    $('#pagination').html(paginationHtml);
+}
 	
 	function makeView(data) { // data = [{key:value}, {}, {}, ...]
 	   // console.log(data);

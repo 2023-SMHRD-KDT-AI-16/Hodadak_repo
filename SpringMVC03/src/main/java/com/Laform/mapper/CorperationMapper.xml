@@ -31,6 +31,14 @@
 	<update id="corpUpdate" parameterType="com.Laform.entity.tb_corperation">
 	  update tb_corperation set corp_name=#{corp_name},corp_tel=#{corp_tel},corp_email=#{corp_email},corp_addr=#{corp_addr} where corp_key = #{corp_key}
 	</update>
+	
+	<!-- 페이징을 포함한 기업 목록 출력 -->
+<select id="getCorpListWithPaging" resultType="com.Laform.entity.tb_corperation">
+    SELECT *
+    FROM tb_corperation
+    ORDER BY joined_at DESC
+    LIMIT #{amount} OFFSET (#{pageNum} - 1) * #{amount}
+</select>
 
 
 
