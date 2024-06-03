@@ -20,6 +20,28 @@
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/resources/css/noscript.css" />
 </noscript>
+
+<style>
+.page-link {
+    padding: 5px 10px;
+    margin-right: 10px;
+    color: white;
+    text-decoration: none;
+
+}
+
+.page-link:hover {
+    background-color: #e9ecef;
+      border-radius: 5px; /* 모서리를 둥글게 */
+}
+
+.page-link.active {
+    font-weight: bold;
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 5px; /* 모서리를 둥글게 */
+}
+</style>
 </head>
 
 <body class="is-preload">
@@ -99,16 +121,12 @@
 				<h2 class="major">기업목록</h2>
 
 				<section>
-					<h3 class="major">목록</h3>
-
-
-
 					<section>
-					<div id="pagination"></div>
+
 						<div class="table-wrapper" id="view"></div>
 
-
 					</section>
+										<div id="pagination"></div>
 					</section>
 			</article>
 
@@ -131,86 +149,79 @@
 		src="${pageContext.request.contextPath}/resources/js/breakpoints.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/util2.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main1.js"></script>
-	<script type="text/javascript">
-	
 
-	$(document).ready(function(){
-		corpList()
-	})
-	
-var currentPage = 0; // 현재 페이지 초기화
 
-// 페이지네이션 정보를 포함해 기업목록 요청
+
+<script type="text/javascript">
+$(document).ready(function() {
+    corpList(1); // 페이지 로드 시 첫 번째 페이지 데이터 로드
+});
+
 function corpList(pageNumber) {
-    currentPage = pageNumber || currentPage; // 페이지 번호 업데이트
+    currentPage = pageNumber;
     $.ajax({
         url: "corpList.do",
         type: "get",
         dataType: "json",
         data: {
-            pageNum: currentPage*10,
+            pageNum: (currentPage - 1) * 5,
         },
-        success: function(data) {
+        success: function(response) {
+            var data = response.list;
+            var totalRecords = response.total;
             makeView(data);
-            updatePaginationControls();
+            updatePaginationControls(totalRecords, currentPage);
         },
         error: function() {
-            alert("error");
+            alert("Error fetching data.");
         }
     });
 }
 
-// 페이지네이션 컨트롤 업데이트
-function updatePaginationControls() {
-    var paginationHtml = '';
-    // 이전 페이지 링크
-    if (currentPage >0) {
-        paginationHtml += '<button onclick="corpList(' + (currentPage - 1) + ')">이전</button>';
+
+function updatePaginationControls(totalRecords, currentPage) {
+    var recordsPerPage = 5;
+    var totalPages = Math.ceil(totalRecords / recordsPerPage);
+    var pageGroupSize = 5; // 한 번에 보여줄 페이지 번호의 수
+    var currentPageGroup = Math.ceil(currentPage / pageGroupSize); // 현재 페이지 그룹
+    var startPage = (currentPageGroup - 1) * pageGroupSize + 1; // 그룹의 시작 페이지
+    var endPage = Math.min(totalPages, startPage + pageGroupSize - 1); // 그룹의 끝 페이지
+
+    var paginationHtml = '<div style="display: flex; justify-content: center; margin-top: 20px;">';
+
+    // 이전 페이지 그룹 링크
+    if (currentPageGroup > 1) {
+        paginationHtml += '<a  onclick="event.preventDefault(); corpList(' + (startPage - 1) + ');" class="page-link"><<</a>';
     }
-    // 다음 페이지 링크
-    paginationHtml += '<button onclick="corpList(' + (currentPage + 1) + ')">다음</button>';
+
+    // 페이지 번호 링크 (선택적으로 표시, 필요에 따라 제거 가능)
+    for (var i = startPage; i <= endPage; i++) {
+        paginationHtml += '<a onclick="event.preventDefault(); corpList(' + i + ');" class="page-link ' + (i === currentPage ? 'active' : '') + '">' + i + '</a>';
+    }
+
+    // 다음 페이지 그룹 링크
+    if (endPage < totalPages) {
+        paginationHtml += '<a  onclick="event.preventDefault(); corpList(' + (endPage + 1) + ');" class="page-link">>></a>';
+    }
+
+    paginationHtml += '</div>';
     $('#pagination').html(paginationHtml);
 }
-	
-	function makeView(data) { // data = [{key:value}, {}, {}, ...]
-	   // console.log(data);
-	    var listHtml = "<table>";
-	    listHtml += "<thead>";
-	    listHtml += "<tr>";
-	    listHtml += "<th>번호</th>";
-	    listHtml += "<th>기업코드</th>";
-	    listHtml += "<th>기업명</th>";
-	    listHtml += "<th>전화번호</th>";
-	    listHtml += "<th>이메일</th>";
-	    listHtml += "<th>주소</th>";
-	    listHtml += "<th>수정</th>";
-	    listHtml += "<th>삭제</th>";
-	    listHtml += "</tr>";
-	    listHtml += "</thead>";
 
-	    listHtml += "<tbody>"; // 여기에 tbody 시작 태그 추가
+function makeView(data) {
+    var listHtml = "<table class='table'>";
+    listHtml += "<thead><tr><th>기업코드</th><th>기업명</th><th>전화번호</th><th>이메일</th><th>주소</th><th>수정</th><th>삭제</th></tr></thead><tbody>";
 
-	    $.each(data, function(index, obj) {
-	        listHtml += "<tr>";
-	        listHtml += "<td>" + (index + 1) + "</td>";
-	        listHtml += "<td>" + obj.corp_key + "</td>";
-	        listHtml += "<td id='n" + obj.corp_key + "'>" + obj.corp_name + "</td>";
-	        listHtml += "<td id='t" + obj.corp_key + "'>" + obj.corp_tel + "</td>";
-	        listHtml += "<td id='e" + obj.corp_key + "'>" + obj.corp_email + "</td>";
-	        listHtml += "<td id='a" + obj.corp_key + "'>" + obj.corp_addr + "</td>";
-	        listHtml += "<td id='ud" + obj.corp_key + "'><button class='btn btn-sm' onclick='goUpdateForm(\"" + obj.corp_key + "\")'>수정</button></td>";
-	        listHtml += "<td id='de" + obj.corp_key + "'><button class='btn btn-sm' onclick='goDelete(\"" + obj.corp_key + "\")'>삭제</button></td>";
-	        listHtml += "</tr>";
-	    });
+    $.each(data, function(index, obj) {
+        listHtml += "<tr><td>" + obj.corp_key + "</td><td>" + obj.corp_name + "</td>";
+        listHtml += "<td>" + obj.corp_tel + "</td><td>" + obj.corp_email + "</td><td>" + obj.corp_addr + "</td>";
+        listHtml += "<td><button onclick='goUpdateForm(\"" + obj.corp_key + "\")'>수정</button></td>";
+        listHtml += "<td><button onclick='goDelete(\"" + obj.corp_key + "\")'>삭제</button></td></tr>";
+    });
 
-	    listHtml += "</tbody>"; // 여기서 tbody 종료 태그 추가
-	    listHtml += "</table>";
-
-	    // view라는 id값을 가진 요소를 가지고 온 다음에
-	    // 그 태그 안쪽에 html형식으로 뿌려주겠다
-	    $("#view").html(listHtml);
-	}
-	
+    listHtml += "</tbody></table>";
+    $('#view').html(listHtml);
+}
 	
 	function goList(){
 		$("#view").css("display","block");

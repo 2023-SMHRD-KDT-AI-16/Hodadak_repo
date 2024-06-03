@@ -37,7 +37,7 @@
     SELECT *
     FROM tb_corperation
     ORDER BY joined_at DESC
-    LIMIT 10 OFFSET #{pageNum}
+    LIMIT 5 OFFSET #{pageNum}
 </select>
 
 

@@ -1,8 +1,11 @@
 package com.Laform.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +24,17 @@ public class AdminRestController {
 	private CorperationMapper corpMapper;
 
 	// 기업 전체보기
-	@GetMapping("corpList.do") // board/all
-	public List<tb_corperation> corpList(int pageNum) {
-		System.out.println("페이지 : "+pageNum);
-		List<tb_corperation> list = corpMapper.getCorpListWithPaging(pageNum);
-		return list;
-	}
+	@GetMapping("corpList.do")
+    public ResponseEntity<Map<String, Object>> corpList(int pageNum) {
+        List<tb_corperation> list = corpMapper.getCorpListWithPaging(pageNum);
+        int total = corpMapper.corpList().size();
+
+        Map<String, Object> response = new HashMap<String, Object>();
+        response.put("list", list);
+        response.put("total", total);
+
+        return ResponseEntity.ok(response); 
+    }
 
 
 
