@@ -109,6 +109,7 @@
 
 
 					</section>
+					</section>
 			</article>
 
 		</div>
@@ -137,8 +138,7 @@
 		corpList()
 	})
 	
-var currentPage = 1; // 현재 페이지 초기화
-var pageSize = 10; // 페이지 당 항목 수
+var currentPage = 0; // 현재 페이지 초기화
 
 // 페이지네이션 정보를 포함해 기업목록 요청
 function corpList(pageNumber) {
@@ -148,8 +148,7 @@ function corpList(pageNumber) {
         type: "get",
         dataType: "json",
         data: {
-            pageNum: currentPage,
-            amount: pageSize
+            pageNum: currentPage*10,
         },
         success: function(data) {
             makeView(data);
@@ -165,11 +164,11 @@ function corpList(pageNumber) {
 function updatePaginationControls() {
     var paginationHtml = '';
     // 이전 페이지 링크
-    if (currentPage > 1) {
-        paginationHtml += '<a href="#" onclick="corpList(' + (currentPage - 1) + ')">&laquo;</a>';
+    if (currentPage >0) {
+        paginationHtml += '<button onclick="corpList(' + (currentPage - 1) + ')">이전</button>';
     }
     // 다음 페이지 링크
-    paginationHtml += '<a href="#" onclick="corpList(' + (currentPage + 1) + ')">&raquo;</a>';
+    paginationHtml += '<button onclick="corpList(' + (currentPage + 1) + ')">다음</button>';
     $('#pagination').html(paginationHtml);
 }
 	

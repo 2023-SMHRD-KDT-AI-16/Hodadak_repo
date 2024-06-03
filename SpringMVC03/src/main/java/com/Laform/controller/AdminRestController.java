@@ -21,10 +21,10 @@ public class AdminRestController {
 	private CorperationMapper corpMapper;
 
 	// 기업 전체보기
-	@GetMapping("getCorpListWithPaging.do") // board/all
-	public List<tb_corperation> getCorpListWithPaging(int pageNum,int amount) {
-		System.out.println("getCorpListWithPaging : "+pageNum+amount);
-		List<tb_corperation> list = corpMapper.getCorpListWithPaging(pageNum,amount);
+	@GetMapping("corpList.do") // board/all
+	public List<tb_corperation> corpList(int pageNum) {
+		System.out.println("페이지 : "+pageNum);
+		List<tb_corperation> list = corpMapper.getCorpListWithPaging(pageNum);
 		return list;
 	}
 

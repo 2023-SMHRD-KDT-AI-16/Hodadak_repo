@@ -33,11 +33,11 @@
 	</update>
 	
 	<!-- 페이징을 포함한 기업 목록 출력 -->
-<select id="getCorpListWithPaging" resultType="com.Laform.entity.tb_corperation">
+<select id="getCorpListWithPaging" resultType="com.Laform.entity.tb_corperation" parameterType="int">
     SELECT *
     FROM tb_corperation
     ORDER BY joined_at DESC
-    LIMIT #{amount} OFFSET (#{pageNum} - 1) * #{amount}
+    LIMIT 10 OFFSET #{pageNum}
 </select>
 
 

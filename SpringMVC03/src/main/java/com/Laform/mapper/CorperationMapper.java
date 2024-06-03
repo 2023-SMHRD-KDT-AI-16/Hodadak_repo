@@ -26,6 +26,6 @@ public interface CorperationMapper {
 
 	public void corpUpdate(tb_corperation vo); //기업 정보 수정 
 
-	public List<tb_corperation> getCorpListWithPaging(@Param("pageNum") int pageNum, @Param("amount") int amount);// 페이징을 포함한 기업 목록 출력
+	public List<tb_corperation> getCorpListWithPaging(int pageNum);// 페이징을 포함한 기업 목록 출력
 	
 }
