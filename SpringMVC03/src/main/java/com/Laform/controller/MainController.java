@@ -56,9 +56,14 @@ public class MainController {
 			return "redirect:/main.do";
 		} else {
 			session.setAttribute("corp", login_corp);
-			return "Dashboard";
+			return "redirect:/dashboard.do";
 		}
 
+	}
+	
+	@GetMapping("dashboard.do")
+	public String Dashboard() {
+		return "Dashboard";
 	}
 
 	@GetMapping("logout.do") // 로그아웃

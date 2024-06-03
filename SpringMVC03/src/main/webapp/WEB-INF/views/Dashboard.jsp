@@ -52,7 +52,7 @@
 			</button>
 
 			<!-- Brand -->
-			<a class="navbar-brand pt-0" href="Dashboard.do"> <img
+			<a class="navbar-brand pt-0" href="dashboard.do"> <img
 				src="${pageContext.request.contextPath}/resources/img/𝑳𝒂 𝑭𝒐𝒓𝒎_newtitle1.png"
 				class="navbar-brand-img" alt="...">
 			</a>
@@ -95,7 +95,7 @@
 					<div class="navbar-collapse-header d-md-none">
 						<div class="row">
 							<div class="col-6 collapse-brand">
-								<a href="./Dashboard.html"> <img
+								<a href="dashboard.do"> <img
 									src="assets/img/𝑳𝒂 𝑭𝒐𝒓𝒎_newtitle1.png">
 								</a>
 							</div>
@@ -126,15 +126,15 @@
 					<!-- Navigation -->
 					<ul class="navbar-nav">
 						<li class="nav-item  active"><a
-							class="nav-link  active hover12" href="./Dashboard.html"> <i
+							class="nav-link  active hover12" href="dashboard.do"> <i
 								class="ni ni-chart-bar-32 text-red "></i> Dashboard
 						</a></li>
 						<li class="nav-item"><a class="nav-link hover12"
-							href="./Check'O.html"> <i class="ni ni-check-bold text-black"></i>
+							href="#"> <i class="ni ni-check-bold text-black"></i>
 								Check'O
 						</a></li>
 						<li class="nav-item"><a class="nav-link hover12"
-							href="./Suggest.html"> <i class="ni ni-basket text-orange"></i>
+							href="#"> <i class="ni ni-basket text-orange"></i>
 								Suggest
 						</a></li>
 					</ul>
@@ -152,7 +152,7 @@
 				<!-- Brand -->
 				<a
 					class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block"
-					href="./Dashboard.html">Dashboard</a>
+					href="dashboard.do">Dashboard</a>
 
 				<!-- Form -->
 				<form
@@ -207,21 +207,21 @@
 					<li class="nav-item mr-2 mr-md-0" data-toggle="chart"
 						data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}'
-						data-prefix="$" data-suffix="k"><a href="#"
+						data-prefix="$" data-suffix="k"><a onclick="naverSearch('밀레니얼')"
 						class="nav-link py-2 px-3 active" data-toggle="tab"> <span
-							class="d-none d-md-block">밀레니엄</span> <span class="d-md-none">M</span>
+							class="d-none d-md-block">밀레니엄</span> <span class="d-md-none">밀레니엄</span>
 					</a></li>
 					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-						data-prefix="$" data-suffix="k"><a href="#"
+						data-prefix="$" data-suffix="k"><a  onclick="naverSearch('스트레스')"
 						class="nav-link py-2 px-3" data-toggle="tab"> <span
-							class="d-none d-md-block">스트레스</span> <span class="d-md-none">W</span>
+							class="d-none d-md-block">스트레스</span> <span class="d-md-none">스트레스</span>
 					</a></li>
 					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-						data-prefix="$" data-suffix="k"><a href="#"
+						data-prefix="$" data-suffix="k"><a  onclick="naverSearch('혈당')"
 						class="nav-link py-2 px-3" data-toggle="tab"> <span
-							class="d-none d-md-block">혈당</span> <span class="d-md-none">W</span>
+							class="d-none d-md-block">혈당</span> <span class="d-md-none">혈당</span>
 					</a></li>
 				</ul>
 			</div>
@@ -406,7 +406,7 @@
 				<div class="card-header bg-gradient-default1 border-0 hover12">
 					<div class="row align-items-center">
 						<div class="col">
-							<h3 class="mb-0">블로그 뉴스 등</h3>
+							<h3 class="mb-0">블로그</h3>
 						</div>
 					</div>
 				</div>
@@ -416,31 +416,13 @@
 
 						<thead class="thead-light">
 							<tr>
-								<th scope="col">긍정, 부정</th>
-								<th scope="col">???????</th>
-								<th scope="col">???????</th>
-								<th scope="col">???????</th>
-								<th scope="col">???????</th>
-								<th scope="col">???????</th>
+								<th scope="col">title</th>
+								<th scope="col">description</th>
 							</tr>
 						</thead>
 
 
-						<tbody>
-							<tr>
-								<th scope="row">!</th>
-								<td>!1</td>
-								<td>!2</td>
-								<td>!3</td>
-								<td>!4</td>
-							</tr>
-							<tr>
-								<th scope="row">@</th>
-								<td>@1</td>
-								<td>@2</td>
-								<td>@3</td>
-							</tr>
-
+						<tbody id="searchResult">
 						</tbody>
 					</table>
 
@@ -641,6 +623,52 @@
       ],
       delay: 600,
     });
+    
+    //------------------------------------------------------------------------
+   	//네이버 블로그
+   $(document).ready(function() { 
+	   naverSearch('밀레니엄')
+   });
+
+   	
+    function naverSearch(query){
+	$.ajax({
+        url: 'naver',  // 백엔드의 /naver 엔드포인트 호출
+        type: 'GET',    // HTTP 메소드
+        contentType: 'application/json;charset:UTF-8', // 반환받을 데이터의 타입
+        data: { query: query },  // 서버로 보낼 데이터
+        success: function(response) {
+          //  console.log("서버로부터의 응답:", response);
+            innerHtml=""
+            	
+            for(let i = 0; i<response.items.length;i++){
+            	var url = ensureCompleteUrl(response.items[i].link);
+            	innerHtml +="<tr>"
+            	innerHtml += "<td><a onclick='modalOpen(\"" + url + "\")'>" + response.items[i].title + "</a></td>";
+            	innerHtml += "<td><a onclick='modalOpen(\"" + url + "\")'>" + response.items[i].description + "</a></td>";
+            	innerHtml +="<tr>"
+            }
+            	
+            $("#searchResult").html(innerHtml)
+        },
+        error: function(xhr, status, error) {
+            console.error("에러 발생:", error);
+        }
+    });
+}
+
+
+function ensureCompleteUrl(url) { //네이버 검색으로 받아온 link 변환
+	  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+	    return 'https://' + url; // 기본적으로 https를 사용하거나 필요에 따라 조정
+	  }
+	  return url;
+	}
+
+
+function modalOpen(link){ //제목클릭시 해당 페이지 
+	window.open(link)
+}
   </script>
 
 </body>
