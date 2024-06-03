@@ -102,9 +102,9 @@
 					<h3 class="major">목록</h3>
 
 
-					<div id="pagination"></div>
 
 					<section>
+					<div id="pagination"></div>
 						<div class="table-wrapper" id="view"></div>
 
 
