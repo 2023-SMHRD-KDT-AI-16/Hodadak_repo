@@ -1470,6 +1470,12 @@ pre code {
     max-width: 33.333333%;
   }
 
+  .col-xl-41 {
+    padding-top: 20px;
+    flex: 0 0 33.333333%;
+    max-width: 100%;
+  }
+
   .col-xl-5 {
     flex: 0 0 41.666667%;
     max-width: 41.666667%;
@@ -1488,6 +1494,18 @@ pre code {
   .col-xl-8 {
     flex: 0 0 66.666667%;
     max-width: 66.666667%;
+  }
+
+  .col-xl-81 {
+    padding-top: 20px;
+    flex: 0 0 66.666667%;
+    max-width: 45%;
+  }
+
+  .col-xl-82 {
+    padding-top: 20px;
+    flex: 0 0 66.666667%;
+    max-width: 45%;
   }
 
   .col-xl-9 {
@@ -4522,6 +4540,7 @@ input[type="button"].btn-block {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1rem;
+  padding-bottom: 0;
 }
 
 .navbar>.container,
@@ -4925,7 +4944,6 @@ input[type="button"].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 0.375rem;
 }
 
@@ -4974,7 +4992,6 @@ input[type="button"].btn-block {
   padding: 1.25rem 1.5rem;
   margin-bottom: 0;
   background-color: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .card-header:first-child {
@@ -13187,7 +13204,7 @@ a.text-darker:focus {
   }
 
   abbr[title]::after {
-    content: " ("attr(title) ")";
+    content: " (" attr(title) ")";
   }
 
   pre {
@@ -13750,6 +13767,12 @@ button.section-darker:focus {
   background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
 }
 
+.bg-gradient-primary2 {
+  /*background: linear-gradient(87deg, #ffffff 0, #DBDBDB 100%) !important;*/
+  background-color: #f0e6f6;
+  background-size: cover;
+}
+
 .bg-gradient-secondary {
   background: linear-gradient(87deg, #f7fafc 0, #f7f8fc 100%) !important;
 }
@@ -13780,6 +13803,14 @@ button.section-darker:focus {
 
 .bg-gradient-default {
   background: linear-gradient(87deg, #172b4d 0, #1a174d 100%) !important;
+}
+
+.bg-gradient-default1 {
+  background-color: #f0e6f6;
+}
+
+.bg-gradient-default_body {
+  background: linear-gradient(125deg, #ffffff 0, #1a174d, #172b4d 100%) !important;
 }
 
 .bg-gradient-white {
@@ -16145,7 +16176,7 @@ textarea[resize="horizontal"] {
 
 .icon-shape i,
 .icon-shape svg {
-  font-size: 1.25rem;
+  font-size: 2.5rem;
 }
 
 .icon-shape.icon-lg i,
@@ -17505,7 +17536,7 @@ textarea[resize="horizontal"] {
 }
 
 .navbar-search-dark .input-group {
-  border-color: rgba(255, 255, 255, 0.6);
+  border-color: #e2e2e2;
 }
 
 .navbar-search-dark .input-group-text {
@@ -17513,11 +17544,11 @@ textarea[resize="horizontal"] {
 }
 
 .navbar-search-dark .form-control {
-  color: rgba(255, 255, 255, 0.9);
+  color: black;
 }
 
 .navbar-search-dark .form-control::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: black;
 }
 
 .navbar-search-dark .focused .input-group {
@@ -20660,4 +20691,94 @@ pre>code.highlight {
   margin-left: 1rem;
 }
 
+#particle-1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.particle {
+  position: absolute;
+  font-size: 20px;
+  /* 텍스트 크기 조절 */
+  color: transparent;
+  /* 텍스트 색상 투명으로 설정 */
+  background: linear-gradient(45deg, #8625FE 0%, #8625FE 100%);
+  /* 그라데이션 설정 */
+  -webkit-background-clip: text;
+  /* 텍스트에만 그라데이션 적용 */
+  background-clip: text;
+  animation: wave 1s infinite alternate;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+
+  100% {
+    transform: translateY(-25px) scaleY(1);
+  }
+}
+
+/* Shine */
+
+.hover12 {
+  display: inline-block; /* 이미지의 크기에 맞게 컨테이너 크기 조정 */
+  position: relative;
+}
+
+.hover12::before {
+  position: absolute;
+  top: 0;
+  left: -75%;
+  z-index: 2;
+  display: block;
+  content: '';
+  width: 50%;
+  height: 100%;
+  background: -webkit-linear-gradient(left, rgba(0, 255, 0, 0) 0%, rgba(255, 184, 255, 0.3) 100%);
+  background: linear-gradient(to right, rgba(0, 255, 0, 0) 0%, rgba(255, 95, 239, 0.3) 100%);
+  -webkit-transform: skewX(-25deg);
+  transform: skewX(-25deg);
+  opacity: 0;
+}
+.hover12:hover::before {
+  -webkit-animation: shine .75s;
+  animation: shine .75s;
+}
+
+@-webkit-keyframes shine {
+  0% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 125%;
+    opacity: 0;
+  }
+}
+
+@keyframes shine {
+  0% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 125%;
+    opacity: 0;
+  }
+}
 /*# sourceMappingURL=dashboard-free.css.map */
