@@ -537,15 +537,14 @@
     	const data = top10Trends.map(trend => trend.trend_sum); // 새로운 데이터 배열
 
     
-    	//차트 객체 생성 전 canvas 초기화
-      $('#011').remove(); // this is my <canvas> element
+      
+      //차트 객체 생성 전 canvas 초기화
+      $('#011').remove(); 
       $('#divBarChart').append('<canvas id="011" style="display: block;height: 355px;width: 1550px;"></canvas>');
 
-      
-  	
+  
       let canvas= document.getElementById('011')
       let ctx = canvas.getContext('2d'); // id가 '011'인 캔버스 요소를 가져와 2D 컨텍스트 얻기
-      
       
       let chart = new Chart(ctx, { // 새로운 Chart 객체 생성
         type: 'bar', // 차트 유형을 '바 차트'로 설정
