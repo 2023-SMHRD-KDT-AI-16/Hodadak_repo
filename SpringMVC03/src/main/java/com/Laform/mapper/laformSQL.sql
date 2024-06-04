@@ -1,4 +1,4 @@
-select * from tb_corperation;
+select * from tb_trend;
 
 UPDATE tb_corperation
 SET corp_key = 'admin'

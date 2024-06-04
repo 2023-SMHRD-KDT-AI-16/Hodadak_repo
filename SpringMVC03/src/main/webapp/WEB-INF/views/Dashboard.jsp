@@ -112,9 +112,9 @@
 					<form class="mt-4 mb-3 d-md-none">
 						<div class="input-group input-group-rounded input-group-merge">
 							<!-- 챗GPT API 들어갈 input 태그-->
-							<input type="search"
+							<input type="text" 
 								class="form-control form-control-rounded form-control-prepended"
-								placeholder="Search" aria-label="Search">
+								placeholder="ChatGPT에게 물어보세요!" aria-label="Search">
 							<div class="input-group-prepend">
 								<div class="input-group-text">
 									<span class="fa fa-search"></span>
@@ -165,8 +165,9 @@
 								</span>
 							</div>
 							<!-- 챗GPT API 들어갈 input 태그-->
-							<input class="form-control" placeholder="Search" type="text"
-								style="width: 850px;">
+							<input class="form-control" placeholder="Search" type="text" id="promptInput" 
+								style="width: 850px;" onkeypress="if(event.keyCode=='13'){event.preventDefault(); gptSearch();}">
+							<button type="submit" id="submitButton" style="visibility: hidden"></button>
 						</div>
 					</div>
 				</form>
@@ -415,10 +416,7 @@
 					<table class="table align-items-center table-flush">
 
 						<thead class="thead-light">
-							<tr>
-								<th scope="col">title</th>
-								<th scope="col">description</th>
-							</tr>
+
 						</thead>
 
 
@@ -644,8 +642,8 @@
             for(let i = 0; i<response.items.length;i++){
             	var url = ensureCompleteUrl(response.items[i].link);
             	innerHtml +="<tr>"
-            	innerHtml += "<td><a onclick='modalOpen(\"" + url + "\")'>" + response.items[i].title + "</a></td>";
-            	innerHtml += "<td><a onclick='modalOpen(\"" + url + "\")'>" + response.items[i].description + "</a></td>";
+            	innerHtml += "<td><h3><a onclick='modalOpen(\"" + url + "\")'>" + response.items[i].title + "</a></h3>";
+            	innerHtml += "<a onclick='modalOpen(\"" + url + "\")'>" + response.items[i].description + "</a></td>";
             	innerHtml +="<tr>"
             }
             	
@@ -669,6 +667,28 @@ function ensureCompleteUrl(url) { //네이버 검색으로 받아온 link 변환
 function modalOpen(link){ //제목클릭시 해당 페이지 
 	window.open(link)
 }
+
+//-------------------------------------------------------------------------------------------
+ //GPT API 실행 
+ function gptSearch(){
+		var myData =$("#promptInput").val()
+    $.ajax({
+        url: 'chat',
+        type: 'POST',
+        contentType: 'application/json;charset:UTF-8',
+        data: JSON.stringify({ prompt: myData }),
+        success: function(response) {
+            console.log("서버로부터의 응답:", response);
+        },
+        error: function(xhr, status, error) {
+            console.error("에러 발생:", error);
+        }
+    });
+		
+		$("#promptInput").val()=""
+}
+  
+
   </script>
 
 </body>
