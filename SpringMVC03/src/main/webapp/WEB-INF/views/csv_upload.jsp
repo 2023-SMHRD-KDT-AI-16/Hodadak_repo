@@ -218,11 +218,7 @@
 		
 			<!-- file upload Start Line -->
 			<div>
-				<form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto"
-				 action="uploadFile" enctype="mltipart/form-data">
-				 	
-				 	
-				 	<div class="row">
+				<div class="row">
 						<div class="col-xl-12  mb-5 mb-xl-0">
 							<div class="card shadow">
 								<div class="card-header bg-transparent hover12">
@@ -232,20 +228,19 @@
 											<h6 class="text-uppercase text-black ls-1 mb-1">CSV File Upload</h6>
 											<h2 class="text-black mb-0">CSV 파일을 선택해주세요</h2>
 										</div>
-		
+											
 										<div class="col"></div>
 									</div>
 								</div>
 								<div class="card-body " style="background-color: #ffffff;">
 		
-									<!-- Chart -->
-									<div class="chart">
-										<canvas id="011" style="display: block;height: 355px;width: 1550px;">
-											<form action="#">
-												<input />
-											</form>
-										
-										</canvas>
+									<!-- 파일 업로드 하기위한 div 태그 -->
+									<div class="chart" style="display: block;height: 355px;width: 1550px;">
+										<form id="testForm" enctype="multipart/form-data">
+											<input type="text" id="name"/>
+											<input type="file" id="file"/>
+											<button id="button1">submit</button>
+										</form>
 									</div>
 		
 								</div>
@@ -450,6 +445,27 @@ function modalOpen(link){ //제목클릭시 해당 페이지
   
 
   </script>
-
+  <!-- 파일 업로드 하기위한 스크립트 -->
+	<script>
+		$(document).ready(function(){
+			$("#button1").click(function(event){
+				// event.preventDefault();
+				var form = $("#testForm");
+				var formData = new FormData(form);
+				formData.append("file", $("#file")[0].files[0]);
+				debugger
+				$.ajax({
+					url: 'csv_upload.do',
+					processData: false,
+					contentType: false,
+					data: formData,
+					type: 'POST',
+					success: function(data){
+						console.log(data);
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
