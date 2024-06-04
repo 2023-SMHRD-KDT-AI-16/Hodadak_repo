@@ -257,7 +257,7 @@
 						<div class="card-body " style="background-color: #ffffff;">
 
 							<!-- Chart -->
-							<div class="chart">
+							<div class="chart" id="divBarChart">
 								<canvas id="011" style="display: block;height: 355px;width: 1550px;"></canvas>
 							</div>
 
@@ -533,16 +533,19 @@
     	const top10Trends = rList.sort((a, b) => b.trend_sum - a.trend_sum).slice(0, 10);
 
     	// 키워드와 sum을 각각의 배열에 담습니다.
-    	const labels = top10Trends.map(trend => trend.trend_keyword);
-    	const data = top10Trends.map(trend => trend.trend_sum);
-
-    	
-    	let canvas= document.getElementById('011')
-      let ctx = canvas.getContext('2d'); // id가 '011'인 캔버스 요소를 가져와 2D 컨텍스트 얻기
-      //const data = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]; // 새로운 데이터 배열
-      //const labels = ['TOP1', 'TOP2', 'TOP3', 'TOP4', 'TOP5', 'TOP6', 'TOP7', 'TOP8', 'TOP9', 'TOP10']; // 새로운 라벨 배열
+    	const labels = top10Trends.map(trend => trend.trend_keyword); // 새로운 라벨 배열
+    	const data = top10Trends.map(trend => trend.trend_sum); // 새로운 데이터 배열
 
     
+    	//차트 객체 생성 전 canvas 초기화
+      $('#011').remove(); // this is my <canvas> element
+      $('#divBarChart').append('<canvas id="011" style="display: block;height: 355px;width: 1550px;"></canvas>');
+
+      
+  	
+      let canvas= document.getElementById('011')
+      let ctx = canvas.getContext('2d'); // id가 '011'인 캔버스 요소를 가져와 2D 컨텍스트 얻기
+      
       
       let chart = new Chart(ctx, { // 새로운 Chart 객체 생성
         type: 'bar', // 차트 유형을 '바 차트'로 설정
