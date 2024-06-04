@@ -208,19 +208,19 @@
 					<li class="nav-item mr-2 mr-md-0" data-toggle="chart"
 						data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}'
-						data-prefix="$" data-suffix="k"><a onclick="naverSearch('밀레니얼')"
+						data-prefix="$" data-suffix="k"><a onclick="changeBoard('밀레니얼')"
 						class="nav-link py-2 px-3 active" data-toggle="tab"> <span
 							class="d-none d-md-block">밀레니엄</span> <span class="d-md-none">밀레니엄</span>
 					</a></li>
 					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-						data-prefix="$" data-suffix="k"><a  onclick="naverSearch('스트레스')"
+						data-prefix="$" data-suffix="k"><a  onclick="changeBoard('스트레스')"
 						class="nav-link py-2 px-3" data-toggle="tab"> <span
 							class="d-none d-md-block">스트레스</span> <span class="d-md-none">스트레스</span>
 					</a></li>
 					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-						data-prefix="$" data-suffix="k"><a  onclick="naverSearch('혈당')"
+						data-prefix="$" data-suffix="k"><a  onclick="changeBoard('혈당')"
 						class="nav-link py-2 px-3" data-toggle="tab"> <span
 							class="d-none d-md-block">혈당</span> <span class="d-md-none">혈당</span>
 					</a></li>
@@ -625,9 +625,30 @@
     //------------------------------------------------------------------------
    	//네이버 블로그
    $(document).ready(function() { 
-	   naverSearch('밀레니엄')
+	   changeBoard('밀레니엄')
    });
 
+	
+	function changeBoard(request){
+		naverSearch(request)
+		
+		$.ajax({
+			url:'trendList',
+			type:'GET',
+			success: function(response) {
+				 let tList = JSON.stringify(response, null, 2)
+				
+				
+			},
+			error:function(xhr, status, error) {
+	            console.error("에러 발생:", error);
+	        }
+		})
+	}
+	
+	
+
+    
    	
     function naverSearch(query){
 	$.ajax({
