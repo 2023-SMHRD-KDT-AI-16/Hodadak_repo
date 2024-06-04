@@ -208,9 +208,9 @@
 					<li class="nav-item mr-2 mr-md-0" data-toggle="chart"
 						data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}'
-						data-prefix="$" data-suffix="k"><a onclick="changeBoard('밀레니얼')"
+						data-prefix="$" data-suffix="k"><a onclick="changeBoard('갓생')"
 						class="nav-link py-2 px-3 active" data-toggle="tab"> <span
-							class="d-none d-md-block">밀레니엄</span> <span class="d-md-none">밀레니엄</span>
+							class="d-none d-md-block">밀레니엄</span> <span class="d-md-none">갓생</span>
 					</a></li>
 					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
@@ -526,10 +526,17 @@
 
     // 키워드 탑10
     // 바차트
-    document.addEventListener("DOMContentLoaded", function () { // 문서가 모두 로드되면 실행
+    function barChart(list) { // 문서가 모두 로드되면 실행
+    	// trend_sum을 기준으로 내림차순으로 정렬하고 상위 10개를 선택합니다.
+    	const top10Trends = list.sort((a, b) => b.trend_sum - a.trend_sum).slice(0, 10);
+
+    	// 키워드와 sum을 각각의 배열에 담습니다.
+    	const labels = top10Trends.map(trend => trend.trend_keyword);
+    	const data = top10Trends.map(trend => trend.trend_sum);
+
       const ctx = document.getElementById('011').getContext('2d'); // id가 '011'인 캔버스 요소를 가져와 2D 컨텍스트 얻기
-      const data = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]; // 새로운 데이터 배열
-      const labels = ['TOP1', 'TOP2', 'TOP3', 'TOP4', 'TOP5', 'TOP6', 'TOP7', 'TOP8', 'TOP9', 'TOP10']; // 새로운 라벨 배열
+      //const data = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]; // 새로운 데이터 배열
+      //const labels = ['TOP1', 'TOP2', 'TOP3', 'TOP4', 'TOP5', 'TOP6', 'TOP7', 'TOP8', 'TOP9', 'TOP10']; // 새로운 라벨 배열
 
       const chart = new Chart(ctx, { // 새로운 Chart 객체 생성
         type: 'bar', // 차트 유형을 '바 차트'로 설정
@@ -571,7 +578,7 @@
           }
         }
       });
-    });
+    }
 
 
     //---------------------------------------------------------------------------------------
@@ -623,12 +630,12 @@
     });
     
     //------------------------------------------------------------------------
-   	//네이버 블로그
+   	//html이 로드 됐을때 
    $(document).ready(function() { 
-	   changeBoard('밀레니엄')
+	   changeBoard('갓생')
    });
 
-	
+	//대시보드 값 DB연결
 	function changeBoard(request){
 		naverSearch(request)
 		
@@ -637,7 +644,7 @@
 			type:'GET',
 			success: function(response) {
 				 let tList = JSON.stringify(response, null, 2)
-				
+				 barChart(JSON.parse(tList))
 				
 			},
 			error:function(xhr, status, error) {
@@ -647,9 +654,9 @@
 	}
 	
 	
-
+//---------------------------------------------------------------------------------------------
     
-   	
+   	//네이버 api 
     function naverSearch(query){
 	$.ajax({
         url: 'naver',  // 백엔드의 /naver 엔드포인트 호출
