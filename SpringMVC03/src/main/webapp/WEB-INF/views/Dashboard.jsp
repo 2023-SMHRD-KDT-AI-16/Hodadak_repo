@@ -208,7 +208,7 @@
 					<li class="nav-item mr-2 mr-md-0" data-toggle="chart"
 						data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}'
-						data-prefix="$" data-suffix="k"><a onclick="changeBoard('갓생')"
+						data-prefix="$" data-suffix="k"><a onclick="changeBoard('갓생살기')"
 						class="nav-link py-2 px-3 active" data-toggle="tab"> <span
 							class="d-none d-md-block">밀레니엄</span> <span class="d-md-none">갓생</span>
 					</a></li>
@@ -526,9 +526,11 @@
 
     // 키워드 탑10
     // 바차트
-    function barChart(list) { // 문서가 모두 로드되면 실행
+    function barChart(list,request) { // 문서가 모두 로드되면 실행
     	// trend_sum을 기준으로 내림차순으로 정렬하고 상위 10개를 선택합니다.
-    	const top10Trends = list.sort((a, b) => b.trend_sum - a.trend_sum).slice(0, 10);
+    	 const rList = list.filter(item => item.trend_source === request);
+    	console.log(rList);
+    	const top10Trends = rList.sort((a, b) => b.trend_sum - a.trend_sum).slice(0, 10);
 
     	// 키워드와 sum을 각각의 배열에 담습니다.
     	const labels = top10Trends.map(trend => trend.trend_keyword);
@@ -632,7 +634,7 @@
     //------------------------------------------------------------------------
    	//html이 로드 됐을때 
    $(document).ready(function() { 
-	   changeBoard('갓생')
+	   changeBoard('갓생살기')
    });
 
 	//대시보드 값 DB연결
@@ -644,7 +646,7 @@
 			type:'GET',
 			success: function(response) {
 				 let tList = JSON.stringify(response, null, 2)
-				 barChart(JSON.parse(tList))
+				 barChart(JSON.parse(tList),request)
 				
 			},
 			error:function(xhr, status, error) {
