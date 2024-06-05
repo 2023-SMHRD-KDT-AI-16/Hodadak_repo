@@ -737,12 +737,13 @@
         contentType: 'application/json;charset:UTF-8', // 반환받을 데이터의 타입
         data: { query: query },  // 서버로 보낼 데이터
         success: function(response) {
-          //  console.log("서버로부터의 응답:", response);
+            console.log("서버로부터의 응답:", response);
             innerHtml=""
             	
             for(let i = 0; i<response.items.length;i++){
             	var url = ensureCompleteUrl(response.items[i].link);
             	innerHtml +="<tr>"
+            	innerHtml += "<td></td>"
             	innerHtml += "<td><h3><a onclick='modalOpen(\"" + url + "\")'>" + response.items[i].title + "</a></h3>";
             	innerHtml += "<a onclick='modalOpen(\"" + url + "\")'>" + response.items[i].description + "</a></td>";
             	innerHtml +="<tr>"
