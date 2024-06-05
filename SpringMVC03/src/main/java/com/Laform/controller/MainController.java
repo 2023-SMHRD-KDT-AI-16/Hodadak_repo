@@ -93,5 +93,10 @@ public class MainController {
 		return "test";
 	}
 	
+	@RequestMapping("/csv_upload.do")
+	public String csv_upload() {
+		
+		return "csv_upload";
+	}
 	
 }

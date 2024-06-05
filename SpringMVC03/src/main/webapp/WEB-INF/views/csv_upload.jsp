@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
 
+<html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport"
@@ -202,31 +202,6 @@
 		<div
 			class="header bg-gradient-primary2 pb-8 pt-5 pt-md-8 position-relative">
 
-			<!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
-			<div class="col" style="padding-left: 45px;">
-				<ul class="nav nav-pills justify-content-start">
-					<li class="nav-item mr-2 mr-md-0" data-toggle="chart"
-						data-target="#chart-sales"
-						data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}'
-						data-prefix="$" data-suffix="k"><a onclick="changeBoard('갓생살기')"
-						class="nav-link py-2 px-3 active" data-toggle="tab"> <span
-							class="d-none d-md-block">밀레니엄</span> <span class="d-md-none">갓생</span>
-					</a></li>
-					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
-						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-						data-prefix="$" data-suffix="k"><a  onclick="changeBoard('스트레스')"
-						class="nav-link py-2 px-3" data-toggle="tab"> <span
-							class="d-none d-md-block">스트레스</span> <span class="d-md-none">스트레스</span>
-					</a></li>
-					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
-						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-						data-prefix="$" data-suffix="k"><a  onclick="changeBoard('혈당')"
-						class="nav-link py-2 px-3" data-toggle="tab"> <span
-							class="d-none d-md-block">혈당</span> <span class="d-md-none">혈당</span>
-					</a></li>
-				</ul>
-			</div>
-			<!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
 
 
 			<div class="container-fluid">
@@ -239,195 +214,50 @@
 
 		<!-- Page content -->
 		<div class="container-fluid mt--7">
-			<div class="row">
-				<div class="col-xl-12  mb-5 mb-xl-0">
-					<div class="card shadow">
-						<div class="card-header bg-transparent hover12">
-							<div class="row align-items-center ">
-
-								<div class="col">
-									<h6 class="text-uppercase text-black ls-1 mb-1">Keyword
-										TOP 10</h6>
-									<h2 class="text-black mb-0">키워드 TOP 10</h2>
-								</div>
-
-								<div class="col"></div>
-							</div>
-						</div>
-						<div class="card-body " style="background-color: #ffffff;">
-
-							<!-- Chart -->
-							<div class="chart" id="divBarChart">
-								<canvas id="011" style="display: block;height: 355px;width: 1550px;"></canvas>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!--행복하다-------------------------------------------------------------------------------------------->
-			<div class="row">
-				<div class="col-xl-4 col-lg-6 "
-					style="padding-top: 20px; padding-bottom: 20px;">
-					<div class="card card-stats mb-4 mb-xl-0 ">
-						<div class="card-body">
-							<div class="row">
-								<div class="col">
-									<h5 class="card-title text-uppercase text-muted mb-0">긍정</h5>
-									<span class="h2 font-weight-bold mb-0 hover12">행복하다</span>
-								</div>
-								<div class="col-auto">
-									<div
-										class="icon icon-shape bg-green text-white rounded-circle shadow">
-										<i class="fas fa-smile"></i>
+		
+		
+			<!-- file upload Start Line -->
+			<div>
+				<div class="row">
+						<div class="col-xl-12  mb-5 mb-xl-0">
+							<div class="card shadow">
+								<div class="card-header bg-transparent hover12">
+									<div class="row align-items-center ">
+		
+										<div class="col">
+											<h6 class="text-uppercase text-black ls-1 mb-1">CSV File Upload</h6>
+											<h2 class="text-black mb-0">CSV 파일을 선택해주세요</h2>
+										</div>
+											
+										<div class="col"></div>
 									</div>
 								</div>
-							</div>
-							<p class="mt-3 mb-0 text-muted text-sm">
-								<span class="text-success mr-2"><i class="fa fa-arrow-up"></i>
-									TOP1</span> <span class="text-nowrap">트렌드 키워드</span>
-							</p>
-
-						</div>
-					</div>
-				</div>
-
-				<!--불행하다----------------------------------------------------------------------------------------->
-				<div class="col-xl-4 col-lg-6 "
-					style="padding-top: 20px; padding-bottom: 20px;">
-					<div class="card card-stats mb-4 mb-xl-0 ">
-						<div class="card-body">
-							<div class="row">
-								<div class="col">
-									<h5 class="card-title text-uppercase text-muted mb-0">부정</h5>
-									<span class="h2 font-weight-bold mb-0 hover12">불행하다</span>
-								</div>
-								<div class="col-auto">
-									<div
-										class="icon icon-shape bg-red text-white rounded-circle shadow">
-										<i class="fas fa-frown"></i>
+								<div class="card-body " style="background-color: #ffffff;">
+		
+									<!-- 파일 업로드 하기위한 div 태그 -->
+									<div class="chart" style="display: block;height: 355px;width: 1550px;">
+										<form id="testForm" enctype="multipart/form-data">
+											<input type="text" id="name"/>
+											<input type="file" id="file"/>
+											<button id="button1">submit</button>
+										</form>
 									</div>
+		
 								</div>
 							</div>
-							<p class="mt-3 mb-0 text-muted text-sm">
-								<span class="text-danger mr-2"><i
-									class="fas fa-arrow-down"></i> TOP1</span> <span class="text-nowrap">트렌드
-									키워드</span>
-							</p>
 						</div>
 					</div>
-				</div>
-
-				<!--test------------------------------------------------------------------------------------------>
-				<div class="col-xl-4 col-lg-6"
-					style="padding-top: 20px; padding-bottom: 20px;">
-					<div class="card card-stats mb-4 mb-xl-0">
-						<div class="card-body">
-							<div class="row">
-								<div class="col">
-									<h5 class="card-title text-uppercase text-muted mb-0 hover12">test</h5>
-									<span class="h2 font-weight-bold mb-0">test</span>
-								</div>
-								<div class="col-auto">
-									<div
-										class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-										<i class="fas fa-users"></i>
-									</div>
-								</div>
-							</div>
-							<p class="mt-3 mb-0 text-muted text-sm">
-								<span class="text-warning mr-2"><i
-									class="fas fa-arrow-down"></i> test</span> <span class="text-nowrap">다른
-									test</span>
-							</p>
-						</div>
-					</div>
-				</div>
-
+				 	
+				 	
+				 	
+				 
+					<!-- <table>
+						<tr>
+							<th>File_Upload</th>
+						</tr>
+					</table> -->
+				</form>
 			</div>
-
-
-			<!---------------------------워드클라우드------------------------------------------------------------------------------->
-			<div class="row">
-				<div class="col-xl-8  mb-5 mb-xl-0">
-					<div class="card shadow">
-						<div class="card-header bg-transparent hover12">
-							<div class="row align-items-center">
-								<div class="col">
-									<h6 class="text-uppercase text-black ls-1 mb-1">Wordcloud</h6>
-									<h2 class="text-black mb-0">워드클라우드</h2>
-								</div>
-							</div>
-						</div>
-						<div class="card-body"
-							style="background-color: #ffffff; padding: 0px;">
-							<img
-								src="${pageContext.request.contextPath}/resources/img/밀레니엄.png"
-								alt="">
-						</div>
-					</div>
-				</div>
-
-
-
-				<!------------------------------------긍정, 부정 그래프------------------------------------------------------------------------->
-				<div class="col-xl-4">
-					<div class="card shadow">
-
-						<div
-							class="card-header bg-gradient-default1  bg-transparent hover12">
-							<div class="row align-items-center">
-
-								<div class="col">
-									<h6 class="text-uppercase text-black ls-1 mb-1">Positive,
-										Negative</h6>
-									<h2 class="mb-0">긍정, 부정</h2>
-								</div>
-
-							</div>
-						</div>
-						<div class="card-body" style="padding-bottom: 50px;">
-
-
-
-							<!-- Chart -->
-							<div class="chart">
-								<canvas id="010"></canvas>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<!-----------------------------블로그 뉴스 등----------------------------------------------------------------------------->
-			<div class="col-xl-81 mb-5 mb-xl-0"></div>
-			<div class="card shadow">
-				<div class="card-header bg-gradient-default1 border-0 hover12">
-					<div class="row align-items-center">
-						<div class="col">
-							<h3 class="mb-0">블로그</h3>
-						</div>
-					</div>
-				</div>
-				<div class="table-responsive">
-
-					<table class="table align-items-center table-flush">
-
-						<thead class="thead-light">
-
-						</thead>
-
-
-						<tbody id="searchResult">
-						</tbody>
-					</table>
-
-
-				</div>
-			</div>
-
 			<!-----------------------footer----------------------------------------------------------------------->
 			<footer class="footer">
 				<div class="row align-items-center justify-content-xl-between">
@@ -475,118 +305,7 @@
 	<script src="${pageContext.request.contextPath}/resources/js/sakura.js" text="text/javascript"></script>
 	<script>
 
-    //---------------------------------------------------------------------------------------
-    
-    // 긍정 부정
-    // 도넛차트
-    window.TrackJS && // TrackJS가 정의되어 있으면
-      TrackJS.install({ // TrackJS를 설치
-        token: "ee6fab19c5a04ac1a32a645abde4613a", // 추적 토큰 설정
-        application: "argon-dashboard-free" // 애플리케이션 이름 설정
-      });
 
-    document.addEventListener("DOMContentLoaded", function () { // 문서가 모두 로드되면 실행
-      var ctx = document.getElementById('010').getContext('2d'); // id가 '010'인 캔버스 요소를 가져와 2D 컨텍스트 얻기
-      var myChart = new Chart(ctx, { // 새로운 Chart 객체 생성
-        type: 'doughnut', // 차트 유형을 '도넛형'으로 설정
-        data: {
-          labels: ['부정', '긍정'], // 도넛 차트의 레이블
-          datasets: [{
-            label: 'Market Share', // 데이터셋의 레이블
-            data: [40, 60], // 각 레이블에 해당하는 데이터 값
-            backgroundColor: ['#F5365C', '#2DCC70'], // 각 데이터 조각의 배경색 설정
-            borderColor: [], // 각 데이터 조각의 테두리 색상 설정 (현재 없음)
-            borderWidth: 10 // 데이터 조각의 테두리 너비 설정
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: true,
-              position: 'chartArea',
-              align: 'center'
-            },
-            tooltip: {
-              enabled: true,
-              backgroundColor: 'rgba(0, 0, 0, 0.7)',
-              titleColor: '#ffffff',
-              bodyColor: '#ffffff', 
-              borderWidth: 1, 
-              borderColor: '#ddd', 
-            }
-          },
-          cutoutPercentage: 50
-        }
-      });
-    });
-
-    //---------------------------------------------------------------------------------------
-
-    // 키워드 탑10
-    // 바차트
-    function barChart(list,request) { // 문서가 모두 로드되면 실행
-    	// trend_sum을 기준으로 내림차순으로 정렬하고 상위 10개를 선택합니다.
-    	 const rList = list.filter(item => item.trend_source === request);
-    	//console.log(rList);
-    	const top10Trends = rList.sort((a, b) => b.trend_sum - a.trend_sum).slice(0, 10);
-
-    	// 키워드와 sum을 각각의 배열에 담습니다.
-    	const labels = top10Trends.map(trend => trend.trend_keyword); // 새로운 라벨 배열
-    	const data = top10Trends.map(trend => trend.trend_sum); // 새로운 데이터 배열
-
-    
-      
-      //차트 객체 생성 전 canvas 초기화
-      $('#011').remove(); 
-      $('#divBarChart').append('<canvas id="011" style="display: block;height: 355px;width: 1550px;"></canvas>');
-
-  
-      let canvas= document.getElementById('011')
-      let ctx = canvas.getContext('2d'); // id가 '011'인 캔버스 요소를 가져와 2D 컨텍스트 얻기
-      
-      let chart = new Chart(ctx, { // 새로운 Chart 객체 생성
-        type: 'bar', // 차트 유형을 '바 차트'로 설정
-        data: {
-          labels: labels, // 차트의 레이블 설정
-          datasets: [{
-            label: 'New Monthly Sales', // 데이터셋의 레이블
-            data: data, // 차트 데이터 설정
-            backgroundColor: '#8467D7', // 데이터셋의 배경색 설정
-          }]
-        },
-        options: {
-          responsive: true, // 차트를 반응형으로 설정
-          indexAxis: 'y', // 가로형 바 차트로 설정
-          plugins: {
-            legend: {
-              display: true, // 범례 표시 여부 설정
-              position: 'top' // 범례를 상단에 배치
-            },
-            title: {
-              display: true, // 타이틀 표시 여부 설정
-              text: 'New Monthly Sales Data' // 타이틀 텍스트 설정
-            }
-          },
-          scales: {
-            x: {
-              title: {
-                display: true, // x축 타이틀 표시 여부 설정
-                text: 'New Sales' // x축 타이틀 텍스트 설정
-              },
-              beginAtZero: true // x축 값이 0부터 시작하도록 설정
-            },
-            y: {
-              title: {
-                display: true, // y축 타이틀 표시 여부 설정
-                text: 'Month' // y축 타이틀 텍스트 설정
-              }
-            }
-          }
-        }
-      });
-    }
 
 
     //---------------------------------------------------------------------------------------
@@ -640,7 +359,7 @@
     //------------------------------------------------------------------------
    	//html이 로드 됐을때 
    $(document).ready(function() { 
-	   changeBoard('갓생살기')
+	   changeBoard('갓생')
    });
 
 	//대시보드 값 DB연결
@@ -652,7 +371,7 @@
 			type:'GET',
 			success: function(response) {
 				 let tList = JSON.stringify(response, null, 2)
-				 barChart(JSON.parse(tList),request)
+				 barChart(JSON.parse(tList))
 				
 			},
 			error:function(xhr, status, error) {
@@ -726,7 +445,27 @@ function modalOpen(link){ //제목클릭시 해당 페이지
   
 
   </script>
-
+  <!-- 파일 업로드 하기위한 스크립트 -->
+	<script>
+		$(document).ready(function(){
+			$("#button1").click(function(event){
+				// event.preventDefault();
+				var form = $("#testForm");
+				var formData = new FormData(form);
+				formData.append("file", $("#file")[0].files[0]);
+				debugger
+				$.ajax({
+					url: 'csv_upload.do',
+					processData: false,
+					contentType: false,
+					data: formData,
+					type: 'POST',
+					success: function(data){
+						console.log(data);
+					}
+				});
+			});
+		});
+	</script>
 </body>
-
 </html>

@@ -69,6 +69,14 @@ function modalOpen(link){ //제목클릭시 해당 페이지
     <button id="submitButton">Send</button>
     <br>
     
+        <h2>File Upload Form</h2>
+    <form action="upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" multiple="multiple"/>
+        <button type="submit">Upload</button>
+    </form>
+    <div th:if="${message}">
+        <p th:text="${message}"></p>
+    </div>
     
 <button onclick="naverSearch('갓생')">갓생</button>
 <button onclick="naverSearch('스트레스')">스트레스</button>
