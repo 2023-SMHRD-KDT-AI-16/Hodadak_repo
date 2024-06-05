@@ -101,5 +101,10 @@ public class MainController {
 	public String Addrewview() {
 		return "Addreview";
 	}
+	
+	@RequestMapping("productAnalysis.do")
+	public String productAnalysis() {
+		return "productAnalysis";
+	}
 
 }

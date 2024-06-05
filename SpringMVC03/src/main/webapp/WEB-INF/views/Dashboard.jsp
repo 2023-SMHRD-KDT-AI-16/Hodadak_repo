@@ -125,15 +125,15 @@
 					<!-- Navigation -->
 					<ul class="navbar-nav">
 						<li class="nav-item active"><a class="nav-link hover12 active"
-							href="./Dashboard.html"> <i
+							href="dashboard.do"> <i
 								class="ni ni-chart-bar-32 text-red "></i> La Form 트렌드 분석
 						</a></li>
 						<li class="nav-item"><a
-							class="nav-link hover12" href="./Check'O.html"> <i
+							class="nav-link hover12" href="productAnalysis.do"> <i
 								class="ni ni-check-bold text-black"></i> Check'O 제품 분석
 						</a></li>
 						<li class="nav-item"><a class="nav-link hover12"
-							href="./Suggest.html"> <i class="ni ni-basket text-orange"></i>
+							href="#"> <i class="ni ni-basket text-orange"></i>
 								La Form 제안서 <span class="badge badge-pill badge-dark"
 								style="background-color: #4B0082; color: #FFD700; border: 2px solid #FFD700;">AI</span>
 						</a></li>
