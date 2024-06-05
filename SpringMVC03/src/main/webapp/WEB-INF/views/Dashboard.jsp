@@ -434,6 +434,38 @@
 				</div>
 			</div>
 
+
+
+<!-- Modal -->
+<div id="naverModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width: 80%; max-width: 1200px;"> <!-- 스타일 추가 -->
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="height: 700px;"> <!-- 스타일 추가 -->
+        <iframe id="naverIframe" style="width: 100%; height: 100%; border: none;"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="gptModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+                  <h4 class="modal-title">ChatGPT</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body" id="gptResponse">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 			<!-----------------------footer----------------------------------------------------------------------->
 			<footer class="footer">
 				<div class="row align-items-center justify-content-xl-between">
@@ -533,68 +565,77 @@
 
     // 키워드 탑10
     // 바차트
-    function barChart(list,request) { // 문서가 모두 로드되면 실행
-    	// trend_sum을 기준으로 내림차순으로 정렬하고 상위 10개를 선택합니다.
-    	 const rList = list.filter(item => item.trend_source === request);
-    	//console.log(rList);
-    	const top10Trends = rList.sort((a, b) => b.trend_sum - a.trend_sum).slice(0, 10);
+  function barChart(list, request) {
 
-    	// 키워드와 sum을 각각의 배열에 담습니다.
-    	const labels = top10Trends.map(trend => trend.trend_keyword); // 새로운 라벨 배열
-    	const data = top10Trends.map(trend => trend.trend_sum); // 새로운 데이터 배열
+    const rList = list.filter(item => item.trend_source === request);
+    const groupedTrends = {};
 
-    
-      
-      //차트 객체 생성 전 canvas 초기화
-      $('#011').remove(); 
-      $('#divBarChart').append('<canvas id="011" style="display: block;height: 355px;width: 1550px;"></canvas>');
+    rList.forEach(trend => {
+        const key = trend.trend_keyword;
+        if (!groupedTrends[key]) {
+            groupedTrends[key] = { trend_keyword: key, trend_sum: 0 };
+        }
+        groupedTrends[key].trend_sum += trend.trend_sum; // 키워드가 같을 때 빈도수를 누적
+    });
 
-  
-      let canvas= document.getElementById('011')
-      let ctx = canvas.getContext('2d'); // id가 '011'인 캔버스 요소를 가져와 2D 컨텍스트 얻기
-      
-      let chart = new Chart(ctx, { // 새로운 Chart 객체 생성
-        type: 'bar', // 차트 유형을 '바 차트'로 설정
+    // trend_sum을 기준으로 내림차순으로 정렬하고 상위 10개를 선택합니다.
+    const top10Trends = Object.values(groupedTrends)
+        .sort((a, b) => b.trend_sum - a.trend_sum)
+        .slice(0, 10);
+
+    const labels = top10Trends.map(trend => trend.trend_keyword);
+    const data = top10Trends.map(trend => trend.trend_sum);
+
+    $('#011').remove();
+    $('#divBarChart').append('<canvas id="011" style="display: block;height: 355px;width: 1550px;"></canvas>');
+
+    let canvas = document.getElementById('011');
+    let ctx = canvas.getContext('2d');
+
+    let chart = new Chart(ctx, {
+        type: 'bar',
         data: {
-          labels: labels, // 차트의 레이블 설정
-          datasets: [{
-            label: 'New Monthly Sales', // 데이터셋의 레이블
-            data: data, // 차트 데이터 설정
-            backgroundColor: '#8467D7', // 데이터셋의 배경색 설정
-          }]
+            labels: labels,
+            datasets: [{
+                label: 'Trend Sum',
+                data: data,
+                backgroundColor: '#8467D7',
+            }]
         },
         options: {
-          responsive: true, // 차트를 반응형으로 설정
-          indexAxis: 'y', // 가로형 바 차트로 설정
-          plugins: {
-            legend: {
-              display: true, // 범례 표시 여부 설정
-              position: 'top' // 범례를 상단에 배치
+            responsive: true,
+            indexAxis: 'y',
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                title: {
+                    display: true,
+                    text: 'Top 10 Trends'
+                },
             },
-            title: {
-              display: true, // 타이틀 표시 여부 설정
-              text: 'New Monthly Sales Data' // 타이틀 텍스트 설정
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Trend Sum'
+                    },
+                    beginAtZero: true
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Keyword'
+                    },
+                    ticks: {
+                        autoSkip: false
+                    }
+                }
             }
-          },
-          scales: {
-            x: {
-              title: {
-                display: true, // x축 타이틀 표시 여부 설정
-                text: 'New Sales' // x축 타이틀 텍스트 설정
-              },
-              beginAtZero: true // x축 값이 0부터 시작하도록 설정
-            },
-            y: {
-              title: {
-                display: true, // y축 타이틀 표시 여부 설정
-                text: 'Month' // y축 타이틀 텍스트 설정
-              }
-            }
-          }
         }
-      });
-    }
-
+    });
+}
 
     //---------------------------------------------------------------------------------------
     document.addEventListener("DOMContentLoaded", function () {
@@ -674,7 +715,7 @@
    	//네이버 api 
     function naverSearch(query){
 	$.ajax({
-        url: 'naverBlog',  // 백엔드의 /naver 엔드포인트 호출
+        url: 'naver',  // 백엔드의 /naver 엔드포인트 호출
         type: 'GET',    // HTTP 메소드
         contentType: 'application/json;charset:UTF-8', // 반환받을 데이터의 타입
         data: { query: query },  // 서버로 보낼 데이터
@@ -707,8 +748,9 @@ function ensureCompleteUrl(url) { //네이버 검색으로 받아온 link 변환
 	}
 
 
-function modalOpen(link){ //제목클릭시 해당 페이지 
-	window.open(link)
+function modalOpen(link) {
+    $('#naverModal').modal("show");
+    $('#naverIframe').attr('src', link); // iFrame의 src 속성 설정
 }
 
 //-------------------------------------------------------------------------------------------
@@ -722,13 +764,15 @@ function modalOpen(link){ //제목클릭시 해당 페이지
         data: JSON.stringify({ prompt: myData }),
         success: function(response) {
             console.log("서버로부터의 응답:", response);
+            $("#gptResponse").html(response)
+            $('#gptModal').modal("show");
         },
         error: function(xhr, status, error) {
             console.error("에러 발생:", error);
         }
     });
 		
-		$("#promptInput").val()=""
+		$("#promptInput").val("")
 }
   
 

@@ -235,7 +235,7 @@
                   <input type="text" name="FileName" id="FileName" placeholder="파일명을 작성해 주세요.">
                 </th>
                 <td>
-                  <input type="file" name="file" id="file">
+                  <input type="file" name="file" id="file" multiple>
                 </td>
               </tr>
               <tr>
