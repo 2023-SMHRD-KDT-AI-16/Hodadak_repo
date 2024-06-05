@@ -212,7 +212,7 @@
 						data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}'
 						data-prefix="$" data-suffix="k"><a
 						onclick="changeBoard('갓생살기')" class="nav-link py-2 px-3 active"
-						data-toggle="tab"> <span class="d-none d-md-block">밀레니엄</span>
+						data-toggle="tab"> <span class="d-none d-md-block">갓생</span>
 							<span class="d-md-none">갓생</span>
 					</a></li>
 					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
@@ -398,7 +398,7 @@
 
 
 							<!-- Chart -->
-							<div class="chart">
+							<div class="chart" id="divDonutChart">
 								<canvas id="010"></canvas>
 							</div>
 						</div>
@@ -524,7 +524,18 @@
         application: "argon-dashboard-free" // 애플리케이션 이름 설정
       });
 
-    document.addEventListener("DOMContentLoaded", function () { // 문서가 모두 로드되면 실행
+    function donutChart(request) { 
+
+    	$.ajax({
+    		url: "getDeepPN",
+    		data: {deep_source: "스트레스" },
+    		success: function(data){
+    			//console.log(data);
+    
+      $('#010').remove();
+    $('#divDonutChart').append('<canvas id="010"></canvas>');
+
+    	
       var ctx = document.getElementById('010').getContext('2d'); // id가 '010'인 캔버스 요소를 가져와 2D 컨텍스트 얻기
       var myChart = new Chart(ctx, { // 새로운 Chart 객체 생성
         type: 'doughnut', // 차트 유형을 '도넛형'으로 설정
@@ -532,7 +543,7 @@
           labels: ['부정', '긍정'], // 도넛 차트의 레이블
           datasets: [{
             label: 'Market Share', // 데이터셋의 레이블
-            data: [40, 60], // 각 레이블에 해당하는 데이터 값
+            data: data, // 각 레이블에 해당하는 데이터 값
             backgroundColor: ['#F5365C', '#2DCC70'], // 각 데이터 조각의 배경색 설정
             borderColor: [], // 각 데이터 조각의 테두리 색상 설정 (현재 없음)
             borderWidth: 10 // 데이터 조각의 테두리 너비 설정
@@ -559,7 +570,13 @@
           cutoutPercentage: 50
         }
       });
-    });
+      
+    		},
+    		error: function(){
+    			alert("연결 실패 ㅜㅜ");
+    		}
+    	});
+    }
 
     //---------------------------------------------------------------------------------------
 
@@ -694,6 +711,7 @@
 	//대시보드 값 DB연결
 	function changeBoard(request){
 		naverSearch(request)
+		donutChart(request)
 		
 		$.ajax({
 			url:'trendList',

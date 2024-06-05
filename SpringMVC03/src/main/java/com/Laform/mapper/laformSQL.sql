@@ -12,3 +12,5 @@ insert into tb_corperation (corp_name,corp_tel,corp_email,corp_addr,joined_at) V
     FROM tb_corperation
     ORDER BY joined_at DESC
     LIMIT 10 OFFSET (1) *10
+    
+    select * from tb_deep where label=1;

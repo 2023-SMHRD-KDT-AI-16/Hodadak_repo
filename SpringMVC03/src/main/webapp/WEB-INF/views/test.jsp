@@ -62,6 +62,7 @@ function modalOpen(link){ //제목클릭시 해당 페이지
 	window.open(link)
 }
 
+//플라스크 (준혁님 서버)로 파일 전송
 $(document).ready(function() {
     $('#uploadButton').click(function() {
         var fileInput = document.getElementById('fileInput');
@@ -86,6 +87,23 @@ $(document).ready(function() {
     });
 });
 
+
+//도넛차트
+function doughnutChart(){
+	$.ajax({
+		url: "getDeepPN",
+		data: {deep_source: "스트레스" },
+		success: function(data){
+			console.log(data);
+		},
+		error: function(){
+			alert("연결 실패 ㅜㅜ");
+		}
+	});
+}
+
+
+
 </script>
 </head>
 <body>
@@ -99,7 +117,6 @@ $(document).ready(function() {
     <input type="file" id="fileInput" />
     <button id="uploadButton">업로드</button>
     
-    
 
 
 <button onclick="naverSearch('갓생')">갓생</button>
@@ -107,6 +124,9 @@ $(document).ready(function() {
 <button onclick="naverSearch('혈당')">혈당</button>
 <br>
 <span id="searchResult"></span>
+
+
+    <button onclick="doughnut()">스트레스</button>
 
 </body>
 </html>

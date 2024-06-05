@@ -11,13 +11,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class tb_review {
+public class tb_deep {
 
-	private int review_idx;
-	private int prod_idx;
-	private String review_content;
-	private boolean review_rating;
+	//키워드 분석 결과
+	private int deep_idx;
+	private String deep_result;
 	private LocalDate created_at;
-	private String review_name;
-	private String review_origin;
+	private int deep_sum;
+	private String deep_source;
+	private int deep_rank;
+	private boolean label;
+	private int deep_age;
+	
 }
