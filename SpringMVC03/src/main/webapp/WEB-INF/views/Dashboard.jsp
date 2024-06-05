@@ -31,7 +31,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/sakura.css" />
 <style type="text/css">
-
 </style>
 </head>
 
@@ -53,7 +52,7 @@
 
 			<!-- Brand -->
 			<a class="navbar-brand pt-0" href="dashboard.do"> <img
-				src="${pageContext.request.contextPath}/resources/img/𝑳𝒂 𝑭𝒐𝒓𝒎_newtitle1.png"
+				src="${pageContext.request.contextPath}/resources/img/배너2.png"
 				class="navbar-brand-img" alt="...">
 			</a>
 
@@ -112,7 +111,7 @@
 					<form class="mt-4 mb-3 d-md-none">
 						<div class="input-group input-group-rounded input-group-merge">
 							<!-- 챗GPT API 들어갈 input 태그-->
-							<input type="text" 
+							<input type="text"
 								class="form-control form-control-rounded form-control-prepended"
 								placeholder="ChatGPT에게 물어보세요!" aria-label="Search">
 							<div class="input-group-prepend">
@@ -125,17 +124,18 @@
 
 					<!-- Navigation -->
 					<ul class="navbar-nav">
-						<li class="nav-item  active"><a
-							class="nav-link  active hover12" href="dashboard.do"> <i
-								class="ni ni-chart-bar-32 text-red "></i> Dashboard
+						<li class="nav-item active"><a class="nav-link hover12 active"
+							href="./Dashboard.html"> <i
+								class="ni ni-chart-bar-32 text-red "></i> La Form 트렌드 분석
+						</a></li>
+						<li class="nav-item"><a
+							class="nav-link hover12" href="./Check'O.html"> <i
+								class="ni ni-check-bold text-black"></i> Check'O 제품 분석
 						</a></li>
 						<li class="nav-item"><a class="nav-link hover12"
-							href="#"> <i class="ni ni-check-bold text-black"></i>
-								Check'O
-						</a></li>
-						<li class="nav-item"><a class="nav-link hover12"
-							href="#"> <i class="ni ni-basket text-orange"></i>
-								Suggest
+							href="./Suggest.html"> <i class="ni ni-basket text-orange"></i>
+								La Form 제안서 <span class="badge badge-pill badge-dark"
+								style="background-color: #4B0082; color: #FFD700; border: 2px solid #FFD700;">AI</span>
 						</a></li>
 					</ul>
 
@@ -165,9 +165,11 @@
 								</span>
 							</div>
 							<!-- 챗GPT API 들어갈 input 태그-->
-							<input class="form-control" placeholder="Search" type="text" id="promptInput" 
-								style="width: 850px;" onkeypress="if(event.keyCode=='13'){event.preventDefault(); gptSearch();}">
-							<button type="submit" id="submitButton" style="visibility: hidden"></button>
+							<input class="form-control" placeholder="Search" type="text"
+								id="promptInput" style="width: 850px;"
+								onkeypress="if(event.keyCode=='13'){event.preventDefault(); gptSearch();}">
+							<button type="submit" id="submitButton"
+								style="visibility: hidden"></button>
 						</div>
 					</div>
 				</form>
@@ -208,21 +210,24 @@
 					<li class="nav-item mr-2 mr-md-0" data-toggle="chart"
 						data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}'
-						data-prefix="$" data-suffix="k"><a onclick="changeBoard('갓생살기')"
-						class="nav-link py-2 px-3 active" data-toggle="tab"> <span
-							class="d-none d-md-block">밀레니엄</span> <span class="d-md-none">갓생</span>
+						data-prefix="$" data-suffix="k"><a
+						onclick="changeBoard('갓생살기')" class="nav-link py-2 px-3 active"
+						data-toggle="tab"> <span class="d-none d-md-block">밀레니엄</span>
+							<span class="d-md-none">갓생</span>
 					</a></li>
 					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-						data-prefix="$" data-suffix="k"><a  onclick="changeBoard('스트레스')"
-						class="nav-link py-2 px-3" data-toggle="tab"> <span
-							class="d-none d-md-block">스트레스</span> <span class="d-md-none">스트레스</span>
+						data-prefix="$" data-suffix="k"><a
+						onclick="changeBoard('스트레스')" class="nav-link py-2 px-3"
+						data-toggle="tab"> <span class="d-none d-md-block">스트레스</span>
+							<span class="d-md-none">스트레스</span>
 					</a></li>
 					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-						data-prefix="$" data-suffix="k"><a  onclick="changeBoard('혈당')"
-						class="nav-link py-2 px-3" data-toggle="tab"> <span
-							class="d-none d-md-block">혈당</span> <span class="d-md-none">혈당</span>
+						data-prefix="$" data-suffix="k"><a
+						onclick="changeBoard('혈당')" class="nav-link py-2 px-3"
+						data-toggle="tab"> <span class="d-none d-md-block">혈당</span> <span
+							class="d-md-none">혈당</span>
 					</a></li>
 				</ul>
 			</div>
@@ -258,7 +263,8 @@
 
 							<!-- Chart -->
 							<div class="chart" id="divBarChart">
-								<canvas id="011" style="display: block;height: 355px;width: 1550px;"></canvas>
+								<canvas id="011"
+									style="display: block; height: 355px; width: 1550px;"></canvas>
 							</div>
 
 						</div>
@@ -472,7 +478,8 @@
 	<script
 		src="${pageContext.request.contextPath}/resourcesjs/argon-dashboard.min.js?v=1.1.2"></script>
 	<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/sakura.js" text="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/sakura.js"
+		text="text/javascript"></script>
 	<script>
 
     //---------------------------------------------------------------------------------------
