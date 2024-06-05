@@ -667,7 +667,7 @@
    	//네이버 api 
     function naverSearch(query){
 	$.ajax({
-        url: 'naver',  // 백엔드의 /naver 엔드포인트 호출
+        url: 'naverBlog',  // 백엔드의 /naver 엔드포인트 호출
         type: 'GET',    // HTTP 메소드
         contentType: 'application/json;charset:UTF-8', // 반환받을 데이터의 타입
         data: { query: query },  // 서버로 보낼 데이터
