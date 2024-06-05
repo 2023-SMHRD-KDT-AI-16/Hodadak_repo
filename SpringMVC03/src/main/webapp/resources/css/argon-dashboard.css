@@ -20783,3 +20783,34 @@ pre>code.highlight {
   }
 }
 /*# sourceMappingURL=dashboard-free.css.map */
+
+
+
+
+
+
+
+/* File Upload Page */
+#btn_1 {
+  background-color: white;
+  color: black;
+  border: 1px solid #e7e7e7;
+  border-radius: 5.5px;
+}
+
+#btn_1:hover {
+  background-color: #e7e7e7;
+}
+
+#FileName{
+  background-color: white;
+  color: black;
+  border: 1px solid #e7e7e7;
+  border-radius: 5.5px;
+  width: 100%;
+  text-align: center;
+} 
+
+#file{
+  background-color: white;
+}/* File Upload Page */
