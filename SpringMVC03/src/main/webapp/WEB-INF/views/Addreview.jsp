@@ -368,7 +368,7 @@
 				formData.append("file", $("#file")[0].files[0]);
 				debugger
 				$.ajax({
-					url: 'Addreview',
+					url: 'uploadFile',
 					processData: false,
 					contentType: false,
 					data: formData,
