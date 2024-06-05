@@ -525,10 +525,9 @@
       });
 
     function donutChart(request) { 
-
     	$.ajax({
     		url: "getDeepPN",
-    		data: {deep_source: "스트레스" },
+    		data: {deep_source: request},
     		success: function(data){
     			//console.log(data);
     

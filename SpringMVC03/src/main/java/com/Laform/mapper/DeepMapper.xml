@@ -3,11 +3,11 @@
 <mapper namespace="com.Laform.mapper.DeepMapper">
 
 <select id = "getDeepP" resultType="int">
-select count(*) from tb_deep where label=1
+select count(*) from tb_deep where label=1 and deep_source=#{deep_source}
 </select>
 
 <select id = "getDeepN" resultType="int">
-select count(*) from tb_deep where label=0
+select count(*) from tb_deep where label=0 and deep_source=#{deep_source}
 </select>
 
 </mapper>
