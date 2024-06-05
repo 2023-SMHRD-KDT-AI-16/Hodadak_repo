@@ -224,18 +224,14 @@
             
             <thead class="thead-light">
               <tr>
-                <th scope="col">File Name</th>
                 <th scope="col">Input File</th>
               </tr>
             </thead>
 
             <tbody>
               <tr>
-                <th scope="row">
-                  <input type="text" name="FileName" id="FileName" placeholder="파일명을 작성해 주세요.">
-                </th>
-                <td>
-                  <input type="file" name="file" id="file" multiple>
+                <td id="uploadFile_td">
+                  <input type="file" name="files" id="files" multiple >
                 </td>
               </tr>
               <tr>
@@ -363,11 +359,11 @@
   <!-- 파일 업로드 하기위한 스크립트 -->
 	<script>
 		$(document).ready(function(){
-			$("#btn").click(function(event){
+			$("#btn_1").click(function(event){
 				// event.preventDefault();
 				var form = $("#SendFileForm");
 				var formData = new FormData(form);
-				formData.append("file", $("#file")[0].files[0]);
+				formData.append("files", $("#files")[0].files[0]);
 				debugger
 				$.ajax({
 					url: 'uploadFile',
