@@ -18,7 +18,7 @@ public class NaverController {
 
     private static final Logger log = LoggerFactory.getLogger(NaverController.class);
 
-    @GetMapping(value = "/naver", produces = "text/plain; charset=UTF-8")
+    @GetMapping(value = "/naverBlog", produces = "text/plain; charset=UTF-8")
     public ResponseEntity<String> naver(@RequestParam String query) { // 메서드 반환 타입을 ResponseEntity<String>으로 명시
         log.info("쿼리: {}", query); // System.out.println 대신 log.info 사용
 

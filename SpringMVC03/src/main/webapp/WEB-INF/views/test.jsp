@@ -61,6 +61,31 @@ function ensureCompleteUrl(url) { //네이버 검색으로 받아온 link 변환
 function modalOpen(link){ //제목클릭시 해당 페이지 
 	window.open(link)
 }
+
+$(document).ready(function() {
+    $('#uploadButton').click(function() {
+        var fileInput = document.getElementById('fileInput');
+        var file = fileInput.files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+
+        $.ajax({
+            url: 'http://192.168.0.33:5000/upload',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                alert('파일이 업로드되었습니다.');
+            },
+            error: function(xhr, status, error) {
+                alert('파일 업로드 실패');
+            }
+        });
+        $('#fileInput').val('');
+    });
+});
+
 </script>
 </head>
 <body>
@@ -69,15 +94,14 @@ function modalOpen(link){ //제목클릭시 해당 페이지
     <button id="submitButton">Send</button>
     <br>
     
-        <h2>File Upload Form</h2>
-    <form action="upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" multiple="multiple"/>
-        <button type="submit">Upload</button>
-    </form>
-    <div th:if="${message}">
-        <p th:text="${message}"></p>
-    </div>
+    <h2>File Upload Form</h2>
     
+    <input type="file" id="fileInput" />
+    <button id="uploadButton">업로드</button>
+    
+    
+
+
 <button onclick="naverSearch('갓생')">갓생</button>
 <button onclick="naverSearch('스트레스')">스트레스</button>
 <button onclick="naverSearch('혈당')">혈당</button>
