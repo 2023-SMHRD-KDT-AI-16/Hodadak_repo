@@ -18,9 +18,8 @@ public class NaverController {
 
     private static final Logger log = LoggerFactory.getLogger(NaverController.class);
 
-    @GetMapping(value = "/naverBlog", produces = "text/plain; charset=UTF-8")
+    @GetMapping(value = "/naver", produces = "text/plain; charset=UTF-8")
     public ResponseEntity<String> naver(@RequestParam String query) { // 메서드 반환 타입을 ResponseEntity<String>으로 명시
-        log.info("쿼리: {}", query); // System.out.println 대신 log.info 사용
 
         URI uri = UriComponentsBuilder
                 .fromUriString("https://openapi.naver.com")
@@ -29,8 +28,14 @@ public class NaverController {
                 .build()
                 .encode()
                 .toUri();
-
-        log.info("uri : {}", uri);
+        
+        URI uri2 = UriComponentsBuilder
+                .fromUriString("https://openapi.naver.com")
+                .path("/v1/search/news.json")
+                .queryParam("query", query)
+                .build()
+                .encode()
+                .toUri();
 
         RestTemplate restTemplate = new RestTemplate();
         
@@ -40,10 +45,16 @@ public class NaverController {
                 .header("X-Naver-Client-Id", "FAb4bunxl3DNMBTgbAkh")
                 .header("X-Naver-Client-Secret", "yTxKC3XSAN")
                 .build();
+        
+        RequestEntity<Void> req2 = RequestEntity
+                .get(uri2)
+                .header("X-Naver-Client-Id", "FAb4bunxl3DNMBTgbAkh")
+                .header("X-Naver-Client-Secret", "yTxKC3XSAN")
+                .build();
 
         ResponseEntity<String> result = restTemplate.exchange(req, String.class);
-        log.info("결과값: {}", result);
-
+        ResponseEntity<String> result2 = restTemplate.exchange(req2, String.class);
+       
         return result; // 결과를 ResponseEntity 객체로 반환
     }
 }

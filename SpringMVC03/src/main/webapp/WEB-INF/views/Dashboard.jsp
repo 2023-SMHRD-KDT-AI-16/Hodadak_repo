@@ -428,6 +428,39 @@
 				</div>
 			</div>
 
+
+
+<!-- Modal -->
+<div id="naverModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width: 80%; max-width: 1200px;"> <!-- 스타일 추가 -->
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">ChatGPT</h4>
+      </div>
+      <div class="modal-body" style="height: 700px;"> <!-- 스타일 추가 -->
+        <iframe id="naverIframe" style="width: 100%; height: 100%; border: none;"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="gptModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+                  <h4 class="modal-title">ChatGPT</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body" id="gptResponse">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 			<!-----------------------footer----------------------------------------------------------------------->
 			<footer class="footer">
 				<div class="row align-items-center justify-content-xl-between">
@@ -536,7 +569,6 @@
     	const labels = top10Trends.map(trend => trend.trend_keyword); // 새로운 라벨 배열
     	const data = top10Trends.map(trend => trend.trend_sum); // 새로운 데이터 배열
 
-    
       
       //차트 객체 생성 전 canvas 초기화
       $('#011').remove(); 
@@ -667,7 +699,7 @@
    	//네이버 api 
     function naverSearch(query){
 	$.ajax({
-        url: 'naverBlog',  // 백엔드의 /naver 엔드포인트 호출
+        url: 'naver',  // 백엔드의 /naver 엔드포인트 호출
         type: 'GET',    // HTTP 메소드
         contentType: 'application/json;charset:UTF-8', // 반환받을 데이터의 타입
         data: { query: query },  // 서버로 보낼 데이터
@@ -700,8 +732,9 @@ function ensureCompleteUrl(url) { //네이버 검색으로 받아온 link 변환
 	}
 
 
-function modalOpen(link){ //제목클릭시 해당 페이지 
-	window.open(link)
+function modalOpen(link) {
+    $('#naverModal').modal("show");
+    $('#naverIframe').attr('src', link); // iFrame의 src 속성 설정
 }
 
 //-------------------------------------------------------------------------------------------
@@ -715,13 +748,15 @@ function modalOpen(link){ //제목클릭시 해당 페이지
         data: JSON.stringify({ prompt: myData }),
         success: function(response) {
             console.log("서버로부터의 응답:", response);
+            $("#gptResponse").html(response)
+            $('#gptModal').modal("show");
         },
         error: function(xhr, status, error) {
             console.error("에러 발생:", error);
         }
     });
 		
-		$("#promptInput").val()=""
+		$("#promptInput").val("")
 }
   
 
