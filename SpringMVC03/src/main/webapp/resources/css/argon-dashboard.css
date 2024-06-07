@@ -21047,32 +21047,192 @@ details[open] summary::after {
   background-color: #e7e7e7;
 }
 
+#FileName {
+  background-color: white;
+  color: black;
+  border: 1px solid #e7e7e7;
+  border-radius: 5.5px;
+  width: 100%;
+  text-align: center;
+}
 
 #file {
   background-color: white;
 }
 
-input[type=file]::file-selector-button {
-    text-align: center;
-    width: 150px;
-    height: 30px;
-    background: #fff;
-    border: 1px solid rgb(77, 77, 77);
-    border-radius: 10px;
-    cursor: pointer;
+
+/*-----------------------------------------------------------------*/
+
+.uploadForm {
+  width: 300px;
+  max-width: px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-input[type=file]::file-selector-button:hover {
-    background: rgb(77, 77, 77);
-    color: #fff;
+.formTitle {
+  margin-top: 0;
 }
 
-
-
-
-
-#uploadFile_td{
-	text-align: center;
+.fileInput {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
+.fileLabel {
+  display: block;
+  width: 100%;
+  background-color: #E0A9C8;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
 
+.fileLabel:hover {
+  background-color: #0056b3;
+}
+
+.imagePreview {
+  width: calc(100% - 40px);
+  max-height: 300px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  /* 가운데 정렬을 설정합니다. */
+}
+
+.imagePreview img {
+  width: 300px;
+  /* 이미지의 너비를 200px로 지정합니다. */
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-left: auto;
+  /* 가운데 정렬을 위해 좌우 마진을 자동으로 설정합니다. */
+  margin-right: auto;
+}
+
+.imagePreview label {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.imagePreview label:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.textInput,
+.textareaInput {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #E0A9C8;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+.productList {
+  margin-top: 20px;
+}
+
+.productItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.productItem img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.productItem .productInfo {
+  flex: 1;
+}
+
+.productItem .productInfo p {
+  margin: 0;
+}
+
+.submitFormButton {
+  float: right;
+  margin-top: -40px;
+  margin-right: 20px;
+  padding: 10px 20px;
+  background-color: #E0A9C8;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submitFormButton:hover {
+  background-color: #0056b3;
+}
+
+.productItem .deleteButton {
+  background-color: #E74C3C;
+  /* 버튼의 배경색 */
+  color: #fff;
+  /* 버튼의 텍스트 색상 */
+  border: none;
+  /* 테두리 제거 */
+  border-radius: 5px;
+  /* 모서리 둥글게 */
+  padding: 5px 10px;
+  /* 패딩 */
+  cursor: pointer;
+  /* 커서 변경 */
+  margin-left: 10px;
+  /* 왼쪽 마진 */
+  transition: background-color 0.3s;
+  /* 호버 효과를 위한 트랜지션 */
+}
+
+.productItem .deleteButton:hover {
+  background-color: #C0392B;
+  /* 호버 시 배경색 */
+}

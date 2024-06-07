@@ -36,7 +36,7 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./Addreview.html">
+      <a class="navbar-brand pt-0" href="./Addproduct.html">
         <img src="./assets/img/배너2.png" class="navbar-brand-img" alt="...">
       </a>
 
@@ -79,7 +79,7 @@
           <div class="navbar-collapse-header d-md-none">
             <div class="row">
               <div class="col-6 collapse-brand">
-                <a href="./Addreview.html">
+                <a href="./Addproduct.html">
                   <img src="assets/img/배너2.png">
                 </a>
               </div>
@@ -138,7 +138,7 @@
       <div class="container-fluid">
 
         <!-- Brand -->
-        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Addreview.html">리뷰 추가</a>
+        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Addproduct.html">제품 추가</a>
 
 
         <!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
@@ -227,20 +227,28 @@
 
 
       <div class="uploadForm" style="width: 1500px;">
-        <h2 class="formTitle">리뷰데이터 파일을 올려주세요.</h2>
+        <h2 class="formTitle">제품 사진과 정보를 입력해주세요.</h2>
         <form id="productForm" enctype="multipart/form-data">
-          <input type="file" id="productFileInput" class="fileInput" accept=".csv" onchange="previewFile(event)"
+          <input type="file" id="productImageInput" class="fileInput" accept="image/*" onchange="previewImage(event)"
             required>
-          <button type="submit" class="submitFormButton">제출</button>
+          <button type="submit" class="submitFormButton" style="width: 200px; top: 50px;">제출</button>
           <br>
-          <label for="productFileInput" class="fileLabel">리뷰데이터 파일을 선택하세요. (CSV)</label>
-          <div class="filePreview" style="margin-bottom: 10px;"></div>
+          <label for="productImageInput" class="fileLabel">제품의 이미지 파일을 선택하세요. (JPG)</label>
+          <div class="imagePreview"></div>
+          <span>제품명 </span>
+          <input type="text" id="productNameInput" class="textInput" placeholder="제품명을 입력하세요" required><br>
+          <br>
+          <span>가격 </span>
+          <input type="text" id="productPriceInput" class="textInput" placeholder="가격을 입력하세요" required><br>
+          <br>
+          <span>성분 </span>
+          <textarea id="productDescriptionInput" class="textareaInput" placeholder="성분을 입력하세요" rows="4" cols="30"
+            required></textarea><br>
           <button type="button" onclick="upload()" class="submitButton">추가</button>
+          <h1 style="text-align: center;">파일을 추가하고 제출을 눌러주세요</h1>
         </form>
-        <h1 style="text-align: center;">파일을 추가하고 제출을 눌러주세요</h1>
       </div>
       <div class="productList"></div>
-
 
 
 
@@ -305,7 +313,7 @@
     //---------------------------------------------------------------------------------------
     document.addEventListener("DOMContentLoaded", function () {
       const container = document.getElementById("particle-1");
-      const texts = [" ", "La form", "Addreview"];
+      const texts = [" ", "La form", "Addproduct"];
       const gap = 1;
       function createParticles() {
         for (let i = 0; i < 3; i++) {
@@ -374,52 +382,53 @@
 
 
     //---------------------------------------------------------------------------------------
-    function previewFile(event) {
-      var file = event.target.files[0];
-      if (file && file.type === "text/csv") {
-        var reader = new FileReader();
-        reader.onload = function () {
-          var filePreview = document.createElement("pre");
-          filePreview.textContent = reader.result;
-          filePreview.style.maxHeight = "200px"; // 정해진 크기로 설정
-          filePreview.style.overflowY = "auto"; // 세로 스크롤 바 표시
-          document.querySelector(".filePreview").innerHTML = "";
-          document.querySelector(".filePreview").appendChild(filePreview);
-        };
-        reader.readAsText(file);
-      } else {
-        alert("CSV 파일만 업로드 가능합니다.");
-        document.getElementById("productFileInput").value = "";
+    function previewImage(event) {
+      var imageFile = event.target.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function () {
+        var imagePreview = document.createElement("img");
+        imagePreview.src = reader.result;
+        imagePreview.width = 100;
+        imagePreview.style.borderRadius = "5px";
+        document.querySelector(".imagePreview").innerHTML = "";
+        document.querySelector(".imagePreview").appendChild(imagePreview);
       }
+
+      reader.readAsDataURL(imageFile);
     }
+
     function upload() {
       var productList = document.querySelector(".productList");
 
       var productItem = document.createElement("div");
       productItem.classList.add("productItem");
 
-      var fileNameInput = document.getElementById("productFileInput");
-      var fileName = document.createElement("p");
-      var fileNameText = fileNameInput.files[0].name;
-      fileName.textContent = fileNameText; // 파일 이름 표시
-      fileName.addEventListener("click", function () {
-        var inputField = document.createElement("input");
-        inputField.type = "text";
-        inputField.value = fileNameText;
-        inputField.addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            fileName.textContent = this.value;
-            this.blur(); // 입력 필드 포커스 해제
-          }
-        });
-        inputField.addEventListener("blur", function () {
-          fileNameText = this.value;
-          this.parentNode.replaceChild(fileName, this); // 입력 필드를 텍스트 요소로 교체
-        });
-        this.parentNode.replaceChild(inputField, this); // 텍스트 요소를 입력 필드로 교체
-        inputField.focus(); // 입력 필드에 포커스 설정
-      });
-      productItem.appendChild(fileName);
+      var productImage = document.createElement("img");
+      productImage.src = URL.createObjectURL(document.getElementById("productImageInput").files[0]);
+      productImage.style.width = "100px";
+      productImage.style.height = "100px";
+      productImage.style.borderRadius = "5px";
+      productItem.appendChild(productImage);
+
+      var productInfo = document.createElement("div");
+      productInfo.classList.add("productInfo");
+
+      var productName = document.createElement("p");
+      productName.textContent = "제품명: " + document.getElementById("productNameInput").value;
+      productInfo.appendChild(productName);
+
+      var productPrice = document.createElement("p");
+      productPrice.textContent = "가격: " + numberWithCommas(document.getElementById("productPriceInput").value) + "원";
+      productInfo.appendChild(productPrice);
+
+      var productDescription = document.createElement("p");
+      productDescription.textContent = "성분: " + document.getElementById("productDescriptionInput").value;
+      productInfo.appendChild(productDescription);
+
+      productItem.appendChild(productInfo);
+
+      productList.appendChild(productItem);
 
       var deleteButton = document.createElement("button");
       deleteButton.textContent = "삭제";
@@ -428,19 +437,51 @@
         productItem.remove();
       };
       productItem.appendChild(deleteButton);
+
       productList.appendChild(productItem);
-      fileNameInput.value = ""; // 파일 선택 input 초기화
-      document.querySelector(".filePreview").innerHTML = "";
+
+      document.getElementById("productImageInput").value = "";
+      document.getElementById("productNameInput").value = "";
+      document.getElementById("productPriceInput").value = "";
+      document.getElementById("productDescriptionInput").value = "";
+      document.querySelector(".imagePreview").innerHTML = "";
     }
 
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    document.getElementById("productPriceInput").addEventListener("keyup", function (event) {
+      var priceWithoutCommas = this.value.replace(/,/g, "");
+      var formattedPrice = Number(priceWithoutCommas).toLocaleString();
+      this.value = formattedPrice;
+    });
+    document.getElementById("productPriceInput").addEventListener("input", function (event) {
+      var inputValue = this.value;
+      var sanitizedInput = inputValue.replace(/\D/g, "");
+      if (sanitizedInput !== inputValue) {
+        this.value = sanitizedInput;
+        showModal("숫자만 입력해주세요.");
+      }
+    });
 
-    // 제출 버튼 클릭 시 파일을 서버로 전송하는 기능을 추가합니다.
+    function showModal(message) {
+      var modal = document.createElement("div");
+      modal.classList.add("modal");
+      modal.textContent = message;
+      document.body.appendChild(modal);
+      setTimeout(function () {
+        document.body.removeChild(modal);
+      }, 2000);
+    }
     document.querySelector(".submitFormButton").addEventListener("click", submitForm);
     function submitForm(event) {
       event.preventDefault();
+
       var formData = new FormData(document.getElementById("productForm"));
+
       // 파일 업로드를 위한 서버 엔드포인트 URL
       var uploadUrl = "YOUR_SERVER_UPLOAD_URL";
+
       fetch(uploadUrl, {
         method: 'POST',
         body: formData
@@ -458,7 +499,6 @@
           alert("파일 업로드에 실패했습니다.");
         });
     }
-
 
   </script>
 
