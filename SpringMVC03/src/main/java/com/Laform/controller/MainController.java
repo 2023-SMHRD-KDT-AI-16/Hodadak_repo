@@ -102,9 +102,6 @@ public class MainController {
 		return "Addreview";
 	}
 	
-	@RequestMapping("productAnalysis.do")
-	public String productAnalysis() {
-		return "productAnalysis";
-	}
+
 
 }

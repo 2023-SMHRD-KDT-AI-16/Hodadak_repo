@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -198,7 +200,7 @@
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
               <div class="dropdown-divider"></div>
-              <a href="Main.html" class="dropdown-item">
+              <a href="logout.do" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
               </a>
@@ -233,7 +235,7 @@
                   </figure>
                 </div>
               </span>
-              <span class="d-md-none">아르타민</span>
+              <span class="d-md-none">아르타민 자몽</span>
             </a>
           </li>
 
@@ -356,26 +358,23 @@
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
-                  <tr>
-                    <th scope="col">긍정</th>
-                  </tr>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Product Detail</th>
+            </tr>
                 </thead>
                 <tbody id="positiveReviewTableBody">
-                  <tr>
-                    <th scope="row">맛있어요</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">효과도 좋다</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">진심 맛있어요</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">팔팔해진다</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">@</th>
-                  </tr>
+                
+			<c:forEach var="product" items="${prodList}" begin="1">
+                <tr>
+                    <td>${product.prod_idx}</td>
+                    <td>${product.prod_name}</td>
+                    <td>${product.prod_price}</td>
+                    <td>${product.prod_detail}</td>
+                </tr>
+            </c:forEach>
 
                 </tbody>
               </table>
@@ -524,224 +523,226 @@
 
 
     //---------------------------------------------------------------------------------------
-    document.addEventListener("DOMContentLoaded", function () {
-      var ctx1 = document.getElementById('011').getContext('2d');
-      var ctx2 = document.getElementById('010').getContext('2d');
+$(document).ready(function () {
+  // Line Chart 및 Polar Chart 생성
+  var ctx1 = document.getElementById('011').getContext('2d');
+  var ctx2 = document.getElementById('010').getContext('2d');
 
-      var myChart = new Chart(ctx2, {
-        type: 'line',
-        data: {
-          labels: ['1월', '2월', '3월', '4월', '5월'],
-          datasets: [{
-            label: 'Dataset 1',
-            data: [40, 60, 50, 30, 20],
-            backgroundColor: 'rgba(224, 169, 200, 0.2)',
-            borderColor: '#E0A9C8',
-            borderWidth: 3,
-            fill: true
-          },
-          {
-            label: 'Dataset 2',
-            data: [30, 50, 60, 40, 30],
-            backgroundColor: 'rgba(84, 172, 244, 0.2)',
-            borderColor: '#54ACF4',
-            borderWidth: 3,
-            fill: true
+  var myChart = createLineChart(ctx2);
+  var myPolarChart = createPolarChart(ctx1);
 
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: true,
-              position: 'top',
-              align: 'center'
-            },
-            tooltip: {
-              enabled: true,
-              backgroundColor: 'rgba(0, 0, 0, 0.7)',
-              titleColor: '#ffffff',
-              bodyColor: '#ffffff',
-              borderWidth: 1,
-              borderColor: '#ddd',
-            }
-          },
-          scales: {
-            x: {
-              beginAtZero: true
-            },
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-
-      //---------------------------------------------------------------------------------------
-      var myPolarChart = new Chart(ctx1, {
-        type: 'polarArea',
-        data: {
-          labels: ['부정', '긍정', '긍정', '긍정', '긍정'],
-          datasets: [{
-            label: '극지방 차트',
-            data: [5, 10, 15, 20, 25],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.5)',
-              'rgba(54, 162, 235, 0.5)',
-              'rgba(255, 206, 86, 0.5)',
-              'rgba(75, 192, 192, 0.5)',
-              'rgba(153, 102, 255, 0.5)'
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)'
-            ],
-            borderWidth: 2
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: true,
-              position: 'top',
-              align: 'center',
-              labels: {
-                font: {
-                  size: 14
-                }
-              }
-            },
-            tooltip: {
-              enabled: true,
-              backgroundColor: 'rgba(0, 0, 0, 0.7)',
-              titleColor: '#ffffff',
-              bodyColor: '#ffffff',
-              borderWidth: 1,
-              borderColor: '#ddd',
-            }
-          },
-          scales: {
-            angle: {
-              display: false
-            },
-            radius: {
-              display: false
-            }
-          }
-        }
-      });
-
-      //---------------------------------------------------------------------------------------
-      const buttons = document.querySelectorAll('.ar123');
-      buttons.forEach(button => {
-        button.addEventListener('click', function (event) {
-          event.preventDefault();
-          const textData = this.querySelector('span.d-md-none').textContent;
-          let newImageSrc = '';
-          let newTextData = '';
-          let newChartData1 = [];
-          let newChartData2 = [];
-          let newReviews = [];
-          let newNegativeData = [];
-          let newPolarData = [];
-          switch (textData) {
-            case '아르타민':
-              newImageSrc = '';
-              newTextData = `
-<h1 class="text-black mb-0" style="font-size: 3em; text-align: center;">아르타민</h1>
-<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em; text-align: right;">
-  가격 : 34,900원</h5>
-<br>
-<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em;">
-성분 : 해야, 해야, 해야
-한입에 널 삼킬 때야 (탐이, 탐이 나)
-해야, 해야, 해야
-이미 내가 이긴 패야 (널 보면 탐이, 탐이 나)</h5>`;
-              newChartData1 = [25, 80, 45, 95, 10];
-              newChartData2 = [20, 70, 55, 30, 5];
-              newPolarData = [25, 15, 30, 20, 25];
-              newReviews = ['맛있어요', '효과도 좋다', '진심 맛있어요', '팔팔해진다', '@'];
-              newNegativeData = ['ㅁㄴㅇ', 'ㅈㄴㅇ', 'ㅁㅌㅊ', 'ㄴㄷㅈ', 'ㅊㄳㄱㅈㅇㄴㅂㅂ'];
-              break;
-            case '아르타민레몬':
-              newImageSrc = '';
-              newTextData = `
-<h1 class="text-black mb-0" style="font-size: 3em; text-align: center;">아르타민 레몬</h1>
-<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em; text-align: right;">
-  가격 : 34,900원</h5>
-<br>
-<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em;">
-성분 : 해야, 해야, 해야
-뜨겁게 떠오르는 해야
-별안간 홀린 그 순간 bite
-단 한 번에 난 널 휘리휘리 catch ya</h5>`;
-              newChartData1 = [40, 20, 90, 70, 5];
-              newChartData2 = [35, 25, 85, 60, 10];
-              newPolarData = [100, 90, 80, 70, 60];
-              newReviews = ['상큼해요', '맛있어요', '레몬향 좋아요', '기분 좋아져요', '재구매 의사 있습니다'];
-              newNegativeData = ['비싸다', '쓰다', '맛없다', '별로다', '그저그렇다'];
-              break;
-            case '베러릴렉스':
-              newImageSrc = '';
-              newTextData = `
-<h1 class="text-black mb-0" style="font-size: 3em; text-align: center;">베러릴렉스</h1>
-<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em; text-align: right;">
-  가격 : 47,900원</h5>
-<br>
-<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em;">
-성분 : 더 높이 keep it up
-Uh-huh
-Happily ever after? Nope
-(Da-da-da-dun-dun)</h5>`;
-              newChartData1 = [15, 60, 35, 85, 55];
-              newChartData2 = [30, 20, 80, 40, 10];
-              newPolarData = [10, 20, 30, 40, 50];
-              newReviews = ['편하다', '맛있다', '짱이다', '행복하다', '재구매 의사 있습니다'];
-              newNegativeData = ['정말 비싸다', '진짜 쓰다', '완저 맛없다', '그냥 별로다', '그저그렇다'];
-              break;
-          }
-
-          document.querySelector('.card-body img').src = newImageSrc;
-          document.querySelector('.s1').innerHTML = newTextData;
-
-          myChart.data.datasets[0].data = newChartData1;
-          myChart.data.datasets[1].data = newChartData2;
-          myChart.update();
-
-          myPolarChart.data.datasets[0].data = newPolarData;
-          myPolarChart.update();
-
-          const reviewTableBody = document.querySelector('.table-responsive tbody');
-          reviewTableBody.innerHTML = '';
-          newReviews.forEach(review => {
-            const newRow = document.createElement('tr');
-            const newCell = document.createElement('th');
-            newCell.scope = 'row';
-            newCell.textContent = review;
-            newRow.appendChild(newCell);
-            reviewTableBody.appendChild(newRow);
-          });
-
-          const negativeReviewTableBody = document.getElementById('negativeReviewTableBody2');
-          negativeReviewTableBody.innerHTML = '';
-          newNegativeData.forEach(negativeReview => {
-            const newRow = document.createElement('tr');
-            const newCell = document.createElement('td');
-            newCell.textContent = negativeReview;
-            newRow.appendChild(newCell);
-            negativeReviewTableBody.appendChild(newRow);
-          });
-
-        });
-      });
+  // 각 버튼에 클릭 이벤트 리스너 추가
+  const buttons = document.querySelectorAll('.ar123');
+  buttons.forEach(button => {
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+      handleButtonClick(this, myChart, myPolarChart);
     });
+  });
+});
+
+// Line Chart 생성 함수
+function createLineChart(ctx) {
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['1월', '2월', '3월', '4월', '5월'],
+      datasets: [{
+        label: 'Dataset 1',
+        data: [40, 60, 50, 30, 20],
+        backgroundColor: 'rgba(224, 169, 200, 0.2)',
+        borderColor: '#E0A9C8',
+        borderWidth: 3,
+        fill: true
+      },
+      {
+        label: 'Dataset 2',
+        data: [30, 50, 60, 40, 30],
+        backgroundColor: 'rgba(84, 172, 244, 0.2)',
+        borderColor: '#54ACF4',
+        borderWidth: 3,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          align: 'center'
+        },
+        tooltip: {
+          enabled: true,
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          titleColor: '#ffffff',
+          bodyColor: '#ffffff',
+          borderWidth: 1,
+          borderColor: '#ddd',
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true
+        },
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+// Polar Chart 생성 함수
+function createPolarChart(ctx) {
+  return new Chart(ctx, {
+    type: 'polarArea',
+    data: {
+      labels: ['부정', '긍정', '긍정', '긍정', '긍정'],
+      datasets: [{
+        label: '극지방 차트',
+        data: [5, 10, 15, 20, 25],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(54, 162, 235, 0.5)',
+          'rgba(255, 206, 86, 0.5)',
+          'rgba(75, 192, 192, 0.5)',
+          'rgba(153, 102, 255, 0.5)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)'
+        ],
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          align: 'center',
+          labels: {
+            font: {
+              size: 14
+            }
+          }
+        },
+        tooltip: {
+          enabled: true,
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          titleColor: '#ffffff',
+          bodyColor: '#ffffff',
+          borderWidth: 1,
+          borderColor: '#ddd',
+        }
+      },
+      scales: {
+        angle: {
+          display: false
+        },
+        radius: {
+          display: false
+        }
+      }
+    }
+  });
+}
+
+// 버튼 클릭 시 실행되는 함수
+function handleButtonClick(button, lineChart, polarChart) {
+  const textData = button.querySelector('span.d-md-none').textContent;
+  const data = getChartData(textData);
+
+  if (data) {
+    updateImage(data.imageSrc);
+    updateText(data.textData);
+    updateChart(lineChart, data.chartData1, data.chartData2);
+    updatePolarChart(polarChart, data.polarData);
+    updateTable('.table-responsive tbody', data.reviews);
+    updateTable('#negativeReviewTableBody2', data.negativeReviews);
+  }
+}
+
+
+function getReview(){
+    $.ajax({
+        url: '',
+        type: '',
+        contentType: 'application/json;charset:UTF-8',
+        data: JSON.stringify({ prompt: myData }),
+        success: function(response) {
+            console.log("서버로부터의 응답:", response);
+        },
+        error: function(xhr, status, error) {
+            console.error("에러 발생:", error);
+        }
+    });
+}
+
+
+
+// 선택된 데이터에 맞는 차트 데이터와 텍스트를 반환하는 함수
+function getChartData(textData) {
+	
+  const chartDataMap = {
+      imageSrc: '',
+      textData: `
+<h1 class="text-black mb-0" style="font-size: 3em; text-align: center;">`+textData+`</h1>
+<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em; text-align: right;">가격 : 34,900원</h5>
+<br>
+<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em;">성분 : 해야, 해야, 해야 한입에 널 삼킬 때야 (탐이, 탐이 나) 해야, 해야, 해야 이미 내가 이긴 패야 (널 보면 탐이, 탐이 나)</h5>`,
+      chartData1: [25, 80, 45, 95, 10],
+      chartData2: [20, 70, 55, 30, 5],
+      polarData: [25, 15, 30, 20, 25],
+      reviews:['ㅁㄴㅇ', 'ㅈㄴㅇ', 'ㅁㅌㅊ', 'ㄴㄷㅈ', 'ㅊㄳㄱㅈㅇㄴㅂㅂ'],
+      negativeReviews: ['ㅁㄴㅇ', 'ㅈㄴㅇ', 'ㅁㅌㅊ', 'ㄴㄷㅈ', 'ㅊㄳㄱㅈㅇㄴㅂㅂ']
+  };
+  return chartDataMap;
+}
+
+// 이미지 업데이트 함수
+function updateImage(src) {
+  document.querySelector('.card-body img').src = src;
+}
+
+// 텍스트 업데이트 함수
+function updateText(html) {
+  document.querySelector('.s1').innerHTML = html;
+}
+
+// Line Chart 업데이트 함수
+function updateChart(chart, data1, data2) {
+  chart.data.datasets[0].data = data1;
+  chart.data.datasets[1].data = data2;
+  chart.update();
+}
+
+// Polar Chart 업데이트 함수
+function updatePolarChart(chart, data) {
+  chart.data.datasets[0].data = data;
+  chart.update();
+}
+
+// 테이블 업데이트 함수
+function updateTable(selector, data) {
+  const tableBody = document.querySelector(selector);
+  tableBody.innerHTML = '';
+  data.forEach(item => {
+    const newRow = document.createElement('tr');
+    const newCell = document.createElement('td');
+    newCell.textContent = item;
+    newRow.appendChild(newCell);
+    tableBody.appendChild(newRow);
+  });
+}
+
 
 
   </script>
