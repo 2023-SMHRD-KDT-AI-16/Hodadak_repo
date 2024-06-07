@@ -10,15 +10,15 @@
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.4.0/pyLDAvis/js/ldavis.v1.0.0.css">
   <!-- Favicon -->
-  <link href="./assets/img/프리지아.png" rel="icon" type="image/png">
+  <link href="${pageContext.request.contextPath}/resources/img/프리지아.png" rel="icon" type="image/png">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
-  <link href="./assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
-  <link href="./assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <link href="${pageContext.request.contextPath}/resources/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="${pageContext.request.contextPath}/resources/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link href="./assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/sakura.css" />
+  <link href="${pageContext.request.contextPath}/resources/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sakura.css" />
 </head>
 
 <!-- body -->
@@ -37,7 +37,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="./Addreview.html">
-        <img src="./assets/img/배너2.png" class="navbar-brand-img" alt="...">
+        <img src="${pageContext.request.contextPath}/resources/img/배너2.png" class="navbar-brand-img" alt="...">
       </a>
 
       <!-- User -->
@@ -50,7 +50,7 @@
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="./assets/img/프리지아.png">
+                <img alt="Image placeholder" src="${pageContext.request.contextPath}/resources/img/프리지아.png">
               </span>
             </div>
           </a>
@@ -80,7 +80,7 @@
             <div class="row">
               <div class="col-6 collapse-brand">
                 <a href="./Addreview.html">
-                  <img src="assets/img/배너2.png">
+                  <img src="${pageContext.request.contextPath}/resources/img/배너2.png">
                 </a>
               </div>
               <div class="col-6 collapse-close">
@@ -292,15 +292,15 @@
     </div>
   </div>
   <!--   Core   -->
-  <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
-  <script src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/jquery/dist/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!--   Optional JS   -->
-  <script src="./assets/js/plugins/chart.js/dist/Chart.min.js"></script>
-  <script src="./assets/js/plugins/chart.js/dist/Chart.extension.js"></script><!--차트-->
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/chart.js/dist/Chart.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/chart.js/dist/Chart.extension.js"></script><!--차트-->
   <!--   Argon JS   -->
-  <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/argon-dashboard.min.js?v=1.1.2"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-  <script src="assets/js/sakura.js" text="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/sakura.js" text="text/javascript"></script>
   <script>
     //---------------------------------------------------------------------------------------
     document.addEventListener("DOMContentLoaded", function () {
