@@ -236,6 +236,7 @@
                 </div>
               </span>
               <span class="d-md-none">${product.prod_name}</span>
+              <span class="prod_idx" style="display:none">${product.prod_idx}</span>
             </a>
           </li>
 </c:forEach>
@@ -259,12 +260,7 @@
                   <figure><img src="" alt=""></figure>
                 </div>
                 <div class="s1" style=" height: 150px; padding-left: 30px;">
-                  <h1 class="text-black mb-0" style="font-size: 3em; text-align: center;">아르타민</h1>
-                  <h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em; text-align: right;">
-                    가격 : 34,900원</h5>
-                  <h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em; text-align: left;">
-                    성분</h5>
-                  <br>
+
                 </div>
               </div>
             </div>
@@ -332,22 +328,25 @@
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
             <tr>
-                <th>Product ID</th>
-                <th>Product Name</th>
-                <th>Product Price</th>
-                <th>Product Detail</th>
+                      <th scope="col">긍정</th>
             </tr>
                 </thead>
                 <tbody id="positiveReviewTableBody">
-                
-			<c:forEach var="product" items="${prodList}" begin="1">
-                <tr>
-                    <td>${product.prod_idx}</td>
-                    <td>${product.prod_name}</td>
-                    <td>${product.prod_price}</td>
-                    <td>${product.prod_detail}</td>
-                </tr>
-            </c:forEach>
+ 					 <tr>
+                    <th scope="row">!</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">@</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">@</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">@</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">@</th>
+                  </tr>
 
                 </tbody>
               </table>
@@ -520,6 +519,7 @@ $(document).ready(function () {
   });
   
   buttons[0].classList.add('active');
+  handleButtonClick(buttons[0], myChart, myPolarChart);
 });
 
 // Line Chart 생성 함수
@@ -639,54 +639,113 @@ function createPolarChart(ctx) {
 // 버튼 클릭 시 실행되는 함수
 function handleButtonClick(button, lineChart, polarChart) {
   const textData = button.querySelector('span.d-md-none').textContent;
-  const data = getChartData(textData);
-
-  if (data) {
-    updateImage(data.imageSrc);
-    updateText(data.textData);
-    updateChart(lineChart, data.chartData1, data.chartData2);
-    updatePolarChart(polarChart, data.polarData);
-    updateTable('.table-responsive tbody', data.reviews);
-    updateTable('#negativeReviewTableBody2', data.negativeReviews);
-  }
+  const prod_idx = button.querySelector('span.prod_idx').textContent;
+  
+  getProductDetail(prod_idx)
+  getPositiveReview(prod_idx)
+  getNegativeReview(prod_idx, lineChart, polarChart)
+  
 }
 
-
-function getReview(){
+//인덱스로 제품 정보 불러오기
+function getProductDetail(prod_idx){
     $.ajax({
-        url: '',
-        type: '',
+        url: 'getProductDetail.do',
         contentType: 'application/json;charset:UTF-8',
-        data: JSON.stringify({ prompt: myData }),
+        data:{ "prod_idx": prod_idx },
         success: function(response) {
-            console.log("서버로부터의 응답:", response);
+           // console.log("서버로부터의 응답:", response);
+            const data = getTextData(response);
+
+            if (data) {
+              updateImage(data.imageSrc);
+              updateText(data.textData);
+            //  updateChart(lineChart, data.chartData1, data.chartData2);
+            //  updatePolarChart(polarChart, data.polarData);
+            //  updateTable('.table-responsive tbody', data.reviews);
+            //  updateTable('#negativeReviewTableBody2', data.negativeReviews);
+            }
         },
         error: function(xhr, status, error) {
             console.error("에러 발생:", error);
         }
     });
+    
+    
 }
 
-
-
-// 선택된 데이터에 맞는 차트 데이터와 텍스트를 반환하는 함수
-function getChartData(textData) {
-	
+//선택된 데이터에 맞는 텍스트를 반환하는 함수
+function getTextData(response) {
+	const formattedPrice = new Intl.NumberFormat('ko-KR', { style: 'decimal', currency: 'KRW' }).format(response.prod_price);
   const chartDataMap = {
       imageSrc: '',
       textData: `
-<h1 class="text-black mb-0" style="font-size: 3em; text-align: center;">`+textData+`</h1>
-<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em; text-align: right;">가격 : 34,900원</h5>
+<h1 class="text-black mb-0" style="font-size: 3em; text-align: center;">`+response.prod_name+`</h1>
+<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em; text-align: right;">가격 : `+formattedPrice+`원</h5>
 <br>
-<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em;">성분 : 해야, 해야, 해야 한입에 널 삼킬 때야 (탐이, 탐이 나) 해야, 해야, 해야 이미 내가 이긴 패야 (널 보면 탐이, 탐이 나)</h5>`,
-      chartData1: [25, 80, 45, 95, 10],
-      chartData2: [20, 70, 55, 30, 5],
-      polarData: [25, 15, 30, 20, 25],
-      reviews:['ㅁㄴㅇ', 'ㅈㄴㅇ', 'ㅁㅌㅊ', 'ㄴㄷㅈ', 'ㅊㄳㄱㅈㅇㄴㅂㅂ'],
-      negativeReviews: ['ㅁㄴㅇ', 'ㅈㄴㅇ', 'ㅁㅌㅊ', 'ㄴㄷㅈ', 'ㅊㄳㄱㅈㅇㄴㅂㅂ']
+<h5 class="text-uppercase text-black ls-1 mb-1" style="font-size: 1.6em;">성분 : `+response.prod_detail+`</h5>`,
   };
   return chartDataMap;
 }
+
+
+//제품별 긍정리뷰 불러오기 
+function getPositiveReview(prod_idx){
+	 $.ajax({
+	        url: 'getReviewP.do',
+	        contentType: 'application/json;charset:UTF-8',
+	        data:{ "prod_idx": prod_idx },
+	        success: function(response) {
+	            console.log("서버로부터의 응답:", response);
+
+	           // 리뷰 내용을 저장할 배열 초기화
+	     	  const reviews = [];
+	     	  
+	     	  // response 객체를 순회하여 review_content 값을 reviews 배열에 추가
+	     	  response.forEach(item => {
+	     	    reviews.push(item.review_content);
+	     	  });
+	              updateTable('.table-responsive tbody', reviews);
+	        },
+	        error: function(xhr, status, error) {
+	            console.error("에러 발생:", error);
+	        }
+	    });
+}
+
+//제품별 부정리뷰 불러오기 
+function getNegativeReview(prod_idx, lineChart, polarChart){
+	 $.ajax({
+	        url: 'getReviewN.do',
+	        contentType: 'application/json;charset:UTF-8',
+	        data:{ "prod_idx": prod_idx },
+	        success: function(response) {
+	            console.log("서버로부터의 응답:", response);
+
+	           // 리뷰 내용을 저장할 배열 초기화
+	     	  const reviews = [];
+	     	  
+	     	  // response 객체를 순회하여 review_content 값을 reviews 배열에 추가
+	     	  response.forEach(item => {
+	     	    reviews.push(item.review_content);
+	     	  });
+
+	          let chartData1= [25, 80, 45, 95, 10];
+	          let chartData2= [20, 70, 55, 30, 5];
+	          let polarData= [25, 15, 30, 20, 25];
+	       
+	              updateChart(lineChart, chartData1, chartData2);
+	              updatePolarChart(polarChart, polarData);
+	              updateTable('#negativeReviewTableBody2', reviews);
+	        },
+	        error: function(xhr, status, error) {
+	            console.error("에러 발생:", error);
+	        }
+	    });
+}
+
+
+
 
 // 이미지 업데이트 함수
 function updateImage(src) {
@@ -711,7 +770,7 @@ function updatePolarChart(chart, data) {
   chart.update();
 }
 
-// 테이블 업데이트 함수
+//테이블 업데이트 함수
 function updateTable(selector, data) {
   const tableBody = document.querySelector(selector);
   tableBody.innerHTML = '';

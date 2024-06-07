@@ -6,4 +6,7 @@
  select * from tb_product
 </select>
 
+<select id="getProductDetail" resultType="com.Laform.entity.tb_product">
+select * from tb_product where prod_idx = #{prod_idx}
+</select>
 </mapper>
