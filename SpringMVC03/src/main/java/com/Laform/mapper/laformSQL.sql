@@ -1,4 +1,4 @@
-select * from tb_trend;
+select * from tb_product;
 
 UPDATE tb_corperation
 SET corp_key = 'admin'
@@ -14,3 +14,6 @@ insert into tb_corperation (corp_name,corp_tel,corp_email,corp_addr,joined_at) V
     LIMIT 10 OFFSET (1) *10
     
     select * from tb_deep where label=1;
+    
+
+update tb_review set review_name= SUBSTRING(review_name, 5);
