@@ -223,50 +223,23 @@
       <div class="col">
 
         <ul class="nav nav-pills justify-content-xl-between" style="padding-bottom: 130px;">
-
+<c:forEach var="product" items="${prodList}" begin="1">
           <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales"
             data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$"
             data-suffix="k">
-            <a href="#" class="nav-link ar123 py-2 px-3 active" data-toggle="tab">
+            <a href="#" class="nav-link ar123 py-2 px-3" data-toggle="tab">
               <span class="d-none d-md-block">
                 <div class="hover13">
-                  <figure style="margin-bottom: 6px; margin-top: 6px;"><img src="${pageContext.request.contextPath}/resources/img/아르타민.png" alt=""
+                  <figure style="margin-bottom: 6px; margin-top: 6px;"><img src="${pageContext.request.contextPath}/resources/img/${product.prod_name}.png" alt=""
                       style="width: 450px; height: 450px;">
                   </figure>
                 </div>
               </span>
-              <span class="d-md-none">아르타민 자몽</span>
+              <span class="d-md-none">${product.prod_name}</span>
             </a>
           </li>
+</c:forEach>
 
-          <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales"
-            data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$"
-            data-suffix="k">
-            <a href="#" class="nav-link ar123 py-2 px-3" data-toggle="tab">
-              <span class="d-none d-md-block">
-                <div class="hover13">
-                  <figure style="margin-bottom: 6px; margin-top: 6px;">
-                    <img src="${pageContext.request.contextPath}/resources/img/아르타민레몬.png" alt="" style="width: 450px; height: 450px;">
-                  </figure>
-                </div>
-              </span>
-              <span class="d-md-none">아르타민레몬</span>
-            </a>
-          </li>
-
-          <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales"
-            data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$"
-            data-suffix="k">
-            <a href="#" class="nav-link ar123 py-2 px-3" data-toggle="tab">
-              <span class="d-none d-md-block">
-                <div class="hover13">
-                  <figure style="margin-bottom: 6px; margin-top: 6px;"><img src="${pageContext.request.contextPath}/resources/img/베러릴렉스.jpg" alt=""
-                      style="width: 450px; height: 450px;"></figure>
-                </div>
-              </span>
-              <span class="d-md-none">베러릴렉스</span>
-            </a>
-          </li>
 
         </ul>
       </div>
@@ -536,9 +509,17 @@ $(document).ready(function () {
   buttons.forEach(button => {
     button.addEventListener('click', function (event) {
       event.preventDefault();
+      // 모든 버튼에서 active 클래스 제거
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      // 현재 클릭한 버튼에 active 클래스 추가
+      this.classList.add('active');
+
       handleButtonClick(this, myChart, myPolarChart);
     });
   });
+  
+  buttons[0].classList.add('active');
 });
 
 // Line Chart 생성 함수
