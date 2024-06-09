@@ -303,7 +303,7 @@
               </div>
             </div>
             <div class="card-body" style="background-color: #ffffff; padding: 0px;">
-              <div class="chart">
+              <div class="chart" id="divlineChart">
                 <canvas id="010"></canvas>
               </div>
             </div>
@@ -497,11 +497,8 @@
     //---------------------------------------------------------------------------------------
 $(document).ready(function () {
   // Line Chart 및 Polar Chart 생성
-  var ctx1 = document.getElementById('011').getContext('2d');
-  var ctx2 = document.getElementById('010').getContext('2d');
-
-  var myChart = createLineChart(ctx2);
-  var myPolarChart = createPolarChart(ctx1);
+  var myChart = createLineChart();
+  var myPolarChart = createPolarChart();
 
   // 각 버튼에 클릭 이벤트 리스너 추가
   const buttons = document.querySelectorAll('.ar123');
@@ -519,65 +516,123 @@ $(document).ready(function () {
   });
   
   buttons[0].classList.add('active');
-  handleButtonClick(buttons[0], myChart, myPolarChart);
+  handleButtonClick(buttons[0]);
 });
 
-// Line Chart 생성 함수
-function createLineChart(ctx) {
-  return new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['1월', '2월', '3월', '4월', '5월'],
-      datasets: [{
-        label: 'Dataset 1',
-        data: [40, 60, 50, 30, 20],
-        backgroundColor: 'rgba(224, 169, 200, 0.2)',
-        borderColor: '#E0A9C8',
-        borderWidth: 3,
-        fill: true
-      },
-      {
-        label: 'Dataset 2',
-        data: [30, 50, 60, 40, 30],
-        backgroundColor: 'rgba(84, 172, 244, 0.2)',
-        borderColor: '#54ACF4',
-        borderWidth: 3,
-        fill: true
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: true,
-          position: 'top',
-          align: 'center'
+//Line Chart 생성 함수
+function createLineChart(prod_idx) {
+    $.ajax({
+        url: 'getReview.do',
+        contentType: 'application/json;charset:UTF-8',
+        data: { "prod_idx": prod_idx },
+        success: function(response) {
+            console.log("서버로부터의 응답:", response);
+            var reviews = []; // 리뷰 데이터를 저장할 배열
+
+            // 서버에서 받은 응답(response)의 각 요소를 순회하면서 리뷰 데이터를 reviews 배열에 추가
+            for (var i = 0; i < response.length; i++) {
+                reviews.push(response[i]);
+            }
+
+            // 날짜와 긍정/부정 여부를 추출하여 새로운 배열에 저장
+            var data = reviews.map(review => ({
+                date: new Date(review.review_oriDate),
+                isPositive: review.review_rating
+            }));
+
+            // 날짜를 기준으로 데이터를 그룹화
+            var groupedData = {};
+            data.forEach(item => {
+                var monthYear = item.date.getMonth() + 1 + '-' + item.date.getFullYear(); // 월과 연도를 문자열로 결합하여 키로 사용
+                if (!groupedData[monthYear]) {
+                    groupedData[monthYear] = { positive: 0, negative: 0 };
+                }
+                if (item.isPositive) {
+                    groupedData[monthYear].positive++;
+                } else {
+                    groupedData[monthYear].negative++;
+                }
+            });
+
+            // 그룹화된 데이터를 바탕으로 긍정과 부정 리뷰의 수를 계산
+            var chartData = {
+                labels: [],
+                datasets: [{
+                        label: '긍정',
+                        data: [],
+                        backgroundColor: 'rgba(224, 169, 200, 0.2)',
+                        borderColor: '#E0A9C8',
+                        borderWidth: 3,
+                        fill: true
+                    },
+                    {
+                        label: '부정',
+                        data: [],
+                        backgroundColor: 'rgba(84, 172, 244, 0.2)',
+                        borderColor: '#54ACF4',
+                        borderWidth: 3,
+                        fill: true
+                    }
+                ]
+            };
+            for (var monthYear in groupedData) {
+                chartData.labels.push(monthYear);
+                chartData.datasets[0].data.push(groupedData[monthYear].positive);
+                chartData.datasets[1].data.push(groupedData[monthYear].negative);
+            }
+
+            // 차트 생성
+            createChart(chartData);
         },
-        tooltip: {
-          enabled: true,
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          titleColor: '#ffffff',
-          bodyColor: '#ffffff',
-          borderWidth: 1,
-          borderColor: '#ddd',
+        error: function(xhr, status, error) {
+            console.error("에러 발생:", error);
         }
-      },
-      scales: {
-        x: {
-          beginAtZero: true
-        },
-        y: {
-          beginAtZero: true
+    });
+}
+
+// 차트 생성 함수
+function createChart(chartData) {
+	$('#010').remove();
+    $('#divlineChart').append('<canvas id="010"></canvas>');
+    var ctx2 = document.getElementById('010').getContext('2d');
+
+    return new Chart(ctx2, {
+        type: 'line',
+        data: chartData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    align: 'center'
+                },
+                tooltip: {
+                    enabled: true,
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    borderWidth: 1,
+                    borderColor: '#ddd',
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
-      }
-    }
-  });
+    });
 }
 
 // Polar Chart 생성 함수
-function createPolarChart(ctx) {
-  return new Chart(ctx, {
+function createPolarChart() {
+	 var ctx1 = document.getElementById('011').getContext('2d');
+  return new Chart(ctx1, {
     type: 'polarArea',
     data: {
       labels: ['부정', '긍정', '긍정', '긍정', '긍정'],
@@ -637,14 +692,15 @@ function createPolarChart(ctx) {
 }
 
 // 버튼 클릭 시 실행되는 함수
-function handleButtonClick(button, lineChart, polarChart) {
+function handleButtonClick(button) {
   const textData = button.querySelector('span.d-md-none').textContent;
   const prod_idx = button.querySelector('span.prod_idx').textContent;
   
   getProductDetail(prod_idx)
   getPositiveReview(prod_idx)
-  getNegativeReview(prod_idx, lineChart, polarChart)
-  
+  getNegativeReview(prod_idx)
+  createLineChart(prod_idx)
+  createPolarChart(prod_idx)
 }
 
 //인덱스로 제품 정보 불러오기
@@ -660,10 +716,6 @@ function getProductDetail(prod_idx){
             if (data) {
               updateImage(data.imageSrc);
               updateText(data.textData);
-            //  updateChart(lineChart, data.chartData1, data.chartData2);
-            //  updatePolarChart(polarChart, data.polarData);
-            //  updateTable('.table-responsive tbody', data.reviews);
-            //  updateTable('#negativeReviewTableBody2', data.negativeReviews);
             }
         },
         error: function(xhr, status, error) {
@@ -696,7 +748,7 @@ function getPositiveReview(prod_idx){
 	        contentType: 'application/json;charset:UTF-8',
 	        data:{ "prod_idx": prod_idx },
 	        success: function(response) {
-	            console.log("서버로부터의 응답:", response);
+	            //console.log("서버로부터의 응답:", response);
 
 	           // 리뷰 내용을 저장할 배열 초기화
 	     	  const reviews = [];
@@ -714,13 +766,13 @@ function getPositiveReview(prod_idx){
 }
 
 //제품별 부정리뷰 불러오기 
-function getNegativeReview(prod_idx, lineChart, polarChart){
+function getNegativeReview(prod_idx){
 	 $.ajax({
 	        url: 'getReviewN.do',
 	        contentType: 'application/json;charset:UTF-8',
 	        data:{ "prod_idx": prod_idx },
 	        success: function(response) {
-	            console.log("서버로부터의 응답:", response);
+	           // console.log("서버로부터의 응답:", response);
 
 	           // 리뷰 내용을 저장할 배열 초기화
 	     	  const reviews = [];
@@ -730,12 +782,7 @@ function getNegativeReview(prod_idx, lineChart, polarChart){
 	     	    reviews.push(item.review_content);
 	     	  });
 
-	          let chartData1= [25, 80, 45, 95, 10];
-	          let chartData2= [20, 70, 55, 30, 5];
-	          let polarData= [25, 15, 30, 20, 25];
-	       
-	              updateChart(lineChart, chartData1, chartData2);
-	              updatePolarChart(polarChart, polarData);
+	         
 	              updateTable('#negativeReviewTableBody2', reviews);
 	        },
 	        error: function(xhr, status, error) {
@@ -755,19 +802,6 @@ function updateImage(src) {
 // 텍스트 업데이트 함수
 function updateText(html) {
   document.querySelector('.s1').innerHTML = html;
-}
-
-// Line Chart 업데이트 함수
-function updateChart(chart, data1, data2) {
-  chart.data.datasets[0].data = data1;
-  chart.data.datasets[1].data = data2;
-  chart.update();
-}
-
-// Polar Chart 업데이트 함수
-function updatePolarChart(chart, data) {
-  chart.data.datasets[0].data = data;
-  chart.update();
 }
 
 //테이블 업데이트 함수

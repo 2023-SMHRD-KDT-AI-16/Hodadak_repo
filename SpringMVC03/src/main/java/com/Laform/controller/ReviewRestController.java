@@ -30,4 +30,11 @@ public class ReviewRestController {
 		
 	}
 	
+	@GetMapping("getReview.do")
+	public List<tb_review> getReview(int prod_idx){
+		List<tb_review> list = reviewMapper.getReview(prod_idx);
+		return list;
+		
+	}
+	
 }
