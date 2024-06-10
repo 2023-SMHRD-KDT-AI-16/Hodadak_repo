@@ -10,4 +10,31 @@ select count(*) from tb_deep where label=1 and deep_source=#{deep_source}
 select count(*) from tb_deep where label=0 and deep_source=#{deep_source}
 </select>
 
+<select id="getBest" resultType ="com.Laform.entity.tb_deep">
+SELECT deep_result
+FROM tb_deep
+WHERE label = 1 AND deep_source = #{deep_source}
+GROUP BY deep_result
+ORDER BY SUM(deep_sum) DESC
+LIMIT 1
+</select>
+
+<select id="getWorst" resultType ="com.Laform.entity.tb_deep">
+SELECT deep_result
+FROM tb_deep
+WHERE label = 0 AND deep_source = #{deep_source}
+GROUP BY deep_result
+ORDER BY SUM(deep_sum) DESC
+LIMIT 1
+</select>
+
+<select id="getDataSize" resultType="int">
+SELECT COUNT(*)
+FROM (
+    SELECT deep_result, SUM(deep_sum) AS total_deep_sum
+    FROM tb_deep
+    WHERE deep_source = #{deep_source}
+    GROUP BY deep_result
+)AS subquery
+</select>
 </mapper>

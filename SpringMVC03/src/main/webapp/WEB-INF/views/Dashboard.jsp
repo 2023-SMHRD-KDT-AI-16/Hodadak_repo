@@ -76,7 +76,7 @@
 							<h6 class="text-overflow m-0">Welcome!</h6>
 						</div>
 						<div class="dropdown-divider"></div>
-						<a href="Main.do" class="dropdown-item"> <i
+						<a href="logout.do" class="dropdown-item"> <i
 							class="ni ni-user-run"></i> <span>Logout</span>
 						</a>
 					</div></li>
@@ -281,7 +281,7 @@
 							<div class="row">
 								<div class="col">
 									<h5 class="card-title text-uppercase text-muted mb-0">긍정</h5>
-									<span class="h2 font-weight-bold mb-0 hover12">행복하다</span>
+									<span class="h2 font-weight-bold mb-0 hover12" id="positiveWord">행복하다</span>
 								</div>
 								<div class="col-auto">
 									<div
@@ -307,7 +307,7 @@
 							<div class="row">
 								<div class="col">
 									<h5 class="card-title text-uppercase text-muted mb-0">부정</h5>
-									<span class="h2 font-weight-bold mb-0 hover12">불행하다</span>
+									<span class="h2 font-weight-bold mb-0 hover12" id="negativeWord">불행하다</span>
 								</div>
 								<div class="col-auto">
 									<div
@@ -332,8 +332,8 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col">
-									<h5 class="card-title text-uppercase text-muted mb-0 hover12">test</h5>
-									<span class="h2 font-weight-bold mb-0">test</span>
+									<h5 class="card-title text-uppercase text-muted mb-0">추출된 단어의 갯수</h5>
+									<span class="h2 font-weight-bold mb-0 hover12" id="dataSize"></span>
 								</div>
 								<div class="col-auto">
 									<div
@@ -343,9 +343,7 @@
 								</div>
 							</div>
 							<p class="mt-3 mb-0 text-muted text-sm">
-								<span class="text-warning mr-2"><i
-									class="fas fa-arrow-down"></i> test</span> <span class="text-nowrap">다른
-									test</span>
+								<span class="text-warning mr-2"></span> <span class="text-nowrap"></span>
 							</p>
 						</div>
 					</div>
@@ -713,6 +711,9 @@
 		naverSearch(request)
 		donutChart(request)
 		ChangeWordCloud(request)
+		positiveWord(request)
+		negativeWord(request)
+		dataSize(request)
 		
 		$.ajax({
 			url:'trendList',
@@ -732,7 +733,7 @@
 	//워드클라우드 
 	var contextPath = "${pageContext.request.contextPath}";
 	function ChangeWordCloud(request){
-	console.log("워드클라우드"+request)
+	//console.log("워드클라우드"+request)
 		// wordCloud 요소를 선택
 	    var wordCloudElement = document.getElementById('wordCloud');
 	    
@@ -744,6 +745,59 @@
 }
 
 
+//------------------------------------------------------------------------------------------
+	
+	//긍정 top1
+	function positiveWord(request){
+	//console.log(request)
+    	$.ajax({
+    		url: "getBest",
+    		data: {deep_source: request},
+    		success: function(data){
+    			//console.log(data);
+    			$("#positiveWord").text(data.deep_result)
+				
+			},
+			error:function(xhr, status, error) {
+	            console.error("에러 발생:", error);
+	        }
+		})
+	}
+	
+	//부정 top1
+		function negativeWord(request){
+			$.ajax({
+	    		url: "getWorst",
+	    		data: {deep_source: request},
+	    		success: function(data){
+	    			//console.log(data);
+	    			$("#negativeWord").text(data.deep_result)
+					
+				},
+				error:function(xhr, status, error) {
+		            console.error("에러 발생:", error);
+		        }
+			})
+	
+	}
+	
+	
+	//추출된 키워드량
+	 function dataSize(request){
+		 $.ajax({
+	    		url: "getDataSize",
+	    		data: {deep_source: request},
+	    		success: function(data){
+	    			console.log(data);
+	    			let formattedData = data.toLocaleString();
+	    			$("#dataSize").text(formattedData)
+					
+				},
+				error:function(xhr, status, error) {
+		            console.error("에러 발생:", error);
+		        }
+			})
+	}
 //---------------------------------------------------------------------------------------------
     
    	//네이버 api 
@@ -754,7 +808,7 @@
         contentType: 'application/json;charset:UTF-8', // 반환받을 데이터의 타입
         data: { query: query },  // 서버로 보낼 데이터
         success: function(response) {
-            console.log("서버로부터의 응답:", response);
+          //  console.log("서버로부터의 응답:", response);
             innerHtml=""
             	
             for(let i = 0; i<response.items.length;i++){

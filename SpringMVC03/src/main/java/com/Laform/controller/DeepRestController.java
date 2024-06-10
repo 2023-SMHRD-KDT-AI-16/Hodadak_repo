@@ -1,6 +1,8 @@
 package com.Laform.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,26 @@ public class DeepRestController {
 		list.add(DeepP);
 		list.add(DeepN);
 		return list;
+	}
+	
+	
+	@GetMapping("getBest")
+	public tb_deep getBest(String deep_source) {
+		tb_deep vo = deepMapper.getBest(deep_source);
+		System.out.println("vo:"+vo);
+		return vo;
+	}
+	
+	@GetMapping("getWorst")
+	public tb_deep getWorst(String deep_source) {
+		tb_deep vo = deepMapper.getWorst(deep_source);
+		return vo;
+	}
+	
+	@GetMapping("getDataSize")
+	public int getDataSize(String deep_source) {
+		int dataSize=deepMapper.getDataSize(deep_source);
+		return dataSize;
 	}
 	
 }
