@@ -50,7 +50,7 @@
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="./assets/img/프리지아.png">
+                <img alt="Image placeholder" src="./assets/img/íë¦¬ì§ì.png">
               </span>
             </div>
           </a>
@@ -80,7 +80,7 @@
             <div class="row">
               <div class="col-6 collapse-brand">
                 <a href="./Addproduct.html">
-                  <img src="${pageContext.request.contextPath}/resources/img/배너2.png">
+                  <img src="${pageContext.request.contextPath}/resources/img/배너2.png">
                 </a>
               </div>
               <div class="col-6 collapse-close">
@@ -94,7 +94,7 @@
           <!-- Form -->
           <form class="mt-4 mb-3 d-md-none">
             <div class="input-group input-group-rounded input-group-merge">
-              <!-- 챗GPT API 들어갈 input 태그-->
+              <!-- ì±GPT API ë¤ì´ê° input íê·¸-->
               <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search"
                 aria-label="Search">
               <div class="input-group-prepend">
@@ -109,17 +109,17 @@
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link hover12" href="./Dashboard.html">
-                <i class="ni ni-chart-bar-32 text-red "></i> La Form 트렌드 분석
+                <i class="ni ni-chart-bar-32 text-red "></i> La Form 트렌드 분석
               </a>
             </li>
             <li class="nav-item active">
               <a class="nav-link hover12 active" href="./Check'O.html">
-                <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
+                <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link hover12" href="./Suggest.html">
-                <i class="ni ni-basket text-orange"></i> La Form 제안서
+                <i class="ni ni-basket text-orange"></i> La Form 제안서
                 <span class="badge badge-pill badge-dark"
                   style="background-color: #4B0082; color: #FFD700; border: 2px solid #FFD700;">AI</span>
               </a>
@@ -141,7 +141,7 @@
         <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Addproduct.html">제품 추가</a>
 
 
-        <!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
+        <!-- ììª½ ë²í¼------------------------------------------------------------------------------------------------------>
         <div class="col" style="padding-left: 45px;">
           <ul class="nav nav-pills justify-content-start">
             <li class="nav-item">
@@ -161,7 +161,7 @@
             </li>
           </ul>
         </div>
-        <!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
+        <!-- ììª½ ë²í¼------------------------------------------------------------------------------------------------------>
 
 
         <!-- Form -->
@@ -173,7 +173,7 @@
                   <i class="fas fa-search" style="color: black;"></i>
                 </span>
               </div>
-              <!-- 챗GPT API 들어갈 input 태그-->
+              <!-- ì±GPT API ë¤ì´ê° input íê·¸-->
               <input class="form-control" placeholder="Search" type="text" style="width: 850px;">
             </div>
           </div>
@@ -223,7 +223,7 @@
 
 
     <div class="container-fluid mt--7">
-      <!----------------------------- 안에 들어갈 컨텐츠 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ----------------------------------------------------------------------------->
+      <!-----------------------------  ----------------------------------------------------------------------------->
 
 
       <div class="uploadForm" style="width: 1500px;">
@@ -252,7 +252,7 @@
 
 
 
-      <!----------------------------- 안에 들어갈 컨텐츠 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ----------------------------------------------------------------------------->
+      <!----------------------------- ---------------------------------------------------------------------------->
 
 
 
@@ -304,7 +304,7 @@
   <script src="${pageContext.request.contextPath}/resources/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!--   Optional JS   -->
   <script src="${pageContext.request.contextPath}/resources/js/plugins/chart.js/dist/Chart.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/plugins/chart.js/dist/Chart.extension.js"></script><!--차트-->
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/chart.js/dist/Chart.extension.js"></script><!--ì°¨í¸-->
   <!--   Argon JS   -->
   <script src="${pageContext.request.contextPath}/resources/js/argon-dashboard.min.js?v=1.1.2"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
@@ -415,15 +415,15 @@
       productInfo.classList.add("productInfo");
 
       var productName = document.createElement("p");
-      productName.textContent = "제품명: " + document.getElementById("productNameInput").value;
+      productName.textContent = "ì íëª: " + document.getElementById("productNameInput").value;
       productInfo.appendChild(productName);
 
       var productPrice = document.createElement("p");
-      productPrice.textContent = "가격: " + numberWithCommas(document.getElementById("productPriceInput").value) + "원";
+      productPrice.textContent = "ê°ê²©: " + numberWithCommas(document.getElementById("productPriceInput").value) + "ì";
       productInfo.appendChild(productPrice);
 
       var productDescription = document.createElement("p");
-      productDescription.textContent = "성분: " + document.getElementById("productDescriptionInput").value;
+      productDescription.textContent = "ì±ë¶: " + document.getElementById("productDescriptionInput").value;
       productInfo.appendChild(productDescription);
 
       productItem.appendChild(productInfo);
@@ -431,7 +431,7 @@
       productList.appendChild(productItem);
 
       var deleteButton = document.createElement("button");
-      deleteButton.textContent = "삭제";
+      deleteButton.textContent = "ì­ì ";
       deleteButton.classList.add("deleteButton");
       deleteButton.onclick = function () {
         productItem.remove();
@@ -460,7 +460,7 @@
       var sanitizedInput = inputValue.replace(/\D/g, "");
       if (sanitizedInput !== inputValue) {
         this.value = sanitizedInput;
-        showModal("숫자만 입력해주세요.");
+        showModal("ì«ìë§ ìë ¥í´ì£¼ì¸ì.");
       }
     });
 
@@ -479,7 +479,7 @@
 
       var formData = new FormData(document.getElementById("productForm"));
 
-      // 파일 업로드를 위한 서버 엔드포인트 URL
+      // íì¼ ìë¡ëë¥¼ ìí ìë² ìëí¬ì¸í¸ URL
       var uploadUrl = "YOUR_SERVER_UPLOAD_URL";
 
       fetch(uploadUrl, {
@@ -489,14 +489,14 @@
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
-          alert("파일이 성공적으로 업로드되었습니다.");
-          // 업로드 후 폼을 초기화합니다.
+          alert("íì¼ì´ ì±ê³µì ì¼ë¡ ìë¡ëëììµëë¤.");
+          // ìë¡ë í í¼ì ì´ê¸°íí©ëë¤.
           document.getElementById("productForm").reset();
           document.querySelector(".productList").innerHTML = "";
         })
         .catch((error) => {
           console.error('Error:', error);
-          alert("파일 업로드에 실패했습니다.");
+          alert("íì¼ ìë¡ëì ì¤í¨íìµëë¤.");
         });
     }
 
