@@ -102,6 +102,11 @@ public class MainController {
 		return "Addreview";
 	}
 	
+	@RequestMapping("/Addproduct.do")
+	public String Addproduct() {
+		return "Addreview";
+	}
+	
 
 
 }

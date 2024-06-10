@@ -148,7 +148,7 @@
         <div class="col" style="padding-left: 45px;">
           <ul class="nav nav-pills justify-content-start">
             <li class="nav-item">
-              <a href="Addproduct.html" class="nav-link we12 py-2 px-3">
+              <a href="Addproduct.do" class="nav-link we12 py-2 px-3">
                 <span class="d-none d-md-block">제품 추가</span>
                 <span class="d-md-none">제품 추가</span>
               </a>
@@ -157,7 +157,7 @@
               <div></div>
             </li>
             <li class="nav-item">
-              <a href="Addreview.html" class="nav-link we12 py-2 px-3">
+              <a href="Addreview.do" class="nav-link we12 py-2 px-3">
                 <span class="d-none d-md-block">리뷰 추가</span>
                 <span class="d-md-none">리뷰 추가</span>
               </a>

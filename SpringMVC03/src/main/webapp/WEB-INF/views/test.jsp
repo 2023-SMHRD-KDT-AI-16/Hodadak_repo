@@ -71,7 +71,7 @@ $(document).ready(function() {
         formData.append('file', file);
 
         $.ajax({
-            url: 'http://192.168.0.33:5000/upload',
+            url: 'http://180.68.91.152:5000/upload',
             type: 'POST',
             data: formData,
             processData: false,
