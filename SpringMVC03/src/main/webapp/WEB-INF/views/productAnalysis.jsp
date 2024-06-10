@@ -521,7 +521,7 @@ $(document).ready(function () {
 
 //Line Chart 생성 함수
 function createLineChart(prod_idx) {
-    $.ajax({
+ /*   $.ajax({
         url: 'getReview.do',
         contentType: 'application/json;charset:UTF-8',
         data: { "prod_idx": prod_idx },
@@ -587,7 +587,7 @@ function createLineChart(prod_idx) {
         error: function(xhr, status, error) {
             console.error("에러 발생:", error);
         }
-    });
+    }); */
 }
 
 // 차트 생성 함수

@@ -367,10 +367,10 @@
 							</div>
 						</div>
 						<div class="card-body"
-							style="background-color: #ffffff; padding: 0px;">
+							style="background-color: #ffffff; padding: 0px;" padding id="wordCloud">
 							<img
-								src="${pageContext.request.contextPath}/resources/img/밀레니엄.png"
-								alt="">
+								src="${pageContext.request.contextPath}/resources/img/갓생살기.png"
+								alt="" style="max-height:350px;object-fit: cover;padding:1.5rem">
 						</div>
 					</div>
 				</div>
