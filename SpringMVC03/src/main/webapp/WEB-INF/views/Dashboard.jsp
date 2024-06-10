@@ -370,7 +370,7 @@
 							style="background-color: #ffffff; padding: 0px;" padding id="wordCloud">
 							<img
 								src="${pageContext.request.contextPath}/resources/img/갓생살기.png"
-								alt="" style="max-height:350px;object-fit: cover;padding:1.5rem">
+								alt="" style="max-height:420px;object-fit: cover;padding:1.5rem;margin-left:100px">
 						</div>
 					</div>
 				</div>
@@ -705,12 +705,14 @@
    	//html이 로드 됐을때 
    $(document).ready(function() { 
 	   changeBoard('갓생살기')
+	  
    });
 
 	//대시보드 값 DB연결
 	function changeBoard(request){
 		naverSearch(request)
 		donutChart(request)
+		ChangeWordCloud(request)
 		
 		$.ajax({
 			url:'trendList',
@@ -726,7 +728,22 @@
 		})
 	}
 	
-	
+//-----------------------------------------------------------------------------------
+	//워드클라우드 
+	var contextPath = "${pageContext.request.contextPath}";
+	function ChangeWordCloud(request){
+	console.log("워드클라우드"+request)
+		// wordCloud 요소를 선택
+	    var wordCloudElement = document.getElementById('wordCloud');
+	    
+	    // wordCloud 요소 안의 img 태그를 선택
+	    var imgElement = wordCloudElement.querySelector('img');
+	    
+	    // img 태그의 src 속성을 변경
+	    imgElement.src = contextPath + '/resources/img/' + request + '.png';
+}
+
+
 //---------------------------------------------------------------------------------------------
     
    	//네이버 api 

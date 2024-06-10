@@ -40,7 +40,7 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./Check'O.html">
+      <a class="navbar-brand pt-0" href="dashboard.do">
         <img src="${pageContext.request.contextPath}/resources/img/배너2.png" class="navbar-brand-img" alt="...">
       </a>
 
@@ -113,12 +113,12 @@
           <!-- Navigation -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link hover12" href="./Dashboard.html">
+              <a class="nav-link hover12" href="dashboard.do">
                 <i class="ni ni-chart-bar-32 text-red "></i> La Form 트렌드 분석
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link hover12 active" href="./Check'O.html">
+              <a class="nav-link hover12 active" href="productAnalysis.do">
                 <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
               </a>
             </li>
@@ -167,20 +167,25 @@
         <!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
 
 
-        <!-- Form -->
-        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-          <div class="form-group mb-0">
-            <div class="input-group input-group-alternative">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fas fa-search" style="color: black;"></i>
-                </span>
-              </div>
-              <!-- 챗GPT API 들어갈 input 태그-->
-              <input class="form-control" placeholder="Search" type="text" style="width: 850px;">
-            </div>
-          </div>
-        </form>
+<!-- Form -->
+				<form
+					class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+					<div class="form-group mb-0">
+						<div class="input-group input-group-alternative">
+							<div class="input-group-prepend">
+								<span class="input-group-text"> <i class="fas fa-search"
+									style="color: black;"></i>
+								</span>
+							</div>
+							<!-- 챗GPT API 들어갈 input 태그-->
+							<input class="form-control" placeholder="Search" type="text"
+								id="promptInput" style="width: 850px;"
+								onkeypress="if(event.keyCode=='13'){event.preventDefault(); gptSearch();}">
+							<button type="submit" id="submitButton"
+								style="visibility: hidden"></button>
+						</div>
+					</div>
+				</form>
 
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
@@ -398,6 +403,22 @@
         <!-- 부정 리뷰 ↑ ------------------------------------------------------------------------------------------------------>
 
 
+<div class="modal fade" id="gptModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+                  <h4 class="modal-title">ChatGPT</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body" id="gptResponse">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>		
+
+
 
 
       </div><!--00000-->
@@ -521,45 +542,23 @@ $(document).ready(function () {
 
 //Line Chart 생성 함수
 function createLineChart(prod_idx) {
- /*   $.ajax({
+    $.ajax({
         url: 'getReview.do',
         contentType: 'application/json;charset:UTF-8',
         data: { "prod_idx": prod_idx },
         success: function(response) {
             console.log("서버로부터의 응답:", response);
-            var reviews = []; // 리뷰 데이터를 저장할 배열
 
-            // 서버에서 받은 응답(response)의 각 요소를 순회하면서 리뷰 데이터를 reviews 배열에 추가
-            for (var i = 0; i < response.length; i++) {
-                reviews.push(response[i]);
-            }
+            var labels = response.labels;
+            var positiveData = response.positiveData;
+            var negativeData = response.negativeData;
 
-            // 날짜와 긍정/부정 여부를 추출하여 새로운 배열에 저장
-            var data = reviews.map(review => ({
-                date: new Date(review.review_oriDate),
-                isPositive: review.review_rating
-            }));
-
-            // 날짜를 기준으로 데이터를 그룹화
-            var groupedData = {};
-            data.forEach(item => {
-                var monthYear = item.date.getMonth() + 1 + '-' + item.date.getFullYear(); // 월과 연도를 문자열로 결합하여 키로 사용
-                if (!groupedData[monthYear]) {
-                    groupedData[monthYear] = { positive: 0, negative: 0 };
-                }
-                if (item.isPositive) {
-                    groupedData[monthYear].positive++;
-                } else {
-                    groupedData[monthYear].negative++;
-                }
-            });
-
-            // 그룹화된 데이터를 바탕으로 긍정과 부정 리뷰의 수를 계산
+            // 차트 데이터 설정
             var chartData = {
-                labels: [],
+                labels: labels,
                 datasets: [{
                         label: '긍정',
-                        data: [],
+                        data: positiveData,
                         backgroundColor: 'rgba(224, 169, 200, 0.2)',
                         borderColor: '#E0A9C8',
                         borderWidth: 3,
@@ -567,7 +566,7 @@ function createLineChart(prod_idx) {
                     },
                     {
                         label: '부정',
-                        data: [],
+                        data: negativeData,
                         backgroundColor: 'rgba(84, 172, 244, 0.2)',
                         borderColor: '#54ACF4',
                         borderWidth: 3,
@@ -575,19 +574,15 @@ function createLineChart(prod_idx) {
                     }
                 ]
             };
-            for (var monthYear in groupedData) {
-                chartData.labels.push(monthYear);
-                chartData.datasets[0].data.push(groupedData[monthYear].positive);
-                chartData.datasets[1].data.push(groupedData[monthYear].negative);
-            }
-
-            // 차트 생성
-            createChart(chartData);
+            
+            console.log("chartData:", chartData);
+            createChart(chartData)
+            
         },
         error: function(xhr, status, error) {
             console.error("에러 발생:", error);
         }
-    }); */
+    }); 
 }
 
 // 차트 생성 함수
@@ -817,6 +812,27 @@ function updateTable(selector, data) {
   });
 }
 
+
+//GPT API 실행 
+function gptSearch(){
+		var myData =$("#promptInput").val()
+   $.ajax({
+       url: 'chat',
+       type: 'POST',
+       contentType: 'application/json;charset:UTF-8',
+       data: JSON.stringify({ prompt: myData }),
+       success: function(response) {
+           console.log("서버로부터의 응답:", response);
+           $("#gptResponse").html(response)
+           $('#gptModal').modal("show");
+       },
+       error: function(xhr, status, error) {
+           console.error("에러 발생:", error);
+       }
+   });
+		
+		$("#promptInput").val("")
+}
 
 
   </script>
