@@ -40,7 +40,7 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./Check'O.html">
+      <a class="navbar-brand pt-0" href="dashboard.do">
         <img src="${pageContext.request.contextPath}/resources/img/배너2.png" class="navbar-brand-img" alt="...">
       </a>
 
@@ -113,12 +113,12 @@
           <!-- Navigation -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link hover12" href="./Dashboard.html">
+              <a class="nav-link hover12" href="dashboard.do">
                 <i class="ni ni-chart-bar-32 text-red "></i> La Form 트렌드 분석
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link hover12 active" href="./Check'O.html">
+              <a class="nav-link hover12 active" href="productAnalysis.do">
                 <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
               </a>
             </li>
@@ -167,20 +167,25 @@
         <!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
 
 
-        <!-- Form -->
-        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-          <div class="form-group mb-0">
-            <div class="input-group input-group-alternative">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fas fa-search" style="color: black;"></i>
-                </span>
-              </div>
-              <!-- 챗GPT API 들어갈 input 태그-->
-              <input class="form-control" placeholder="Search" type="text" style="width: 850px;">
-            </div>
-          </div>
-        </form>
+<!-- Form -->
+				<form
+					class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+					<div class="form-group mb-0">
+						<div class="input-group input-group-alternative">
+							<div class="input-group-prepend">
+								<span class="input-group-text"> <i class="fas fa-search"
+									style="color: black;"></i>
+								</span>
+							</div>
+							<!-- 챗GPT API 들어갈 input 태그-->
+							<input class="form-control" placeholder="Search" type="text"
+								id="promptInput" style="width: 850px;"
+								onkeypress="if(event.keyCode=='13'){event.preventDefault(); gptSearch();}">
+							<button type="submit" id="submitButton"
+								style="visibility: hidden"></button>
+						</div>
+					</div>
+				</form>
 
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
@@ -398,6 +403,22 @@
         <!-- 부정 리뷰 ↑ ------------------------------------------------------------------------------------------------------>
 
 
+<div class="modal fade" id="gptModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+                  <h4 class="modal-title">ChatGPT</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body" id="gptResponse">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>		
+
+
 
 
       </div><!--00000-->
@@ -555,7 +576,7 @@ function createLineChart(prod_idx) {
             };
             
             console.log("chartData:", chartData);
-            createChart(chartData);
+            createChart(chartData)
             
         },
         error: function(xhr, status, error) {
@@ -791,6 +812,27 @@ function updateTable(selector, data) {
   });
 }
 
+
+//GPT API 실행 
+function gptSearch(){
+		var myData =$("#promptInput").val()
+   $.ajax({
+       url: 'chat',
+       type: 'POST',
+       contentType: 'application/json;charset:UTF-8',
+       data: JSON.stringify({ prompt: myData }),
+       success: function(response) {
+           console.log("서버로부터의 응답:", response);
+           $("#gptResponse").html(response)
+           $('#gptModal').modal("show");
+       },
+       error: function(xhr, status, error) {
+           console.error("에러 발생:", error);
+       }
+   });
+		
+		$("#promptInput").val("")
+}
 
 
   </script>
