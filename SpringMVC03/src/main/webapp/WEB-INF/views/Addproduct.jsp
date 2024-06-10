@@ -10,7 +10,7 @@
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.4.0/pyLDAvis/js/ldavis.v1.0.0.css">
   <!-- Favicon -->
-  <link href="${pageContext.request.contextPath}/resources/img/íë¦¬ì§ì.png" rel="icon" type="image/png">
+  <link href="${pageContext.request.contextPath}/resources/img/프리지아.png" rel="icon" type="image/png">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
@@ -37,7 +37,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="./Addproduct.html">
-        <img src="${pageContext.request.contextPath}/resources/img/ë°°ë2.png" class="navbar-brand-img" alt="...">
+        <img src="${pageContext.request.contextPath}/resources/img/배너2.png" class="navbar-brand-img" alt="...">
       </a>
 
       <!-- User -->
@@ -80,7 +80,7 @@
             <div class="row">
               <div class="col-6 collapse-brand">
                 <a href="./Addproduct.html">
-                  <img src="${pageContext.request.contextPath}/resources/img/ë°°ë2.png">
+                  <img src="${pageContext.request.contextPath}/resources/img/배너2.png">
                 </a>
               </div>
               <div class="col-6 collapse-close">
@@ -223,7 +223,7 @@
 
 
     <div class="container-fluid mt--7">
-      <!----------------------------- ìì ë¤ì´ê° ì»¨íì¸  ââââââââââââââ ----------------------------------------------------------------------------->
+      <!-----------------------------  ----------------------------------------------------------------------------->
 
 
       <div class="uploadForm" style="width: 1500px;">
@@ -252,7 +252,7 @@
 
 
 
-      <!----------------------------- ìì ë¤ì´ê° ì»¨íì¸  ââââââââââââââââââ ----------------------------------------------------------------------------->
+      <!----------------------------- ---------------------------------------------------------------------------->
 
 
 
