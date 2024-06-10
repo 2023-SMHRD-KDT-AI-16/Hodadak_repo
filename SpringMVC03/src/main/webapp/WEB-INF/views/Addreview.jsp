@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +12,7 @@
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.4.0/pyLDAvis/js/ldavis.v1.0.0.css">
   <!-- Favicon -->
-  <link href="${pageContext.request.contextPath}/resources/img/프리지아.png" rel="icon" type="image/png">
+  <link href="${pageContext.request.contextPath}/resources/img/프리지아.png" rel="icon" type="image/png">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
@@ -50,7 +52,7 @@
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="${pageContext.request.contextPath}/resources/img/프리지아.png">
+                <img alt="Image placeholder" src="${pageContext.request.contextPath}/resources/img/íë¦¬ì§ì.png">
               </span>
             </div>
           </a>
@@ -71,7 +73,7 @@
       <div class="collapse navbar-collapse" id="sidenav-collapse-main"
         style="background: linear-gradient(30deg, #feb47b, #815EE4,#ffffff, #ffffff);">
 
-        <!-- 이미지 배경 -->
+        <!-- ì´ë¯¸ì§ ë°°ê²½ -->
         <div class="collapse navbar-collapse" id="sidenav-collapse-main" style="background-color: #ffffff;
                background-size: cover;">
 
@@ -80,7 +82,7 @@
             <div class="row">
               <div class="col-6 collapse-brand">
                 <a href="./Addreview.html">
-                  <img src="${pageContext.request.contextPath}/resources/img/배너2.png">
+                  <img src="${pageContext.request.contextPath}/resources/img/ë°°ë2.png">
                 </a>
               </div>
               <div class="col-6 collapse-close">
@@ -94,7 +96,7 @@
           <!-- Form -->
           <form class="mt-4 mb-3 d-md-none">
             <div class="input-group input-group-rounded input-group-merge">
-              <!-- 챗GPT API 들어갈 input 태그-->
+              <!-- ì±GPT API ë¤ì´ê° input íê·¸-->
               <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search"
                 aria-label="Search">
               <div class="input-group-prepend">
@@ -109,17 +111,17 @@
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link hover12" href="./Dashboard.html">
-                <i class="ni ni-chart-bar-32 text-red "></i> La Form 트렌드 분석
+                <i class="ni ni-chart-bar-32 text-red "></i> La Form 대시보드
               </a>
             </li>
             <li class="nav-item active">
               <a class="nav-link hover12 active" href="./Check'O.html">
-                <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
+                <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link hover12" href="./Suggest.html">
-                <i class="ni ni-basket text-orange"></i> La Form 제안서
+                <i class="ni ni-basket text-orange"></i> La Form 제안서
                 <span class="badge badge-pill badge-dark"
                   style="background-color: #4B0082; color: #FFD700; border: 2px solid #FFD700;">AI</span>
               </a>
@@ -138,16 +140,16 @@
       <div class="container-fluid">
 
         <!-- Brand -->
-        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Addreview.html">리뷰 추가</a>
+        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Addreview.html">리뷰 추가</a>
 
 
-        <!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
+        <!-- ììª½ ë²í¼------------------------------------------------------------------------------------------------------>
         <div class="col" style="padding-left: 45px;">
           <ul class="nav nav-pills justify-content-start">
             <li class="nav-item">
               <a href="Addproduct.html" class="nav-link we12 py-2 px-3">
-                <span class="d-none d-md-block">제품 추가</span>
-                <span class="d-md-none">제품 추가</span>
+                <span class="d-none d-md-block">제품 추가</span>
+                <span class="d-md-none">제품 추가</span>
               </a>
             </li>
             <li>
@@ -155,8 +157,8 @@
             </li>
             <li class="nav-item">
               <a href="Addreview.html" class="nav-link we12 py-2 px-3">
-                <span class="d-none d-md-block">리뷰 추가</span>
-                <span class="d-md-none">리뷰 추가</span>
+                <span class="d-none d-md-block">리뷰 추가</span>
+                <span class="d-md-none">리뷰 추가</span>
               </a>
             </li>
           </ul>
@@ -173,7 +175,7 @@
                   <i class="fas fa-search" style="color: black;"></i>
                 </span>
               </div>
-              <!-- 챗GPT API 들어갈 input 태그-->
+              <!-- 챗GPT API 들어갈 input 태그 -->
               <input class="form-control" placeholder="Search" type="text" style="width: 850px;">
             </div>
           </div>
@@ -223,14 +225,19 @@
 
 
     <div class="container-fluid mt--7">
-      <!----------------------------- 안에 들어갈 컨텐츠 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ----------------------------------------------------------------------------->
+      <!----------------------------- 안에 들어갈 컨텐츠 ----------------------------------------------------------------------------->
 
 
-      <div class="uploadForm" style="width: 1500px;">
+          <div class="uploadForm" style="width: 1500px;">
         <h2 class="formTitle">리뷰데이터 파일을 올려주세요.</h2>
         <form id="productForm" enctype="multipart/form-data">
           <input type="file" id="productFileInput" class="fileInput" accept=".csv" onchange="previewFile(event)"
             required>
+            <select name="productName" id="select_product" class="pl">
+            	<option value="추가한 제품 명 1">추가한 제품 명 1</option>
+            	<option value="추가한 제품 명 2">추가한 제품 명 2</option>
+            	<option value="추가한 제품 명 3">추가한 제품 명 3</option>
+            </select>
           <button type="submit" class="submitFormButton">제출</button>
           <br>
           <label for="productFileInput" class="fileLabel">리뷰데이터 파일을 선택하세요. (CSV)</label>
@@ -243,8 +250,7 @@
 
 
 
-
-      <!----------------------------- 안에 들어갈 컨텐츠 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ----------------------------------------------------------------------------->
+      <!----------------------------- 안에 들어갈 컨텐츠 ----------------------------------------------------------------------------->
 
 
 
@@ -381,14 +387,14 @@
         reader.onload = function () {
           var filePreview = document.createElement("pre");
           filePreview.textContent = reader.result;
-          filePreview.style.maxHeight = "200px"; // 정해진 크기로 설정
-          filePreview.style.overflowY = "auto"; // 세로 스크롤 바 표시
+          filePreview.style.maxHeight = "200px"; // 정해진 크기로 설정
+          filePreview.style.overflowY = "auto"; // 세로 스크롤 바 표시
           document.querySelector(".filePreview").innerHTML = "";
           document.querySelector(".filePreview").appendChild(filePreview);
         };
         reader.readAsText(file);
       } else {
-        alert("CSV 파일만 업로드 가능합니다.");
+        alert("CSV íì¼ë§ ìë¡ë ê°ë¥í©ëë¤.");
         document.getElementById("productFileInput").value = "";
       }
     }
@@ -401,7 +407,7 @@
       var fileNameInput = document.getElementById("productFileInput");
       var fileName = document.createElement("p");
       var fileNameText = fileNameInput.files[0].name;
-      fileName.textContent = fileNameText; // 파일 이름 표시
+      fileName.textContent = fileNameText; // 파일 이름 표시
       fileName.addEventListener("click", function () {
         var inputField = document.createElement("input");
         inputField.type = "text";
@@ -409,7 +415,7 @@
         inputField.addEventListener("keypress", function (e) {
           if (e.key === "Enter") {
             fileName.textContent = this.value;
-            this.blur(); // 입력 필드 포커스 해제
+            this.blur(); //입력 필드 포커스 해제 
           }
         });
         inputField.addEventListener("blur", function () {
@@ -417,24 +423,24 @@
           this.parentNode.replaceChild(fileName, this); // 입력 필드를 텍스트 요소로 교체
         });
         this.parentNode.replaceChild(inputField, this); // 텍스트 요소를 입력 필드로 교체
-        inputField.focus(); // 입력 필드에 포커스 설정
+        inputField.focus(); // 입력 필드에 포커스 설정
       });
       productItem.appendChild(fileName);
 
       var deleteButton = document.createElement("button");
-      deleteButton.textContent = "삭제";
+      deleteButton.textContent = "삭제";
       deleteButton.classList.add("deleteButton");
       deleteButton.onclick = function () {
         productItem.remove();
       };
       productItem.appendChild(deleteButton);
       productList.appendChild(productItem);
-      fileNameInput.value = ""; // 파일 선택 input 초기화
+      fileNameInput.value = ""; // 파일 선택 input 초기화
       document.querySelector(".filePreview").innerHTML = "";
     }
 
 
-    // 제출 버튼 클릭 시 파일을 서버로 전송하는 기능을 추가합니다.
+    // 제출 버튼 클릭 시 파일을 서버로 전홍하는 기능을 추가
     document.querySelector(".submitFormButton").addEventListener("click", submitForm);
     function submitForm(event) {
       event.preventDefault();
@@ -448,8 +454,8 @@
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
-          alert("파일이 성공적으로 업로드되었습니다.");
-          // 업로드 후 폼을 초기화합니다.
+          alert("파일이 성공적으로 업로드 되었습니다.");
+          // 업로드 후 폼을 초기화
           document.getElementById("productForm").reset();
           document.querySelector(".productList").innerHTML = "";
         })
