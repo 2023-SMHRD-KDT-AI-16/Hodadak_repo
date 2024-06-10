@@ -521,45 +521,23 @@ $(document).ready(function () {
 
 //Line Chart 생성 함수
 function createLineChart(prod_idx) {
- /*   $.ajax({
+    $.ajax({
         url: 'getReview.do',
         contentType: 'application/json;charset:UTF-8',
         data: { "prod_idx": prod_idx },
         success: function(response) {
             console.log("서버로부터의 응답:", response);
-            var reviews = []; // 리뷰 데이터를 저장할 배열
 
-            // 서버에서 받은 응답(response)의 각 요소를 순회하면서 리뷰 데이터를 reviews 배열에 추가
-            for (var i = 0; i < response.length; i++) {
-                reviews.push(response[i]);
-            }
+            var labels = response.labels;
+            var positiveData = response.positiveData;
+            var negativeData = response.negativeData;
 
-            // 날짜와 긍정/부정 여부를 추출하여 새로운 배열에 저장
-            var data = reviews.map(review => ({
-                date: new Date(review.review_oriDate),
-                isPositive: review.review_rating
-            }));
-
-            // 날짜를 기준으로 데이터를 그룹화
-            var groupedData = {};
-            data.forEach(item => {
-                var monthYear = item.date.getMonth() + 1 + '-' + item.date.getFullYear(); // 월과 연도를 문자열로 결합하여 키로 사용
-                if (!groupedData[monthYear]) {
-                    groupedData[monthYear] = { positive: 0, negative: 0 };
-                }
-                if (item.isPositive) {
-                    groupedData[monthYear].positive++;
-                } else {
-                    groupedData[monthYear].negative++;
-                }
-            });
-
-            // 그룹화된 데이터를 바탕으로 긍정과 부정 리뷰의 수를 계산
+            // 차트 데이터 설정
             var chartData = {
-                labels: [],
+                labels: labels,
                 datasets: [{
                         label: '긍정',
-                        data: [],
+                        data: positiveData,
                         backgroundColor: 'rgba(224, 169, 200, 0.2)',
                         borderColor: '#E0A9C8',
                         borderWidth: 3,
@@ -567,7 +545,7 @@ function createLineChart(prod_idx) {
                     },
                     {
                         label: '부정',
-                        data: [],
+                        data: negativeData,
                         backgroundColor: 'rgba(84, 172, 244, 0.2)',
                         borderColor: '#54ACF4',
                         borderWidth: 3,
@@ -575,19 +553,15 @@ function createLineChart(prod_idx) {
                     }
                 ]
             };
-            for (var monthYear in groupedData) {
-                chartData.labels.push(monthYear);
-                chartData.datasets[0].data.push(groupedData[monthYear].positive);
-                chartData.datasets[1].data.push(groupedData[monthYear].negative);
-            }
-
-            // 차트 생성
+            
+            console.log("chartData:", chartData);
             createChart(chartData);
+            
         },
         error: function(xhr, status, error) {
             console.error("에러 발생:", error);
         }
-    }); */
+    }); 
 }
 
 // 차트 생성 함수

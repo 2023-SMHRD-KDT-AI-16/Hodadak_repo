@@ -11,7 +11,7 @@ select * from tb_review where review_rating=0 and prod_idx=#{prod_idx} limit 20
 </select>
 
 <select id="getReview" resultType="com.Laform.entity.tb_review">
-select * from tb_review where prod_idx=#{prod_idx} and review_oridate >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+select * from tb_review where prod_idx=#{prod_idx} and review_oridate >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
 </select>
 
 
