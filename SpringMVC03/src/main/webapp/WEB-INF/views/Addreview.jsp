@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -235,10 +235,11 @@
             required>
             <div>
 	            <select name="productName" id="select_product" class="pl">
-	            	<option value="아르타민 자몽">아르타민 자몽</option>
-	            	<option value="아르타민 레몬">아르타민 레몬</option>
-	            	<option value="베러릴렉스">베러릴렉스</option>
+	           <c:forEach var="product" items="${prodList}" begin="1">
+                <option value="${product.prod_name}">${product.prod_name}</option>
+            </c:forEach>
 	            </select>
+	            
             </div>
             
             

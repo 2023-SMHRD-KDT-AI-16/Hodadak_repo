@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Laform.entity.tb_corperation;
+import com.Laform.entity.tb_product;
 import com.Laform.mapper.CorperationMapper;
 
 @Controller
@@ -97,10 +98,7 @@ public class MainController {
 	}
 	
 	
-	@RequestMapping("/Addreview.do")
-	public String Addrewview() {
-		return "Addreview";
-	}
+
 	
 	@RequestMapping("/Addproduct.do")
 	public String Addproduct() {

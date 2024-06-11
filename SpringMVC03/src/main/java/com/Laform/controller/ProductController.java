@@ -1,6 +1,9 @@
 package com.Laform.controller;
 
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +23,7 @@ public class ProductController {
 	private ProductMapper productMapper;
 
 	@RequestMapping("productAnalysis.do")
-	public String productAnalysis(Model model) {
+	public String productAnalysis(Model model,HttpSession session) {
 		List<tb_product> prodList = productMapper.productList();
 		//지금은 체크오 데이터만 있어서 파라미터 없이 모든 제품 받아옴. 추후 기업키 파라미터로 받기 
 		//System.out.println(prodList.toString());
@@ -34,4 +37,14 @@ public class ProductController {
 		tb_product vo = productMapper.getProductDetail(prod_idx);
 		return vo;
 		}
+	
+	@RequestMapping("/Addreview.do")
+	public String Addrewview(Model model,HttpSession session) {
+		List<tb_product> prodList = productMapper.productList();
+		//지금은 체크오 데이터만 있어서 파라미터 없이 모든 제품 받아옴. 추후 기업키 파라미터로 받기 
+		System.out.println(prodList.toString());
+		model.addAttribute("prodList",prodList);
+		
+		return "Addreview";
+	}
 }
