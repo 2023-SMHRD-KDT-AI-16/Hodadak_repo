@@ -133,7 +133,7 @@
 								class="ni ni-check-bold text-black"></i> Check'O 제품 분석
 						</a></li>
 						<li class="nav-item"><a class="nav-link hover12"
-							href="#"> <i class="ni ni-basket text-orange"></i>
+							href="suggest.do"> <i class="ni ni-basket text-orange"></i>
 								La Form 제안서 <span class="badge badge-pill badge-dark"
 								style="background-color: #4B0082; color: #FFD700; border: 2px solid #FFD700;">AI</span>
 						</a></li>

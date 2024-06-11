@@ -38,7 +38,7 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="Addreview.do">
+      <a class="navbar-brand pt-0" href="dashboard.do">
         <img src="${pageContext.request.contextPath}/resources/img/배너2.png" class="navbar-brand-img" alt="...">
       </a>
 
@@ -120,7 +120,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link hover12" href="./Suggest.do">
+              <a class="nav-link hover12" href="suggest.do">
                 <i class="ni ni-basket text-orange"></i> La Form 제안서
                 <span class="badge badge-pill badge-dark"
                   style="background-color: #4B0082; color: #FFD700; border: 2px solid #FFD700;">AI</span>
@@ -175,8 +175,12 @@
                   <i class="fas fa-search" style="color: black;"></i>
                 </span>
               </div>
-              <!-- 챗GPT API 들어갈 input 태그 -->
-              <input class="form-control" placeholder="Search" type="text" style="width: 850px;">
+              <!-- 챗GPT API 들어갈 input 태그-->
+							<input class="form-control" placeholder="Search" type="text"
+								id="promptInput" style="width: 850px;"
+								onkeypress="if(event.keyCode=='13'){event.preventDefault(); gptSearch();}">
+							<button type="submit" id="submitButton"
+								style="visibility: hidden"></button>
             </div>
           </div>
         </form>
@@ -260,7 +264,20 @@
 
 
 
+<div class="modal fade" id="gptModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+                  <h4 class="modal-title">ChatGPT</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
 
+        </div>
+        <div class="modal-body" id="gptResponse">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -423,7 +440,7 @@
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    alert('파일이 업로드되었습니다.');
+                    alert(response);
                 },
                 error: function(xhr, status, error) {
                     alert('파일 업로드 실패');
@@ -436,7 +453,27 @@
     }
 	
 
-         
+  //-------------------------------------------------------------------------------------------
+    //GPT API 실행 
+    function gptSearch(){
+   		var myData =$("#promptInput").val()
+       $.ajax({
+           url: 'chat',
+           type: 'POST',
+           contentType: 'application/json;charset:UTF-8',
+           data: JSON.stringify({ prompt: myData }),
+           success: function(response) {
+               console.log("서버로부터의 응답:", response);
+               $("#gptResponse").html(response)
+               $('#gptModal').modal("show");
+           },
+           error: function(xhr, status, error) {
+               console.error("에러 발생:", error);
+           }
+       });
+   		
+   		$("#promptInput").val("")
+   }       
            
 
 
