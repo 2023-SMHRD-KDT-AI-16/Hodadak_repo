@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,14 +13,14 @@
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.4.0/pyLDAvis/js/ldavis.v1.0.0.css">
   <!-- Favicon -->
-  <link href="${pageContext.request.contextPath}/resources/img/프리지아.png" rel="icon" type="image/png">
+  <link href="./assets/img/프리지아.png" rel="icon" type="image/png">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
-  <link href="${pageContext.request.contextPath}/resources/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
-  <link href="${pageContext.request.contextPath}/resources/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <link href="./assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="./assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link href="${pageContext.request.contextPath}/resources/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+  <link href="./assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/sakura.css" />
 </head>
 
@@ -36,8 +39,8 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./Addproduct.html">
-        <img src="${pageContext.request.contextPath}/resources/img/배너2.png" class="navbar-brand-img" alt="...">
+      <a class="navbar-brand pt-0" href="./Addproduct.do">
+        <img src="./assets/img/배너2.png" class="navbar-brand-img" alt="...">
       </a>
 
       <!-- User -->
@@ -50,7 +53,7 @@
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="./assets/img/íë¦¬ì§ì.png">
+                <img alt="Image placeholder" src="./assets/img/프리지아.png">
               </span>
             </div>
           </a>
@@ -59,7 +62,7 @@
               <h6 class="text-overflow m-0">Welcome!</h6>
             </div>
             <div class="dropdown-divider"></div>
-            <a href="Main.html" class="dropdown-item">
+            <a href="Main.do" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
             </a>
@@ -79,8 +82,8 @@
           <div class="navbar-collapse-header d-md-none">
             <div class="row">
               <div class="col-6 collapse-brand">
-                <a href="./Addproduct.html">
-                  <img src="${pageContext.request.contextPath}/resources/img/배너2.png">
+                <a href="./Addproduct.">
+                  <img src="assets/img/배너2.png">
                 </a>
               </div>
               <div class="col-6 collapse-close">
@@ -94,7 +97,7 @@
           <!-- Form -->
           <form class="mt-4 mb-3 d-md-none">
             <div class="input-group input-group-rounded input-group-merge">
-              <!-- ì±GPT API ë¤ì´ê° input íê·¸-->
+              <!-- 챗GPT API 들어갈 input 태그-->
               <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search"
                 aria-label="Search">
               <div class="input-group-prepend">
@@ -108,18 +111,18 @@
           <!-- Navigation -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link hover12" href="./Dashboard.html">
-                <i class="ni ni-chart-bar-32 text-red "></i> La Form 트렌드 분석
+              <a class="nav-link hover12" href="./Dashboard.do">
+                <i class="ni ni-chart-bar-32 text-red "></i> La Form 트렌드 분석
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link hover12 active" href="./Check'O.html">
-                <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
+              <a class="nav-link hover12 active" href="./Check'O.do">
+                <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link hover12" href="./Suggest.html">
-                <i class="ni ni-basket text-orange"></i> La Form 제안서
+              <a class="nav-link hover12" href="./Suggest.do">
+                <i class="ni ni-basket text-orange"></i> La Form 제안서
                 <span class="badge badge-pill badge-dark"
                   style="background-color: #4B0082; color: #FFD700; border: 2px solid #FFD700;">AI</span>
               </a>
@@ -138,14 +141,14 @@
       <div class="container-fluid">
 
         <!-- Brand -->
-        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Addproduct.html">제품 추가</a>
+        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Addproduct.do">제품 추가</a>
 
 
-        <!-- ììª½ ë²í¼------------------------------------------------------------------------------------------------------>
+        <!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
         <div class="col" style="padding-left: 45px;">
           <ul class="nav nav-pills justify-content-start">
             <li class="nav-item">
-              <a href="Addproduct.html" class="nav-link we12 py-2 px-3">
+              <a href="Addproduct.do" class="nav-link we12 py-2 px-3">
                 <span class="d-none d-md-block">제품 추가</span>
                 <span class="d-md-none">제품 추가</span>
               </a>
@@ -154,14 +157,14 @@
               <div></div>
             </li>
             <li class="nav-item">
-              <a href="Addreview.html" class="nav-link we12 py-2 px-3">
+              <a href="Addreview.do" class="nav-link we12 py-2 px-3">
                 <span class="d-none d-md-block">리뷰 추가</span>
                 <span class="d-md-none">리뷰 추가</span>
               </a>
             </li>
           </ul>
         </div>
-        <!-- ììª½ ë²í¼------------------------------------------------------------------------------------------------------>
+        <!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
 
 
         <!-- Form -->
@@ -173,7 +176,7 @@
                   <i class="fas fa-search" style="color: black;"></i>
                 </span>
               </div>
-              <!-- ì±GPT API ë¤ì´ê° input íê·¸-->
+              <!-- 챗GPT API 들어갈 input 태그-->
               <input class="form-control" placeholder="Search" type="text" style="width: 850px;">
             </div>
           </div>
@@ -198,7 +201,7 @@
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
               <div class="dropdown-divider"></div>
-              <a href="Main.html" class="dropdown-item">
+              <a href="Main.do" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
               </a>
@@ -223,7 +226,7 @@
 
 
     <div class="container-fluid mt--7">
-      <!-----------------------------  ----------------------------------------------------------------------------->
+      <!----------------------------- 안에 들어갈 컨텐츠 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ----------------------------------------------------------------------------->
 
 
       <div class="uploadForm" style="width: 1500px;">
@@ -252,7 +255,7 @@
 
 
 
-      <!----------------------------- ---------------------------------------------------------------------------->
+      <!----------------------------- 안에 들어갈 컨텐츠 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ----------------------------------------------------------------------------->
 
 
 
@@ -300,15 +303,15 @@
     </div>
   </div>
   <!--   Core   -->
-  <script src="${pageContext.request.contextPath}/resources/js/plugins/jquery/dist/jquery.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
+  <script src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!--   Optional JS   -->
-  <script src="${pageContext.request.contextPath}/resources/js/plugins/chart.js/dist/Chart.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/plugins/chart.js/dist/Chart.extension.js"></script><!--ì°¨í¸-->
+  <script src="./assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+  <script src="./assets/js/plugins/chart.js/dist/Chart.extension.js"></script><!--차트-->
   <!--   Argon JS   -->
-  <script src="${pageContext.request.contextPath}/resources/js/argon-dashboard.min.js?v=1.1.2"></script>
+  <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/sakura.js" text="text/javascript"></script>
+  <script src="assets/js/sakura.js" text="text/javascript"></script>
   <script>
     //---------------------------------------------------------------------------------------
     document.addEventListener("DOMContentLoaded", function () {
@@ -415,15 +418,15 @@
       productInfo.classList.add("productInfo");
 
       var productName = document.createElement("p");
-      productName.textContent = "ì íëª: " + document.getElementById("productNameInput").value;
+      productName.textContent = "제품명: " + document.getElementById("productNameInput").value;
       productInfo.appendChild(productName);
 
       var productPrice = document.createElement("p");
-      productPrice.textContent = "ê°ê²©: " + numberWithCommas(document.getElementById("productPriceInput").value) + "ì";
+      productPrice.textContent = "가격: " + numberWithCommas(document.getElementById("productPriceInput").value) + "원";
       productInfo.appendChild(productPrice);
 
       var productDescription = document.createElement("p");
-      productDescription.textContent = "ì±ë¶: " + document.getElementById("productDescriptionInput").value;
+      productDescription.textContent = "성분: " + document.getElementById("productDescriptionInput").value;
       productInfo.appendChild(productDescription);
 
       productItem.appendChild(productInfo);
@@ -431,7 +434,7 @@
       productList.appendChild(productItem);
 
       var deleteButton = document.createElement("button");
-      deleteButton.textContent = "ì­ì ";
+      deleteButton.textContent = "삭제";
       deleteButton.classList.add("deleteButton");
       deleteButton.onclick = function () {
         productItem.remove();
@@ -460,7 +463,7 @@
       var sanitizedInput = inputValue.replace(/\D/g, "");
       if (sanitizedInput !== inputValue) {
         this.value = sanitizedInput;
-        showModal("ì«ìë§ ìë ¥í´ì£¼ì¸ì.");
+        showModal("숫자만 입력해주세요.");
       }
     });
 
@@ -479,7 +482,7 @@
 
       var formData = new FormData(document.getElementById("productForm"));
 
-      // íì¼ ìë¡ëë¥¼ ìí ìë² ìëí¬ì¸í¸ URL
+      // 파일 업로드를 위한 서버 엔드포인트 URL
       var uploadUrl = "YOUR_SERVER_UPLOAD_URL";
 
       fetch(uploadUrl, {
@@ -489,18 +492,19 @@
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
-          alert("íì¼ì´ ì±ê³µì ì¼ë¡ ìë¡ëëììµëë¤.");
-          // ìë¡ë í í¼ì ì´ê¸°íí©ëë¤.
+          alert("파일이 성공적으로 업로드되었습니다.");
+          // 업로드 후 폼을 초기화합니다.
           document.getElementById("productForm").reset();
           document.querySelector(".productList").innerHTML = "";
         })
         .catch((error) => {
           console.error('Error:', error);
-          alert("íì¼ ìë¡ëì ì¤í¨íìµëë¤.");
+          alert("파일 업로드에 실패했습니다.");
         });
     }
 
   </script>
+  
 
 </body>
 

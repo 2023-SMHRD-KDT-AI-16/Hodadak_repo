@@ -110,17 +110,17 @@
           <!-- Navigation -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link hover12" href="./Dashboard.html">
+              <a class="nav-link hover12" href="./Dashboard.do">
                 <i class="ni ni-chart-bar-32 text-red "></i> La Form 대시보드
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link hover12 active" href="./Check'O.html">
+              <a class="nav-link hover12 active" href="./Check'O.do">
                 <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link hover12" href="./Suggest.html">
+              <a class="nav-link hover12" href="./Suggest.do">
                 <i class="ni ni-basket text-orange"></i> La Form 제안서
                 <span class="badge badge-pill badge-dark"
                   style="background-color: #4B0082; color: #FFD700; border: 2px solid #FFD700;">AI</span>
@@ -140,14 +140,14 @@
       <div class="container-fluid">
 
         <!-- Brand -->
-        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Addreview.html">리뷰 추가</a>
+        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Addreview.do">리뷰 추가</a>
 
 
         <!-- ììª½ ë²í¼------------------------------------------------------------------------------------------------------>
         <div class="col" style="padding-left: 45px;">
           <ul class="nav nav-pills justify-content-start">
             <li class="nav-item">
-              <a href="Addproduct.html" class="nav-link we12 py-2 px-3">
+              <a href="Addproduct.do" class="nav-link we12 py-2 px-3">
                 <span class="d-none d-md-block">제품 추가</span>
                 <span class="d-md-none">제품 추가</span>
               </a>
@@ -156,7 +156,7 @@
               <div></div>
             </li>
             <li class="nav-item">
-              <a href="Addreview.html" class="nav-link we12 py-2 px-3">
+              <a href="Addreview.do" class="nav-link we12 py-2 px-3">
                 <span class="d-none d-md-block">리뷰 추가</span>
                 <span class="d-md-none">리뷰 추가</span>
               </a>
@@ -200,7 +200,7 @@
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
               <div class="dropdown-divider"></div>
-              <a href="Main.html" class="dropdown-item">
+              <a href="Main.do" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
               </a>
