@@ -75,11 +75,12 @@ public class ChatGptService {
             headers.add("Authorization", "Bearer " + apiKey);
             System.out.println("프롬프트"+prompt);
             
+            String systemContent="약사 2명의 대표가 건강기능식품을 판매하는 기업의 리뷰 데이터로 lda분석을 실시한 결과야. 이걸 가지고 기업의 장점, 단점  3가지씩 , 신메뉴 제안을 위한 키워드조합 5가지 출력해줘";
             // 요청 생성
             String requestBody1 = String.format(
-                "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": %s}], \"max_tokens\": 200}",
-                prompt
-            );
+            	    "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": %s}, {\"role\": \"system\", \"content\": \"%s\"}], \"max_tokens\": 1000}",
+            	    prompt,systemContent
+            	);
             HttpEntity<String> entity = new HttpEntity<>(requestBody1, headers);
             System.out.println(requestBody1);
             
