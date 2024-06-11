@@ -233,11 +233,15 @@
         <form id="productForm" enctype="multipart/form-data">
           <input type="file" id="productFileInput" class="fileInput" accept=".csv" onchange="previewFile(event)"
             required>
-            <select name="productName" id="select_product" class="pl">
-            	<option value="추가한 제품 명 1">추가한 제품 명 1</option>
-            	<option value="추가한 제품 명 2">추가한 제품 명 2</option>
-            	<option value="추가한 제품 명 3">추가한 제품 명 3</option>
-            </select>
+            <div>
+	            <select name="productName" id="select_product" class="pl">
+	            	<option value="아르타민 자몽">아르타민 자몽</option>
+	            	<option value="아르타민 레몬">아르타민 레몬</option>
+	            	<option value="베러릴렉스">베러릴렉스</option>
+	            </select>
+            </div>
+            
+            
           <button type="submit" class="submitFormButton">제출</button>
           <br>
           <label for="productFileInput" class="fileLabel">리뷰데이터 파일을 선택하세요. (CSV)</label>
@@ -394,7 +398,7 @@
         };
         reader.readAsText(file);
       } else {
-        alert("CSV íì¼ë§ ìë¡ë ê°ë¥í©ëë¤.");
+        alert("CSV 파일만 업로드 가능합니다.");
         document.getElementById("productFileInput").value = "";
       }
     }
