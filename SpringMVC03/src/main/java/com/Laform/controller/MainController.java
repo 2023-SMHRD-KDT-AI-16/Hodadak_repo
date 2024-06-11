@@ -104,7 +104,7 @@ public class MainController {
 	
 	@RequestMapping("/Addproduct.do")
 	public String Addproduct() {
-		return "Addreview";
+		return "Addproduct";
 	}
 	
 
