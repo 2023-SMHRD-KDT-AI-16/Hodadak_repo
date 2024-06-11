@@ -63,7 +63,7 @@
               <h6 class="text-overflow m-0">Welcome!</h6>
             </div>
             <div class="dropdown-divider"></div>
-            <a href="Main.html" class="dropdown-item">
+            <a href="Main.do" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
             </a>
@@ -84,7 +84,7 @@
           <div class="navbar-collapse-header d-md-none">
             <div class="row">
               <div class="col-6 collapse-brand">
-                <a href="./Check'O.html">
+                <a href="./Check'O.do">
                   <img src="${pageContext.request.contextPath}/resources/img/배너2.png">
                 </a>
               </div>
@@ -142,7 +142,7 @@
       <div class="container-fluid">
 
         <!-- Brand -->
-        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Check'O.html">Check'O</a>
+        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./productAnalysis.do">Check'O</a>
 
         <!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
         <div class="col" style="padding-left: 45px;">
