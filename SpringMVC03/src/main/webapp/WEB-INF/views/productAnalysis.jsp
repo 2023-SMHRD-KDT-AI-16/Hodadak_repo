@@ -123,7 +123,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link hover12" href="./Suggest.html">
+              <a class="nav-link hover12" href="suggest.do">
                 <i class="ni ni-basket text-orange"></i> La Form 제안서
                 <span class="badge badge-pill badge-dark"
                   style="background-color: #4B0082; color: #FFD700; border: 2px solid #FFD700;">AI</span>
@@ -142,7 +142,8 @@
       <div class="container-fluid">
 
         <!-- Brand -->
-        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./productAnalysis.do">Check'O</a>
+
+        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="productAnalysis.do">Check'O</a>
 
         <!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
         <div class="col" style="padding-left: 45px;">

@@ -106,5 +106,9 @@ public class MainController {
 	}
 	
 
+	@RequestMapping("suggest.do")
+	public String suggest() {
+		return "suggest";
+	}
 
 }
