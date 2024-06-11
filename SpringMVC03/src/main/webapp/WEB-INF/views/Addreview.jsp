@@ -38,7 +38,7 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./Addreview.html">
+      <a class="navbar-brand pt-0" href="Addreview.do">
         <img src="${pageContext.request.contextPath}/resources/img/배너2.png" class="navbar-brand-img" alt="...">
       </a>
 
@@ -61,7 +61,7 @@
               <h6 class="text-overflow m-0">Welcome!</h6>
             </div>
             <div class="dropdown-divider"></div>
-            <a href="Main.html" class="dropdown-item">
+            <a href="logout.do" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
             </a>
@@ -81,7 +81,7 @@
           <div class="navbar-collapse-header d-md-none">
             <div class="row">
               <div class="col-6 collapse-brand">
-                <a href="./Addreview.html">
+                <a href="Addreview.do">
                   <img src="${pageContext.request.contextPath}/resources/img/ë°°ë2.png">
                 </a>
               </div>
@@ -110,12 +110,12 @@
           <!-- Navigation -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link hover12" href="./Dashboard.do">
+              <a class="nav-link hover12" href="dashboard.do">
                 <i class="ni ni-chart-bar-32 text-red "></i> La Form 대시보드
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link hover12 active" href="./Check'O.do">
+              <a class="nav-link hover12 active" href="productAnalysis.do">
                 <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
               </a>
             </li>
@@ -140,7 +140,7 @@
       <div class="container-fluid">
 
         <!-- Brand -->
-        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Addreview.do">리뷰 추가</a>
+        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="Addreview.do">리뷰 추가</a>
 
 
         <!-- ììª½ ë²í¼------------------------------------------------------------------------------------------------------>
@@ -242,13 +242,13 @@
             </div>
             
             
-          <button type="submit" class="submitFormButton">제출</button>
+       
           <br>
           <label for="productFileInput" class="fileLabel">리뷰데이터 파일을 선택하세요. (CSV)</label>
           <div class="filePreview" style="margin-bottom: 10px;"></div>
-          <button type="button" onclick="upload()" class="submitButton">추가</button>
+          <button type="button" onclick="upload()" class="submitButton">제출</button>
         </form>
-        <h1 style="text-align: center;">파일을 추가하고 제출을 눌러주세요</h1>
+        <h1 style="text-align: center;">파일 선택 후 제출 버튼을 눌러주세요</h1>
       </div>
       <div class="productList"></div>
 
@@ -402,74 +402,45 @@
         document.getElementById("productFileInput").value = "";
       }
     }
+    
+    
     function upload() {
-      var productList = document.querySelector(".productList");
 
-      var productItem = document.createElement("div");
-      productItem.classList.add("productItem");
-
-      var fileNameInput = document.getElementById("productFileInput");
-      var fileName = document.createElement("p");
-      var fileNameText = fileNameInput.files[0].name;
-      fileName.textContent = fileNameText; // 파일 이름 표시
-      fileName.addEventListener("click", function () {
-        var inputField = document.createElement("input");
-        inputField.type = "text";
-        inputField.value = fileNameText;
-        inputField.addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            fileName.textContent = this.value;
-            this.blur(); //입력 필드 포커스 해제 
-          }
-        });
-        inputField.addEventListener("blur", function () {
-          fileNameText = this.value;
-          this.parentNode.replaceChild(fileName, this); // 입력 필드를 텍스트 요소로 교체
-        });
-        this.parentNode.replaceChild(inputField, this); // 텍스트 요소를 입력 필드로 교체
-        inputField.focus(); // 입력 필드에 포커스 설정
-      });
-      productItem.appendChild(fileName);
-
-      var deleteButton = document.createElement("button");
-      deleteButton.textContent = "삭제";
-      deleteButton.classList.add("deleteButton");
-      deleteButton.onclick = function () {
-        productItem.remove();
-      };
-      productItem.appendChild(deleteButton);
-      productList.appendChild(productItem);
-      fileNameInput.value = ""; // 파일 선택 input 초기화
+    		var productName = $("#select_product option:selected").val()
+    		//console.log(productName)
+    	    var fileInput = document.getElementById('productFileInput');
+            var file = fileInput.files[0];
+            var formData = new FormData();
+            formData.append('file', file);
+            formData.append('productName',productName)
+            console.log(formData)
+          
+               $.ajax({
+                url: 'http://180.68.91.152:5000/upload',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    alert('파일이 업로드되었습니다.');
+                },
+                error: function(xhr, status, error) {
+                    alert('파일 업로드 실패');
+                }
+            });
+            
+       
+      fileInput.value = ""; // 파일 선택 input 초기화
       document.querySelector(".filePreview").innerHTML = "";
     }
+	
+
+         
+           
 
 
-    // 제출 버튼 클릭 시 파일을 서버로 전홍하는 기능을 추가
-    document.querySelector(".submitFormButton").addEventListener("click", submitForm);
-    function submitForm(event) {
-      event.preventDefault();
-      var formData = new FormData(document.getElementById("productForm"));
-      // 파일 업로드를 위한 서버 엔드포인트 URL
-      var uploadUrl = "YOUR_SERVER_UPLOAD_URL";
-      fetch(uploadUrl, {
-        method: 'POST',
-        body: formData
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-          alert("파일이 성공적으로 업로드 되었습니다.");
-          // 업로드 후 폼을 초기화
-          document.getElementById("productForm").reset();
-          document.querySelector(".productList").innerHTML = "";
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          alert("파일 업로드에 실패했습니다.");
-        });
-    }
-
-
+    
+    
   </script>
 
 </body>
