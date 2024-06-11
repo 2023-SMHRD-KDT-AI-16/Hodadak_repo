@@ -73,16 +73,16 @@ public class ChatGptService {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));  // 인코딩 추가
             headers.add("Authorization", "Bearer " + apiKey);
-            System.out.println("프롬프트"+prompt);
+            //System.out.println("프롬프트"+prompt);
             
-            String systemContent="약사 2명의 대표가 건강기능식품을 판매하는 기업의 리뷰 데이터로 lda분석을 실시한 결과야. 이걸 가지고 기업의 장점, 단점  3가지씩 , 신메뉴 제안을 위한 키워드조합 5가지 출력해줘";
+            String systemContent="약사 2명의 대표가 건강기능식품을 판매하는 기업의 리뷰 데이터로 lda분석을 실시한 결과야. 이걸 가지고 기업의 장점, 단점  3가지씩 , 신메뉴 제안을 위한 키워드조합은 밀레니얼 세대 트렌드랑 lda결과랑 같이 분석해서 5가지 출력해줘";
             // 요청 생성
             String requestBody1 = String.format(
-            	    "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": %s}, {\"role\": \"system\", \"content\": \"%s\"}], \"max_tokens\": 1000}",
+            	    "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": %s}, {\"role\": \"system\", \"content\": \"%s\"}], \"max_tokens\": 1000, \"temperature\": 0}",
             	    prompt,systemContent
             	);
             HttpEntity<String> entity = new HttpEntity<>(requestBody1, headers);
-            System.out.println(requestBody1);
+            //System.out.println(requestBody1);
             
             // 요청 전송 및 응답 처리
             ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);

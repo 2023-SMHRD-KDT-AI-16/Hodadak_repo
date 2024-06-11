@@ -307,7 +307,7 @@
             <div class="card-body scrollbar"
               style="height: 408.5px; max-height: 408.5px; display: flex; justify-content: center; align-items: center; overflow: auto;">
               <!-- 차트 -->
-              <div>
+              <div id="apiResult">
                 <h1 style="text-align: center; height: 408.5px; max-height: 408.5px; margin: 0px; padding: 20px;">
                   You You You You like it's magnetic
                   U U U U U U U U super 이끌림
@@ -551,14 +551,16 @@ $(document).ready(function gptSearch(){
     }
     console.log(ldaData);
     var requestData = { prompt: JSON.stringify(ldaData) };
-    console.log(JSON.stringify(requestData));
+    //console.log(JSON.stringify(requestData));
     $.ajax({
         url: 'chatLda',
         type: 'POST',
         contentType: 'application/json;charset:UTF-8',
         data: JSON.stringify(requestData),
         success: function(response) {
+        	$("#apiResult").html(response)
             console.log("서버로부터의 응답:", response);
+            
         },
         error: function(xhr, status, error) {
             console.error("에러 발생:", error);
