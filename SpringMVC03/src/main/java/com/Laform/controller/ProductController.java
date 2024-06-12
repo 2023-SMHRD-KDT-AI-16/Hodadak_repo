@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Laform.entity.tb_product;
+import com.Laform.entity.tb_product_keyword;
 import com.Laform.mapper.ProductMapper;
+import com.Laform.mapper.productKeywordMapper;
 
 @Controller
 public class ProductController {
@@ -42,9 +44,11 @@ public class ProductController {
 	public String Addrewview(Model model,HttpSession session) {
 		List<tb_product> prodList = productMapper.productList();
 		//지금은 체크오 데이터만 있어서 파라미터 없이 모든 제품 받아옴. 추후 기업키 파라미터로 받기 
-		System.out.println(prodList.toString());
+		//System.out.println(prodList.toString());
 		model.addAttribute("prodList",prodList);
 		
 		return "Addreview";
 	}
+	
+
 }

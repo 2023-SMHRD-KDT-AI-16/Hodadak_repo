@@ -281,12 +281,12 @@
             <div class="card-header bg-transparent hover12">
               <div class="row align-items-center">
                 <div class="col">
-                  <h2 class="text-black mb-0">제목생각안남(극지방)</h2>
+                  <h2 class="text-black mb-0"> 키워드 Top5 </h2>
                 </div>
               </div>
             </div>
             <div class="card-body" style="background-color: #ffffff; padding: 0px;">
-              <div class="chart">
+              <div class="chart" id="divPolarChart">
                 <canvas id="011"></canvas>
               </div>
             </div>
@@ -626,65 +626,109 @@ function createChart(chartData) {
 }
 
 // Polar Chart 생성 함수
-function createPolarChart() {
+function createPolarChart(prod_idx) {
+	
+	$('#011').remove();
+    $('#divPolarChart').append('<canvas id="011"></canvas>');
+    
 	 var ctx1 = document.getElementById('011').getContext('2d');
-  return new Chart(ctx1, {
-    type: 'polarArea',
-    data: {
-      labels: ['부정', '긍정', '긍정', '긍정', '긍정'],
-      datasets: [{
-        label: '극지방 차트',
-        data: [5, 10, 15, 20, 25],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.5)',
-          'rgba(54, 162, 235, 0.5)',
-          'rgba(255, 206, 86, 0.5)',
-          'rgba(75, 192, 192, 0.5)',
-          'rgba(153, 102, 255, 0.5)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)'
-        ],
-        borderWidth: 2
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: true,
-          position: 'top',
-          align: 'center',
-          labels: {
-            font: {
-              size: 14
-            }
-          }
-        },
-        tooltip: {
-          enabled: true,
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          titleColor: '#ffffff',
-          bodyColor: '#ffffff',
-          borderWidth: 1,
-          borderColor: '#ddd',
-        }
-      },
-      scales: {
-        angle: {
-          display: false
-        },
-        radius: {
-          display: false
-        }
-      }
-    }
-  });
+	   $.ajax({
+	        url: 'getProductKeyword.do',
+	        contentType: 'application/json;charset:UTF-8',
+	        data:{ "prod_idx": prod_idx},
+	        success: function(response) {
+	            const labels = [];
+	            const data = [];
+	            for (let i = 0; i < response.length; i++) {
+	                labels.push(response[i].pr_keyword);
+	                data.push(response[i].pr_sum);
+	            }
+
+	            console.log('labels:', labels);
+	            console.log('data:', data);
+
+	            
+	            return new Chart(ctx1, {
+	                type: 'polarArea',
+	                data: {
+	                    labels: labels,
+	                    datasets: [{
+	                        label: '극지방 차트',
+	                        data: data,
+	                        backgroundColor: [
+	                            'rgba(255, 99, 132, 0.5)',
+	                            'rgba(54, 162, 235, 0.5)',
+	                            'rgba(255, 206, 86, 0.5)',
+	                            'rgba(75, 192, 192, 0.5)',
+	                            'rgba(153, 102, 255, 0.5)'
+	                        ],
+	                        borderColor: [
+	                            'rgba(255, 99, 132, 1)',
+	                            'rgba(54, 162, 235, 1)',
+	                            'rgba(255, 206, 86, 1)',
+	                            'rgba(75, 192, 192, 1)',
+	                            'rgba(153, 102, 255, 1)'
+	                        ],
+	                        borderWidth: 2
+	                    }]
+	                },
+	                options: {
+	                    responsive: true,
+	                    maintainAspectRatio: false,
+	                    plugins: {
+	                        legend: {
+	                            display: true,
+	                            position: 'top',
+	                            align: 'center',
+	                            labels: {
+	                                font: {
+	                                    size: 14
+	                                }
+	                            }
+	                        },
+	                        tooltip: {
+	                            enabled: true,
+	                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+	                            titleColor: '#ffffff',
+	                            bodyColor: '#ffffff',
+	                            borderWidth: 1,
+	                            borderColor: '#ddd',
+	                            mode: 'nearest', // nearest element triggers the tooltip
+	                            intersect: true, // tooltip only appears when mouse is directly over an element
+	                            callbacks: {
+	                                label: function(context) {
+	                                    let label = context.label || '';
+	                                    if (label) {
+	                                        label += ': ';
+	                                    }
+	                                    label += context.raw;
+	                                    return label;
+	                                }
+	                            }
+	                        }
+	                    },
+	                    interaction: {
+	                        mode: 'nearest',
+	                        intersect: true
+	                    },
+	                    scales: {
+	                        angle: {
+	                            display: false
+	                        },
+	                        radius: {
+	                            display: false
+	                        }
+	                    }
+	                }
+	            });
+	            
+	        },
+	        error: function(xhr, status, error) {
+	            console.error("에러 발생:", error);
+	        }
+	    });
+	 
+
 }
 
 // 버튼 클릭 시 실행되는 함수

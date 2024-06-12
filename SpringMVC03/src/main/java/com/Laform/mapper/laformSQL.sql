@@ -1,4 +1,4 @@
-select * from tb_product;
+select * from tb_product_keyword where prod_idx=5 order by pr_sum desc limit 5;
 
 UPDATE tb_corperation
 SET corp_key = 'admin'
