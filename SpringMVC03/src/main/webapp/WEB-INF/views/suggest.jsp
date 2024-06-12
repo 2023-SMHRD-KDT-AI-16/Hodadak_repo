@@ -208,7 +208,7 @@
                 </div>
               </div>
             </div>
-            <div class="table-responsive scrollbar" id="strongResult">
+            <div class="table-responsive scrollbar" id="strongResult" style=" height: 408.5px; max-height: 408.5px; margin: 0px; padding: 20px;">
               
             </div>
           </div>
@@ -222,7 +222,7 @@
                 </div>
               </div>
             </div>
-            <div class="table-responsive scrollbar" id="weakResult">
+            <div class="table-responsive scrollbar" id="weakResult" style=" height: 408.5px; max-height: 408.5px; margin: 0px; padding: 20px;">
               
             </div>
           </div>
@@ -249,10 +249,8 @@
             <div class="card-body scrollbar"
               style="height: 408.5px; max-height: 408.5px; display: flex; justify-content: center; align-items: center; overflow: auto;">
               <!-- 차트 -->
-              <div id="apiResult">
-                <h1 style="text-align: center; height: 408.5px; max-height: 408.5px; margin: 0px; padding: 20px;">
-                 
-                </h1>
+              <div >
+					<p id="apiResult" style=" height: 408.5px; max-height: 408.5px; margin: 0px; padding: 20px;"></p>
               </div>
             </div>
 
