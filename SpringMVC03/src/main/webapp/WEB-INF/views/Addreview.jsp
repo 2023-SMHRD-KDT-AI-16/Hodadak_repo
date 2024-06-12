@@ -21,6 +21,8 @@
   <!-- CSS Files -->
   <link href="${pageContext.request.contextPath}/resources/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sakura.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/icons.css"/>
+
 </head>
 
 <!-- body -->
@@ -329,6 +331,8 @@
   <script src="${pageContext.request.contextPath}/resources/js/argon-dashboard.min.js?v=1.1.2"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/sakura.js" text="text/javascript"></script>
+ <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/loadingoverlay.min.js"></script>
+  
   <script>
     //---------------------------------------------------------------------------------------
     document.addEventListener("DOMContentLoaded", function () {
@@ -442,8 +446,21 @@
                 success: function(response) {
                     alert(response);
                 },
+                beforeSend:function(){
+                	$.LoadingOverlay("show", {
+                		background       : "rgba(0, 0, 0, 0.5)",
+                		image            : "",
+                		maxSize          : 60,
+                		fontawesome      : "fa fa-spinner fa-pulse fa-fw",
+                		fontawesomeColor : "#FFFFFF",
+                	});
+
+                },
                 error: function(xhr, status, error) {
                     alert('파일 업로드 실패');
+                },
+                complete:function(){
+                	$.LoadingOverlay("hide");
                 }
             });
             
