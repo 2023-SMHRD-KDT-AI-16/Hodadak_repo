@@ -236,7 +236,7 @@
             <a href="#" class="nav-link ar123 py-2 px-3" data-toggle="tab">
               <span class="d-none d-md-block">
                 <div class="hover13">
-                  <figure style="margin-bottom: 6px; margin-top: 6px;"><img src="${pageContext.request.contextPath}/resources/img/${product.prod_name}.png" alt=""
+                  <figure style="margin-bottom: 6px; margin-top: 6px;"><img src="data:image/png;base64, ${product.prod_img}" alt=""
                       style="width: 450px; height: 450px;">
                   </figure>
                 </div>
@@ -708,7 +708,7 @@ function getProductDetail(prod_idx){
         success: function(response) {
            // console.log("서버로부터의 응답:", response);
             const data = getTextData(response);
-
+			
             if (data) {
               updateImage(data.imageSrc);
               updateText(data.textData);

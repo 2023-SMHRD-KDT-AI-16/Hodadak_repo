@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.oreilly.servlet.MultipartRequest" %> <!-- 파일 업로드 처리를 위한 MultipartRequest 객체를 임포트 -->
+<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %> <!-- 파일 중복처리 객체 임포트 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -233,7 +235,7 @@
         <form id="productForm" enctype="multipart/form-data">
           <input type="file" id="productImageInput" class="fileInput" accept="image/*" onchange="previewImage(event)"
             required>
-          <button type="submit" class="submitFormButton" style="width: 200px; top: 50px;">제출</button>
+          <button type="button" class="submitFormButton" onclick = "uploadvv()" style="width: 200px; top: 50px;">제출</button>
           <br>
           <label for="productImageInput" class="fileLabel">제품의 이미지 파일을 선택하세요. (JPG)</label>
           <div class="imagePreview"></div>
@@ -311,6 +313,7 @@
   <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script src="assets/js/sakura.js" text="text/javascript"></script>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script>
     //---------------------------------------------------------------------------------------
     document.addEventListener("DOMContentLoaded", function () {
@@ -442,11 +445,11 @@
 
       productList.appendChild(productItem);
 
-      document.getElementById("productImageInput").value = "";
+      /*document.getElementById("productImageInput").value = "";
       document.getElementById("productNameInput").value = "";
       document.getElementById("productPriceInput").value = "";
       document.getElementById("productDescriptionInput").value = "";
-      document.querySelector(".imagePreview").innerHTML = "";
+      document.querySelector(".imagePreview").innerHTML = "";*/
     }
 
     function numberWithCommas(x) {
@@ -475,33 +478,47 @@
         document.body.removeChild(modal);
       }, 2000);
     }
-    document.querySelector(".submitFormButton").addEventListener("click", submitForm);
-    function submitForm(event) {
-      event.preventDefault();
-
-      var formData = new FormData(document.getElementById("productForm"));
-
-      // 파일 업로드를 위한 서버 엔드포인트 URL
-      var uploadUrl = "YOUR_SERVER_UPLOAD_URL";
-
-      fetch(uploadUrl, {
-        method: 'POST',
-        body: formData
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-          alert("파일이 성공적으로 업로드되었습니다.");
-          // 업로드 후 폼을 초기화합니다.
-          document.getElementById("productForm").reset();
-          document.querySelector(".productList").innerHTML = "";
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          alert("파일 업로드에 실패했습니다.");
+    
+    function uploadvv() {
+       console.log('테스트테스트가나다라마바사')
+      var productName = document.getElementById("productNameInput").value; /* 제품이름 */
+      var productPrice = document.getElementById("productPriceInput").value; /* 제품가격*/
+      var productDesc = document.getElementById("productDescriptionInput").value;/*제품성분*/
+      console.log(productName)
+       var fileInput = document.getElementById('productImageInput'); /*이미지정보*/
+       var corpkey = "HDDAK-2024-400857923030220807";
+        var file = fileInput.files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+        formData.append('productName',productName)
+        formData.append('price',productPrice)
+        formData.append('prodcomponent',productDesc)
+        formData.append('corpkey',corpkey)
+        console.log(formData)
+      
+           $.ajax({
+            url: 'http://192.168.0.33:5000/image',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                alert(response);
+            },
+            error: function(xhr, status, error) {
+                alert('파일 업로드 실패');
+            }
         });
-    }
 
+        
+  
+  fileInput.value = ""; // 파일 선택 input 초기화
+
+  
+
+}
+    
+    
   </script>
   
 
