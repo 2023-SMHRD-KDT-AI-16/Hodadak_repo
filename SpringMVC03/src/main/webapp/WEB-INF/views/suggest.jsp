@@ -24,7 +24,7 @@
   <!--LDA-->
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.4.0/pyLDAvis/js/ldavis.v1.0.0.css">
-
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/icons.css"/>
 
 </head>
 
@@ -358,6 +358,7 @@
   <script src="${pageContext.request.contextPath}/resources/js/argon-dashboard.min.js?v=1.1.2"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/sakura.js" text="text/javascript"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/loadingoverlay.min.js"></script>
   <script>
     //---------------------------------------------------------------------------------------
     document.addEventListener("DOMContentLoaded", function () {
@@ -517,8 +518,21 @@ function chatLda(ldaData){
            console.log("서버로부터의 응답:", response);
             
         },
+        beforeSend:function(){
+        	$.LoadingOverlay("show", {
+        		background       : "rgba(0, 0, 0, 0.5)",
+        		image            : "",
+        		maxSize          : 60,
+        		fontawesome      : "fa fa-spinner fa-pulse fa-fw",
+        		fontawesomeColor : "#FFFFFF",
+        	});
+
+        },
         error: function(xhr, status, error) {
             console.error("에러 발생:", error);
+        },
+        complete:function(){
+        	$.LoadingOverlay("hide");
         }
     });
     
