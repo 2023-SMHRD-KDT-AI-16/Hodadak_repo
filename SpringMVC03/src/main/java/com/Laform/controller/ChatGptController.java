@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Laform.entity.PromptRequest;
@@ -19,7 +21,7 @@ import com.Laform.service.ChatGptService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@RestController()
+@RestController
 public class ChatGptController {
 	 
     private final ChatGptService chatGptService;
@@ -45,13 +47,60 @@ public class ChatGptController {
     @PostMapping(value = "/chatLda", produces = "text/plain; charset=UTF-8")
     public ResponseEntity<String> chatLda(@RequestBody PromptRequest request, HttpServletResponse hresponse) {
         try {
-            // PromptRequest 객체를 JSON 문자열로 변환
-            String promptJson = objectMapper.writeValueAsString(request.getPrompt());
+        	
+        	String prompt = request.getPrompt();
+        	// PromptRequest 객체를 JSON 문자열로 변환
+            String promptJson = objectMapper.writeValueAsString(prompt);
             System.out.println("prompt JSON: " + promptJson);
             
             // chatGptService.getLdaResponse()를 사용하여 응답 얻기
             String response = chatGptService.getLdaResponse(promptJson);
-            System.out.println("response :" + response);
+            
+            hresponse.setCharacterEncoding("UTF-8");
+
+            // ResponseEntity로 응답 반환
+            return ResponseEntity.ok(response);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            // 예외 발생 시 ResponseEntity로 오류 응답 반환
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing JSON");
+        }
+    }
+    
+    @PostMapping(value = "/chatStrong", produces = "text/plain; charset=UTF-8")
+    public ResponseEntity<String> chatStrong(@RequestBody PromptRequest request, HttpServletResponse hresponse) {
+        try {
+        	
+        	String prompt = request.getPrompt();
+        	// PromptRequest 객체를 JSON 문자열로 변환
+            String promptJson = objectMapper.writeValueAsString(prompt);
+            System.out.println("prompt JSON: " + promptJson);
+            
+            // chatGptService.getLdaResponse()를 사용하여 응답 얻기
+            String response = chatGptService.getLdaStrong(promptJson);
+         
+            hresponse.setCharacterEncoding("UTF-8");
+
+            // ResponseEntity로 응답 반환
+            return ResponseEntity.ok(response);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            // 예외 발생 시 ResponseEntity로 오류 응답 반환
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing JSON");
+        }
+    }
+    
+    @PostMapping(value = "/chatWeak", produces = "text/plain; charset=UTF-8")
+    public ResponseEntity<String> chatWeak(@RequestBody PromptRequest request, HttpServletResponse hresponse) {
+        try {
+        	
+        	String prompt = request.getPrompt();
+        	// PromptRequest 객체를 JSON 문자열로 변환
+            String promptJson = objectMapper.writeValueAsString(prompt);
+            System.out.println("prompt JSON: " + promptJson);
+            
+            // chatGptService.getLdaResponse()를 사용하여 응답 얻기
+            String response =chatGptService.getLdaWeak(promptJson);
             
             hresponse.setCharacterEncoding("UTF-8");
 

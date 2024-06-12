@@ -155,7 +155,11 @@
                 </span>
               </div>
               <!-- 챗GPT API 들어갈 input 태그-->
-              <input class="form-control" placeholder="Search" type="text" style="width: 850px;">
+							<input class="form-control" placeholder="ChatGPT에게 질문하기" type="text"
+								id="promptInput" style="width: 850px;"
+								onkeypress="if(event.keyCode=='13'){event.preventDefault(); gptSearch();}">
+							<button type="submit" id="submitButton"
+								style="visibility: hidden"></button>
             </div>
           </div>
         </form>
@@ -195,165 +199,31 @@
       <!-- 테이블 섹션 -->
       <div class="row">
         <div class="col-xl-6 mb-5 mb-xl-0 " style="padding-top: 25px;">
-          <div class="card shadow " style="max-height: 230px;">
+          <div class="card shadow " style="height: 230px;">
             <div class="card-header bg-gradient-default2 border-0 hover12">
               <div class="row align-items-center ">
                 <div class="col">
-                  <h6 class="text-uppercase text-black ls-1 mb-1">blog & news</h6>
-                  <h3 class="mb-0">긍정</h3>
+                  <h6 class="text-uppercase text-black ls-1 mb-1">Check'O</h6>
+                  <h3 class="mb-0">강점</h3>
                 </div>
               </div>
             </div>
-            <div class="table-responsive scrollbar">
-              <table class="table align-items-center table-flush">
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">6</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">7</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">8</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">9</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-  
-                </tbody>
-              </table>
+            <div class="table-responsive scrollbar" id="strongResult">
+              
             </div>
           </div>
           <div style="padding-top: 30px;"></div>
-          <div class="card shadow " style="max-height: 230px;">
+          <div class="card shadow " style="height: 230px;">
             <div class="card-header bg-gradient-default2 border-0 hover12">
               <div class="row align-items-center ">
                 <div class="col">
-                  <h6 class="text-uppercase text-black ls-1 mb-1">blog & news</h6>
-                  <h3 class="mb-0">부정</h3>
+                  <h6 class="text-uppercase text-black ls-1 mb-1">Check'O</h6>
+                  <h3 class="mb-0">개선점</h3>
                 </div>
               </div>
             </div>
-            <div class="table-responsive scrollbar">
-              <table class="table align-items-center table-flush">
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">6</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">7</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">8</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">9</th>
-                    <td>!1</td>
-                    <td>!2</td>
-                    <td>!3</td>
-                    <td>!4</td>
-                  </tr>
-  
-                </tbody>
-              </table>
+            <div class="table-responsive scrollbar" id="weakResult">
+              
             </div>
           </div>
         </div>
@@ -368,9 +238,9 @@
             <div class="card-header bg-gradient-default2 border-0 hover12">
               <div class="row align-items-center">
                 <div class="col">
-                  <h6 class="text-uppercase text-black ls-1 mb-1">Application Programming Interface
+                  <h6 class="text-uppercase text-black ls-1 mb-1">ChatGPT 기반
                   </h6>
-                  <h2 class="mb-0">API</h2>
+                  <h2 class="mb-0">종합 분석 결과</h2>
                 </div>
               </div>
             </div>
@@ -381,34 +251,7 @@
               <!-- 차트 -->
               <div id="apiResult">
                 <h1 style="text-align: center; height: 408.5px; max-height: 408.5px; margin: 0px; padding: 20px;">
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
-                  You You You You like it's magnetic
-                  U U U U U U U U super 이끌림
+                 
                 </h1>
               </div>
             </div>
@@ -450,7 +293,20 @@
 
 
 
+<div class="modal fade" id="gptModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+                  <h4 class="modal-title">ChatGPT</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
 
+        </div>
+        <div class="modal-body" id="gptResponse">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>	
 
 
 
@@ -592,53 +448,130 @@
       });
     }
     
+ //---------------------------------------------------------------------------------------------------------------------------   
+  //GPT API 실행 
+    function gptSearch(){
+    		var myData =$("#promptInput").val()
+       $.ajax({
+           url: 'chat',
+           type: 'POST',
+           contentType: 'application/json;charset:UTF-8',
+           data: JSON.stringify({ prompt: myData }),
+           success: function(response) {
+               console.log("서버로부터의 응답:", response);
+               $("#gptResponse").html(response)
+               $('#gptModal').modal("show");
+           },
+           error: function(xhr, status, error) {
+               console.error("에러 발생:", error);
+           }
+       });
+    		
+    		$("#promptInput").val("")
+    }
+
+    
     
     
     //---------------------------------------------------------------------------------------------------------------
 
-
-$(document).ready(function gptSearch(){
-    var ldaData = ldavis_el9244820594679021601244233400_data;
-    //console.log(Object.keys(ldavis_el9244820594679021601244233400_data));
-    // mdsDat 속성 처리
-
-    for (var outerKey in ldaData) {
-        if (ldaData.hasOwnProperty(outerKey)) {
-            var innerData = ldaData[outerKey];
-            // 만약 값이 객체인 경우, 내부 객체의 모든 키를 반복하여 값을 수정합니다.
-            if (typeof innerData === 'object') {
-                for (var innerKey in innerData) {
-                    if (innerData.hasOwnProperty(innerKey)) {
-                        var value = innerData[innerKey];
-                        // 만약 값이 배열이고, 배열의 각 항목이 숫자인 경우에만 소수점을 반올림합니다.
-                        if (Array.isArray(value) && value.every(item => typeof item === 'number')) {
-                            ldaData[outerKey][innerKey] = value.map(function(item) {
-                                return Number.isInteger(item) ? item : parseFloat(item.toFixed(3));
-                            });
-                        }
+//GPT를 이용한 LDA 토픽 결과 분석
+ldaData()
+function ldaData(){
+var ldaData = ldavis_el9244820594679021601244233400_data;
+//console.log(Object.keys(ldavis_el9244820594679021601244233400_data));
+for (var outerKey in ldaData) {
+    if (ldaData.hasOwnProperty(outerKey)) {
+        var innerData = ldaData[outerKey];
+        // 만약 값이 객체인 경우, 내부 객체의 모든 키를 반복하여 값을 수정합니다.
+        if (typeof innerData === 'object') {
+            for (var innerKey in innerData) {
+                if (innerData.hasOwnProperty(innerKey)) {
+                    var value = innerData[innerKey];
+                    // 만약 값이 배열이고, 배열의 각 항목이 숫자인 경우에만 소수점을 반올림합니다.
+                    if (Array.isArray(value) && value.every(item => typeof item === 'number')) {
+                        ldaData[outerKey][innerKey] = value.map(function(item) {
+                            return Number.isInteger(item) ? item : parseFloat(item.toFixed(3));
+                        });
                     }
                 }
             }
         }
     }
-    console.log(ldaData);
+}
+
+chatLda(ldaData)
+chatStrong(ldaData)
+chatWeak(ldaData)
+    }    
+function chatLda(ldaData){
+	
+    //console.log(JSON.stringify(ldaData));
     var requestData = { prompt: JSON.stringify(ldaData) };
-    //console.log(JSON.stringify(requestData));
     $.ajax({
         url: 'chatLda',
-        type: 'POST',
+        type: 'POST', 
         contentType: 'application/json;charset:UTF-8',
         data: JSON.stringify(requestData),
         success: function(response) {
-        	$("#apiResult").html(response)
-            console.log("서버로부터의 응답:", response);
+        	var formattedResponse = response.replace(/\n/g, "<br>");
+        	$("#apiResult").html(formattedResponse)
+           console.log("서버로부터의 응답:", response);
             
         },
         error: function(xhr, status, error) {
             console.error("에러 발생:", error);
         }
     });
-});
+    
+    
+}
+
+function chatStrong(ldaData){
+
+    //console.log(JSON.stringify(ldaData));
+    var requestData = { prompt: JSON.stringify(ldaData) };
+    $.ajax({
+        url: 'chatStrong',
+        type: 'POST', 
+        contentType: 'application/json;charset:UTF-8',
+        data: JSON.stringify(requestData),
+        success: function(response) {
+        	var formattedResponse = response.replace(/\n/g, "<br>");
+        	$("#strongResult").html(formattedResponse)
+           console.log("서버로부터의 응답:", response);
+            
+        },
+        error: function(xhr, status, error) {
+            console.error("에러 발생:", error);
+        }
+    });
+    
+    
+}
+
+function chatWeak(ldaData){
+
+    //console.log(JSON.stringify(ldaData));
+    var requestData = { prompt: JSON.stringify(ldaData) };
+    $.ajax({
+        url: 'chatWeak',
+        type: 'POST', 
+        contentType: 'application/json;charset:UTF-8',
+        data: JSON.stringify(requestData),
+        success: function(response) {
+        	var formattedResponse = response.replace(/\n/g, "<br>");
+        	$("#weakResult").html(formattedResponse)
+           console.log("서버로부터의 응답:", response);
+            
+        },
+        error: function(xhr, status, error) {
+            console.error("에러 발생:", error);
+        }
+    });
+    
+    
+}
   </script>
 
 </body>

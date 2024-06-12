@@ -165,7 +165,7 @@
 								</span>
 							</div>
 							<!-- 챗GPT API 들어갈 input 태그-->
-							<input class="form-control" placeholder="Search" type="text"
+							<input class="form-control" placeholder="CahtGPT에게 질문하기" type="text"
 								id="promptInput" style="width: 850px;"
 								onkeypress="if(event.keyCode=='13'){event.preventDefault(); gptSearch();}">
 							<button type="submit" id="submitButton"
