@@ -195,26 +195,17 @@
       <!-- 테이블 섹션 -->
       <div class="row">
         <div class="col-xl-6 mb-5 mb-xl-0 " style="padding-top: 25px;">
-          <div class="card shadow " style="max-height: 493px;">
+          <div class="card shadow " style="max-height: 230px;">
             <div class="card-header bg-gradient-default2 border-0 hover12">
               <div class="row align-items-center ">
                 <div class="col">
                   <h6 class="text-uppercase text-black ls-1 mb-1">blog & news</h6>
-                  <h3 class="mb-0">블로그 & 뉴스 </h3>
+                  <h3 class="mb-0">긍정</h3>
                 </div>
               </div>
             </div>
             <div class="table-responsive scrollbar">
               <table class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">긍정, 부정</th>
-                    <th scope="col">???????</th>
-                    <th scope="col">???????</th>
-                    <th scope="col">???????</th>
-                    <th scope="col">???????</th>
-                  </tr>
-                </thead>
                 <tbody>
                   <tr>
                     <th scope="row">1</th>
@@ -279,7 +270,88 @@
                     <td>!3</td>
                     <td>!4</td>
                   </tr>
-
+  
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div style="padding-top: 30px;"></div>
+          <div class="card shadow " style="max-height: 230px;">
+            <div class="card-header bg-gradient-default2 border-0 hover12">
+              <div class="row align-items-center ">
+                <div class="col">
+                  <h6 class="text-uppercase text-black ls-1 mb-1">blog & news</h6>
+                  <h3 class="mb-0">부정</h3>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive scrollbar">
+              <table class="table align-items-center table-flush">
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>!1</td>
+                    <td>!2</td>
+                    <td>!3</td>
+                    <td>!4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>!1</td>
+                    <td>!2</td>
+                    <td>!3</td>
+                    <td>!4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>!1</td>
+                    <td>!2</td>
+                    <td>!3</td>
+                    <td>!4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>!1</td>
+                    <td>!2</td>
+                    <td>!3</td>
+                    <td>!4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td>!1</td>
+                    <td>!2</td>
+                    <td>!3</td>
+                    <td>!4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                    <td>!1</td>
+                    <td>!2</td>
+                    <td>!3</td>
+                    <td>!4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">7</th>
+                    <td>!1</td>
+                    <td>!2</td>
+                    <td>!3</td>
+                    <td>!4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">8</th>
+                    <td>!1</td>
+                    <td>!2</td>
+                    <td>!3</td>
+                    <td>!4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">9</th>
+                    <td>!1</td>
+                    <td>!2</td>
+                    <td>!3</td>
+                    <td>!4</td>
+                  </tr>
+  
                 </tbody>
               </table>
             </div>
