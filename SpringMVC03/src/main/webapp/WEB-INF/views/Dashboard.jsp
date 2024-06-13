@@ -31,12 +31,16 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/sakura.css" />
 <style type="text/css">
+.table-responsive {
+	max-height: 300px;
+	overflow-y: auto;
+}
 </style>
 </head>
 
 <!-- body -->
 
-<body>
+<body class="scrollbar">
 	<div id="particle-1"></div>
 	<nav
 		class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white"
@@ -124,12 +128,12 @@
 
 					<!-- Navigation -->
 					<ul class="navbar-nav">
-						<li class="nav-item active"><a class="nav-link hover12 active"
-							href="dashboard.do"> <i
+						<li class="nav-item active"><a
+							class="nav-link hover12 active" href="dashboard.do"> <i
 								class="ni ni-chart-bar-32 text-red "></i> La Form 트렌드 분석
 						</a></li>
-						<li class="nav-item"><a
-							class="nav-link hover12" href="productAnalysis.do"> <i
+						<li class="nav-item"><a class="nav-link hover12"
+							href="productAnalysis.do"> <i
 								class="ni ni-check-bold text-black"></i> Check'O 제품 분석
 						</a></li>
 						<li class="nav-item"><a class="nav-link hover12"
@@ -152,7 +156,7 @@
 				<!-- Brand -->
 				<a
 					class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block"
-					href="dashboard.do">Dashboard</a>
+					href="dashboard.do">TREND ANALYSIS</a>
 
 				<!-- Form -->
 				<form
@@ -165,8 +169,8 @@
 								</span>
 							</div>
 							<!-- 챗GPT API 들어갈 input 태그-->
-							<input class="form-control" placeholder="CahtGPT에게 질문하기" type="text"
-								id="promptInput" style="width: 850px;"
+							<input class="form-control" placeholder="CahtGPT에게 질문하기"
+								type="text" id="promptInput" style="width: 850px;"
 								onkeypress="if(event.keyCode=='13'){event.preventDefault(); gptSearch();}">
 							<button type="submit" id="submitButton"
 								style="visibility: hidden"></button>
@@ -212,8 +216,8 @@
 						data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}'
 						data-prefix="$" data-suffix="k"><a
 						onclick="changeBoard('갓생살기')" class="nav-link py-2 px-3 active"
-						data-toggle="tab"> <span class="d-none d-md-block">갓생</span>
-							<span class="d-md-none">갓생</span>
+						data-toggle="tab"> <span class="d-none d-md-block">갓생</span> <span
+							class="d-md-none">갓생</span>
 					</a></li>
 					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
@@ -281,7 +285,8 @@
 							<div class="row">
 								<div class="col">
 									<h5 class="card-title text-uppercase text-muted mb-0">긍정</h5>
-									<span class="h2 font-weight-bold mb-0 hover12" id="positiveWord">행복하다</span>
+									<span class="h2 font-weight-bold mb-0 hover12"
+										id="positiveWord">행복하다</span>
 								</div>
 								<div class="col-auto">
 									<div
@@ -307,7 +312,8 @@
 							<div class="row">
 								<div class="col">
 									<h5 class="card-title text-uppercase text-muted mb-0">부정</h5>
-									<span class="h2 font-weight-bold mb-0 hover12" id="negativeWord">불행하다</span>
+									<span class="h2 font-weight-bold mb-0 hover12"
+										id="negativeWord">불행하다</span>
 								</div>
 								<div class="col-auto">
 									<div
@@ -332,7 +338,8 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col">
-									<h5 class="card-title text-uppercase text-muted mb-0">추출된 단어의 갯수</h5>
+									<h5 class="card-title text-uppercase text-muted mb-0">추출된
+										단어의 갯수</h5>
 									<span class="h2 font-weight-bold mb-0 hover12" id="dataSize"></span>
 								</div>
 								<div class="col-auto">
@@ -343,7 +350,8 @@
 								</div>
 							</div>
 							<p class="mt-3 mb-0 text-muted text-sm">
-								<span class="text-warning mr-2"></span> <span class="text-nowrap"></span>
+								<span class="text-warning mr-2"></span> <span
+									class="text-nowrap"></span>
 							</p>
 						</div>
 					</div>
@@ -365,10 +373,12 @@
 							</div>
 						</div>
 						<div class="card-body"
-							style="background-color: #ffffff; padding: 0px;" padding id="wordCloud">
+							style="background-color: #ffffff; padding: 0px;" padding
+							id="wordCloud">
 							<img
 								src="${pageContext.request.contextPath}/resources/img/갓생살기.png"
-								alt="" style="max-height:420px;object-fit: cover;padding:1.5rem;margin-left:100px">
+								alt=""
+								style="max-height: 420px; object-fit: cover; padding: 1.5rem; margin-left: 100px">
 						</div>
 					</div>
 				</div>
@@ -415,7 +425,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="table-responsive">
+				<div class="table-responsive scrollbar">
 
 					<table class="table align-items-center table-flush">
 
@@ -434,63 +444,65 @@
 
 
 
-<!-- Modal -->
-<div id="naverModal" class="modal fade" role="dialog">
-  <div class="modal-dialog" style="width: 80%; max-width: 1200px;"> <!-- 스타일 추가 -->
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body" style="height: 700px;"> <!-- 스타일 추가 -->
-        <iframe id="naverIframe" style="width: 100%; height: 100%; border: none;"></iframe>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="gptModal" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-                  <h4 class="modal-title">ChatGPT</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-        </div>
-        <div class="modal-body" id="gptResponse">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-			<!-----------------------footer----------------------------------------------------------------------->
-			<footer class="footer">
-				<div class="row align-items-center justify-content-xl-between">
-					<div class="col-xl-6">
-						<div class="copyright text-center text-xl-left text-muted">
-							&copy; 2024 <a href="https://www.naver.com"
-								class="font-weight-bold ml-1" target="_blank">관리자 요청하기</a>
+			<!-- Modal -->
+			<div id="naverModal" class="modal fade" role="dialog">
+				<div class="modal-dialog" style="width: 80%; max-width: 1200px;">
+					<!-- 스타일 추가 -->
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body" style="height: 700px;">
+							<!-- 스타일 추가 -->
+							<iframe id="naverIframe"
+								style="width: 100%; height: 100%; border: none;"></iframe>
 						</div>
 					</div>
-					<div class="col-xl-6">
-						<ul
-							class="nav nav-footer justify-content-center justify-content-xl-end">
-							<li class="nav-item"><a href="https://www.naver.com"
-								class="nav-link" target="_blank">관리자 요청하기</a></li>
-							<li class="nav-item"><a href="https://checko.kr"
-								class="nav-link" target="_blank">체크오</a></li>
-							<li class="nav-item"><a href="https://grandalphakhk.com"
-								class="nav-link" target="_blank">그랑알파</a></li>
-							<li class="nav-item"><a href="https://smhrd.or.kr/"
-								class="nav-link" target="_blank">SMHRD</a></li>
-						</ul>
+				</div>
+			</div>
+
+			<div class="modal fade" id="gptModal" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">ChatGPT</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+						</div>
+						<div class="modal-body" id="gptResponse"></div>
 					</div>
 				</div>
-			</footer>
-			<!-----------------------footer----------------------------------------------------------------------->
-
+			</div>
 		</div>
+
+		<!-----------------------footer----------------------------------------------------------------------->
+		<footer class="footer">
+			<div class="row align-items-center justify-content-xl-between">
+				<div class="col-xl-6">
+					<div class="copyright text-center text-xl-left text-muted">
+						&copy; 2024 <a href="https://www.naver.com"
+							class="font-weight-bold ml-1" target="_blank">관리자 요청하기</a>
+					</div>
+				</div>
+				<div class="col-xl-6">
+					<ul
+						class="nav nav-footer justify-content-center justify-content-xl-end">
+						<li class="nav-item"><a href="https://www.naver.com"
+							class="nav-link" target="_blank">관리자 요청하기</a></li>
+						<li class="nav-item"><a href="https://checko.kr"
+							class="nav-link" target="_blank">체크오</a></li>
+						<li class="nav-item"><a href="https://grandalphakhk.com"
+							class="nav-link" target="_blank">그랑알파</a></li>
+						<li class="nav-item"><a href="https://smhrd.or.kr/"
+							class="nav-link" target="_blank">SMHRD</a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+		<!-----------------------footer----------------------------------------------------------------------->
+
+	</div>
 	</div>
 	<!--   Core   -->
 	<script

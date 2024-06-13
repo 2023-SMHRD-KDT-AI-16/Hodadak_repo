@@ -22,24 +22,31 @@
 </noscript>
 
 <style>
-.page-link {
-    padding: 5px 10px;
-    margin-right: 10px;
-    color: white;
-    text-decoration: none;
+body {
+	background-image:
+		url('${pageContext.request.contextPath}/resources/img/pic03.jpg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
 
+.page-link {
+	padding: 5px 10px;
+	margin-right: 10px;
+	color: white;
+	text-decoration: none;
 }
 
 .page-link:hover {
-    background-color: #e9ecef;
-      border-radius: 5px; /* 모서리를 둥글게 */
+	background-color: #e9ecef;
+	border-radius: 5px; /* 모서리를 둥글게 */
 }
 
 .page-link.active {
-    font-weight: bold;
-    background-color: whitesmoke;
-    color: black;
-    border-radius: 5px; /* 모서리를 둥글게 */
+	font-weight: bold;
+	background-color: whitesmoke;
+	color: black;
+	border-radius: 5px; /* 모서리를 둥글게 */
 }
 </style>
 </head>
@@ -117,17 +124,15 @@
 
 
 			<!-- 기업목록 -->
-			<article id="elements">
+			<article id="elements" style="width: 1100px">
 				<h2 class="major">기업목록</h2>
 
 				<section>
 					<section>
-
 						<div class="table-wrapper" id="view"></div>
-
 					</section>
-										<div id="pagination"></div>
-					</section>
+					<div id="pagination"></div>
+				</section>
 			</article>
 
 		</div>
@@ -152,7 +157,7 @@
 
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
 $(document).ready(function() {
     corpList(1); // 페이지 로드 시 첫 번째 페이지 데이터 로드
 });
