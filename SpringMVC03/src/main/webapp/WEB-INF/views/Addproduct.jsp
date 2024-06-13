@@ -117,7 +117,7 @@
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link hover12 active" href="./Check'O.do">
+              <a class="nav-link hover12 active" href="./productAnalysis.do">
                 <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
               </a>
             </li>
@@ -509,10 +509,15 @@
                 alert('파일 업로드 실패');
             }
         });
-
         
-  
-  fileInput.value = ""; // 파일 선택 input 초기화
+        
+        
+        document.getElementById("productImageInput").value = "";
+        document.getElementById("productNameInput").value = "";
+        document.getElementById("productPriceInput").value = "";
+        document.getElementById("productDescriptionInput").value = "";
+        document.querySelector(".imagePreview").innerHTML = "";
+  		fileInput.value = ""; // 파일 선택 input 초기화
 
   
 
