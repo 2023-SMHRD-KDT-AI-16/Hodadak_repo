@@ -31,16 +31,16 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/sakura.css" />
 <style type="text/css">
-#011 { /* 차트 크기를 CSS로 설정 */
-	width: 100px; /* 너비를 400픽셀로 설정 */
-	height: 100px; /* 높이를 300픽셀로 설정 */
+.table-responsive {
+	max-height: 300px;
+	overflow-y: auto;
 }
 </style>
 </head>
 
 <!-- body -->
 
-<body>
+<body class="scrollbar">
 	<div id="particle-1"></div>
 	<nav
 		class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white"
@@ -55,8 +55,8 @@
 			</button>
 
 			<!-- Brand -->
-			<a class="navbar-brand pt-0" href="Dashboard.do"> <img
-				src="${pageContext.request.contextPath}/resources/img/𝑳𝒂 𝑭𝒐𝒓𝒎_newtitle1.png"
+			<a class="navbar-brand pt-0" href="dashboard.do"> <img
+				src="${pageContext.request.contextPath}/resources/img/배너2.png"
 				class="navbar-brand-img" alt="...">
 			</a>
 
@@ -80,7 +80,7 @@
 							<h6 class="text-overflow m-0">Welcome!</h6>
 						</div>
 						<div class="dropdown-divider"></div>
-						<a href="Main.do" class="dropdown-item"> <i
+						<a href="logout.do" class="dropdown-item"> <i
 							class="ni ni-user-run"></i> <span>Logout</span>
 						</a>
 					</div></li>
@@ -98,7 +98,7 @@
 					<div class="navbar-collapse-header d-md-none">
 						<div class="row">
 							<div class="col-6 collapse-brand">
-								<a href="./Dashboard.html"> <img
+								<a href="dashboard.do"> <img
 									src="assets/img/𝑳𝒂 𝑭𝒐𝒓𝒎_newtitle1.png">
 								</a>
 							</div>
@@ -115,9 +115,9 @@
 					<form class="mt-4 mb-3 d-md-none">
 						<div class="input-group input-group-rounded input-group-merge">
 							<!-- 챗GPT API 들어갈 input 태그-->
-							<input type="search"
+							<input type="text"
 								class="form-control form-control-rounded form-control-prepended"
-								placeholder="Search" aria-label="Search">
+								placeholder="ChatGPT에게 물어보세요!" aria-label="Search">
 							<div class="input-group-prepend">
 								<div class="input-group-text">
 									<span class="fa fa-search"></span>
@@ -127,7 +127,6 @@
 					</form>
 
 					<!-- Navigation -->
-					
 
 				</div>
 			</div>
@@ -142,7 +141,7 @@
 				<!-- Brand -->
 				<a
 					class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block"
-					href="./Dashboard.html">Dashboard</a>
+					href="dashboard.do">TREND ANALYSIS</a>
 
 				<!-- Form -->
 				<form
@@ -155,8 +154,11 @@
 								</span>
 							</div>
 							<!-- 챗GPT API 들어갈 input 태그-->
-							<input class="form-control" placeholder="Search" type="text"
-								style="width: 850px;">
+							<input class="form-control" placeholder="CahtGPT에게 질문하기"
+								type="text" id="promptInput" style="width: 850px;"
+								onkeypress="if(event.keyCode=='13'){event.preventDefault(); gptSearch();}">
+							<button type="submit" id="submitButton"
+								style="visibility: hidden"></button>
 						</div>
 					</div>
 				</form>
@@ -197,21 +199,24 @@
 					<li class="nav-item mr-2 mr-md-0" data-toggle="chart"
 						data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}'
-						data-prefix="$" data-suffix="k"><a href="#"
-						class="nav-link py-2 px-3 active" data-toggle="tab"> <span
-							class="d-none d-md-block">밀레니엄</span> <span class="d-md-none">M</span>
+						data-prefix="$" data-suffix="k"><a
+						onclick="changeBoard('갓생살기')" class="nav-link py-2 px-3 active"
+						data-toggle="tab"> <span class="d-none d-md-block">갓생</span> <span
+							class="d-md-none">갓생</span>
 					</a></li>
 					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-						data-prefix="$" data-suffix="k"><a href="#"
-						class="nav-link py-2 px-3" data-toggle="tab"> <span
-							class="d-none d-md-block">스트레스</span> <span class="d-md-none">W</span>
+						data-prefix="$" data-suffix="k"><a
+						onclick="changeBoard('스트레스')" class="nav-link py-2 px-3"
+						data-toggle="tab"> <span class="d-none d-md-block">스트레스</span>
+							<span class="d-md-none">스트레스</span>
 					</a></li>
 					<li class="nav-item" data-toggle="chart" data-target="#chart-sales"
 						data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-						data-prefix="$" data-suffix="k"><a href="#"
-						class="nav-link py-2 px-3" data-toggle="tab"> <span
-							class="d-none d-md-block">혈당</span> <span class="d-md-none">W</span>
+						data-prefix="$" data-suffix="k"><a
+						onclick="changeBoard('혈당')" class="nav-link py-2 px-3"
+						data-toggle="tab"> <span class="d-none d-md-block">혈당</span> <span
+							class="d-md-none">혈당</span>
 					</a></li>
 				</ul>
 			</div>
@@ -246,8 +251,9 @@
 						<div class="card-body " style="background-color: #ffffff;">
 
 							<!-- Chart -->
-							<div class="chart">
-								<canvas id="011" style="display: block;height: 355px;width: 1550px;"></canvas>
+							<div class="chart" id="divBarChart">
+								<canvas id="011"
+									style="display: block; height: 355px; width: 1550px;"></canvas>
 							</div>
 
 						</div>
@@ -264,7 +270,8 @@
 							<div class="row">
 								<div class="col">
 									<h5 class="card-title text-uppercase text-muted mb-0">긍정</h5>
-									<span class="h2 font-weight-bold mb-0 hover12">행복하다</span>
+									<span class="h2 font-weight-bold mb-0 hover12"
+										id="positiveWord">행복하다</span>
 								</div>
 								<div class="col-auto">
 									<div
@@ -290,7 +297,8 @@
 							<div class="row">
 								<div class="col">
 									<h5 class="card-title text-uppercase text-muted mb-0">부정</h5>
-									<span class="h2 font-weight-bold mb-0 hover12">불행하다</span>
+									<span class="h2 font-weight-bold mb-0 hover12"
+										id="negativeWord">불행하다</span>
 								</div>
 								<div class="col-auto">
 									<div
@@ -315,8 +323,9 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col">
-									<h5 class="card-title text-uppercase text-muted mb-0 hover12">test</h5>
-									<span class="h2 font-weight-bold mb-0">test</span>
+									<h5 class="card-title text-uppercase text-muted mb-0">추출된
+										단어의 갯수</h5>
+									<span class="h2 font-weight-bold mb-0 hover12" id="dataSize"></span>
 								</div>
 								<div class="col-auto">
 									<div
@@ -326,9 +335,8 @@
 								</div>
 							</div>
 							<p class="mt-3 mb-0 text-muted text-sm">
-								<span class="text-warning mr-2"><i
-									class="fas fa-arrow-down"></i> test</span> <span class="text-nowrap">다른
-									test</span>
+								<span class="text-warning mr-2"></span> <span
+									class="text-nowrap"></span>
 							</p>
 						</div>
 					</div>
@@ -350,10 +358,12 @@
 							</div>
 						</div>
 						<div class="card-body"
-							style="background-color: #ffffff; padding: 0px;">
+							style="background-color: #ffffff; padding: 0px;" padding
+							id="wordCloud">
 							<img
-								src="${pageContext.request.contextPath}/resources/img/밀레니엄.png"
-								alt="">
+								src="${pageContext.request.contextPath}/resources/img/갓생살기.png"
+								alt=""
+								style="max-height: 420px; object-fit: cover; padding: 1.5rem; margin-left: 100px">
 						</div>
 					</div>
 				</div>
@@ -381,7 +391,7 @@
 
 
 							<!-- Chart -->
-							<div class="chart">
+							<div class="chart" id="divDonutChart">
 								<canvas id="010"></canvas>
 							</div>
 						</div>
@@ -396,41 +406,20 @@
 				<div class="card-header bg-gradient-default1 border-0 hover12">
 					<div class="row align-items-center">
 						<div class="col">
-							<h3 class="mb-0">블로그 뉴스 등</h3>
+							<h3 class="mb-0">블로그</h3>
 						</div>
 					</div>
 				</div>
-				<div class="table-responsive">
+				<div class="table-responsive scrollbar">
 
 					<table class="table align-items-center table-flush">
 
 						<thead class="thead-light">
-							<tr>
-								<th scope="col">긍정, 부정</th>
-								<th scope="col">???????</th>
-								<th scope="col">???????</th>
-								<th scope="col">???????</th>
-								<th scope="col">???????</th>
-								<th scope="col">???????</th>
-							</tr>
+
 						</thead>
 
 
-						<tbody>
-							<tr>
-								<th scope="row">!</th>
-								<td>!1</td>
-								<td>!2</td>
-								<td>!3</td>
-								<td>!4</td>
-							</tr>
-							<tr>
-								<th scope="row">@</th>
-								<td>@1</td>
-								<td>@2</td>
-								<td>@3</td>
-							</tr>
-
+						<tbody id="searchResult">
 						</tbody>
 					</table>
 
@@ -438,33 +427,67 @@
 				</div>
 			</div>
 
-			<!-----------------------footer----------------------------------------------------------------------->
-			<footer class="footer">
-				<div class="row align-items-center justify-content-xl-between">
-					<div class="col-xl-6">
-						<div class="copyright text-center text-xl-left text-muted">
-							&copy; 2024 <a href="https://www.naver.com"
-								class="font-weight-bold ml-1" target="_blank">관리자 요청하기</a>
+
+
+			<!-- Modal -->
+			<div id="naverModal" class="modal fade" role="dialog">
+				<div class="modal-dialog" style="width: 80%; max-width: 1200px;">
+					<!-- 스타일 추가 -->
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body" style="height: 700px;">
+							<!-- 스타일 추가 -->
+							<iframe id="naverIframe"
+								style="width: 100%; height: 100%; border: none;"></iframe>
 						</div>
 					</div>
-					<div class="col-xl-6">
-						<ul
-							class="nav nav-footer justify-content-center justify-content-xl-end">
-							<li class="nav-item"><a href="https://www.naver.com"
-								class="nav-link" target="_blank">관리자 요청하기</a></li>
-							<li class="nav-item"><a href="https://checko.kr"
-								class="nav-link" target="_blank">체크오</a></li>
-							<li class="nav-item"><a href="https://grandalphakhk.com"
-								class="nav-link" target="_blank">그랑알파</a></li>
-							<li class="nav-item"><a href="https://smhrd.or.kr/"
-								class="nav-link" target="_blank">SMHRD</a></li>
-						</ul>
+				</div>
+			</div>
+
+			<div class="modal fade" id="gptModal" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">ChatGPT</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+						</div>
+						<div class="modal-body" id="gptResponse"></div>
 					</div>
 				</div>
-			</footer>
-			<!-----------------------footer----------------------------------------------------------------------->
-
+			</div>
 		</div>
+
+		<!-----------------------footer----------------------------------------------------------------------->
+		<footer class="footer">
+			<div class="row align-items-center justify-content-xl-between">
+				<div class="col-xl-6">
+					<div class="copyright text-center text-xl-left text-muted">
+						&copy; 2024 <a href="https://www.naver.com"
+							class="font-weight-bold ml-1" target="_blank">관리자 요청하기</a>
+					</div>
+				</div>
+				<div class="col-xl-6">
+					<ul
+						class="nav nav-footer justify-content-center justify-content-xl-end">
+						<li class="nav-item"><a href="https://www.naver.com"
+							class="nav-link" target="_blank">관리자 요청하기</a></li>
+						<li class="nav-item"><a href="https://checko.kr"
+							class="nav-link" target="_blank">체크오</a></li>
+						<li class="nav-item"><a href="https://grandalphakhk.com"
+							class="nav-link" target="_blank">그랑알파</a></li>
+						<li class="nav-item"><a href="https://smhrd.or.kr/"
+							class="nav-link" target="_blank">SMHRD</a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+		<!-----------------------footer----------------------------------------------------------------------->
+
+	</div>
 	</div>
 	<!--   Core   -->
 	<script
@@ -496,7 +519,17 @@
         application: "argon-dashboard-free" // 애플리케이션 이름 설정
       });
 
-    document.addEventListener("DOMContentLoaded", function () { // 문서가 모두 로드되면 실행
+    function donutChart(request) { 
+    	$.ajax({
+    		url: "getDeepPN",
+    		data: {deep_source: request},
+    		success: function(data){
+    			//console.log(data);
+    
+      $('#010').remove();
+    $('#divDonutChart').append('<canvas id="010"></canvas>');
+
+    	
       var ctx = document.getElementById('010').getContext('2d'); // id가 '010'인 캔버스 요소를 가져와 2D 컨텍스트 얻기
       var myChart = new Chart(ctx, { // 새로운 Chart 객체 생성
         type: 'doughnut', // 차트 유형을 '도넛형'으로 설정
@@ -504,7 +537,7 @@
           labels: ['부정', '긍정'], // 도넛 차트의 레이블
           datasets: [{
             label: 'Market Share', // 데이터셋의 레이블
-            data: [40, 60], // 각 레이블에 해당하는 데이터 값
+            data: data, // 각 레이블에 해당하는 데이터 값
             backgroundColor: ['#F5365C', '#2DCC70'], // 각 데이터 조각의 배경색 설정
             borderColor: [], // 각 데이터 조각의 테두리 색상 설정 (현재 없음)
             borderWidth: 10 // 데이터 조각의 테두리 너비 설정
@@ -531,59 +564,89 @@
           cutoutPercentage: 50
         }
       });
-    });
+      
+    		},
+    		error: function(){
+    			alert("연결 실패 ㅜㅜ");
+    		}
+    	});
+    }
 
     //---------------------------------------------------------------------------------------
 
     // 키워드 탑10
     // 바차트
-    document.addEventListener("DOMContentLoaded", function () { // 문서가 모두 로드되면 실행
-      const ctx = document.getElementById('011').getContext('2d'); // id가 '011'인 캔버스 요소를 가져와 2D 컨텍스트 얻기
-      const data = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]; // 새로운 데이터 배열
-      const labels = ['TOP1', 'TOP2', 'TOP3', 'TOP4', 'TOP5', 'TOP6', 'TOP7', 'TOP8', 'TOP9', 'TOP10']; // 새로운 라벨 배열
+  function barChart(list, request) {
 
-      const chart = new Chart(ctx, { // 새로운 Chart 객체 생성
-        type: 'bar', // 차트 유형을 '바 차트'로 설정
-        data: {
-          labels: labels, // 차트의 레이블 설정
-          datasets: [{
-            label: 'New Monthly Sales', // 데이터셋의 레이블
-            data: data, // 차트 데이터 설정
-            backgroundColor: '#8467D7', // 데이터셋의 배경색 설정
-          }]
-        },
-        options: {
-          responsive: true, // 차트를 반응형으로 설정
-          indexAxis: 'y', // 가로형 바 차트로 설정
-          plugins: {
-            legend: {
-              display: true, // 범례 표시 여부 설정
-              position: 'top' // 범례를 상단에 배치
-            },
-            title: {
-              display: true, // 타이틀 표시 여부 설정
-              text: 'New Monthly Sales Data' // 타이틀 텍스트 설정
-            }
-          },
-          scales: {
-            x: {
-              title: {
-                display: true, // x축 타이틀 표시 여부 설정
-                text: 'New Sales' // x축 타이틀 텍스트 설정
-              },
-              beginAtZero: true // x축 값이 0부터 시작하도록 설정
-            },
-            y: {
-              title: {
-                display: true, // y축 타이틀 표시 여부 설정
-                text: 'Month' // y축 타이틀 텍스트 설정
-              }
-            }
-          }
+    const rList = list.filter(item => item.trend_source === request);
+    const groupedTrends = {};
+
+    rList.forEach(trend => {
+        const key = trend.trend_keyword;
+        if (!groupedTrends[key]) {
+            groupedTrends[key] = { trend_keyword: key, trend_sum: 0 };
         }
-      });
+        groupedTrends[key].trend_sum += trend.trend_sum; // 키워드가 같을 때 빈도수를 누적
     });
 
+    // trend_sum을 기준으로 내림차순으로 정렬하고 상위 10개를 선택합니다.
+    const top10Trends = Object.values(groupedTrends)
+        .sort((a, b) => b.trend_sum - a.trend_sum)
+        .slice(0, 10);
+
+    const labels = top10Trends.map(trend => trend.trend_keyword);
+    const data = top10Trends.map(trend => trend.trend_sum);
+
+    $('#011').remove();
+    $('#divBarChart').append('<canvas id="011" style="display: block;height: 355px;width: 1550px;"></canvas>');
+
+    let canvas = document.getElementById('011');
+    let ctx = canvas.getContext('2d');
+
+    let chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Trend Sum',
+                data: data,
+                backgroundColor: '#8467D7',
+            }]
+        },
+        options: {
+            responsive: true,
+            indexAxis: 'y',
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                title: {
+                    display: true,
+                    text: 'Top 10 Trends'
+                },
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Trend Sum'
+                    },
+                    beginAtZero: true
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Keyword'
+                    },
+                    ticks: {
+                        autoSkip: false
+                    }
+                }
+            }
+        }
+    });
+}
 
     //---------------------------------------------------------------------------------------
     document.addEventListener("DOMContentLoaded", function () {
@@ -632,6 +695,173 @@
       ],
       delay: 600,
     });
+    
+    //------------------------------------------------------------------------
+   	//html이 로드 됐을때 
+   $(document).ready(function() { 
+	   changeBoard('갓생살기')
+	  
+   });
+
+	//대시보드 값 DB연결
+	function changeBoard(request){
+		naverSearch(request)
+		donutChart(request)
+		ChangeWordCloud(request)
+		positiveWord(request)
+		negativeWord(request)
+		dataSize(request)
+		
+		$.ajax({
+			url:'trendList',
+			type:'GET',
+			success: function(response) {
+				 let tList = JSON.stringify(response, null, 2)
+				 barChart(JSON.parse(tList),request)
+				
+			},
+			error:function(xhr, status, error) {
+	            console.error("에러 발생:", error);
+	        }
+		})
+	}
+	
+//-----------------------------------------------------------------------------------
+	//워드클라우드 
+	var contextPath = "${pageContext.request.contextPath}";
+	function ChangeWordCloud(request){
+	//console.log("워드클라우드"+request)
+		// wordCloud 요소를 선택
+	    var wordCloudElement = document.getElementById('wordCloud');
+	    
+	    // wordCloud 요소 안의 img 태그를 선택
+	    var imgElement = wordCloudElement.querySelector('img');
+	    
+	    // img 태그의 src 속성을 변경
+	    imgElement.src = contextPath + '/resources/img/' + request + '.png';
+}
+
+
+//------------------------------------------------------------------------------------------
+	
+	//긍정 top1
+	function positiveWord(request){
+	//console.log(request)
+    	$.ajax({
+    		url: "getBest",
+    		data: {deep_source: request},
+    		success: function(data){
+    			//console.log(data);
+    			$("#positiveWord").text(data.deep_result)
+				
+			},
+			error:function(xhr, status, error) {
+	            console.error("에러 발생:", error);
+	        }
+		})
+	}
+	
+	//부정 top1
+		function negativeWord(request){
+			$.ajax({
+	    		url: "getWorst",
+	    		data: {deep_source: request},
+	    		success: function(data){
+	    			//console.log(data);
+	    			$("#negativeWord").text(data.deep_result)
+					
+				},
+				error:function(xhr, status, error) {
+		            console.error("에러 발생:", error);
+		        }
+			})
+	
+	}
+	
+	
+	//추출된 키워드량
+	 function dataSize(request){
+		 $.ajax({
+	    		url: "getDataSize",
+	    		data: {deep_source: request},
+	    		success: function(data){
+	    			console.log(data);
+	    			let formattedData = data.toLocaleString();
+	    			$("#dataSize").text(formattedData)
+					
+				},
+				error:function(xhr, status, error) {
+		            console.error("에러 발생:", error);
+		        }
+			})
+	}
+//---------------------------------------------------------------------------------------------
+    
+   	//네이버 api 
+    function naverSearch(query){
+	$.ajax({
+        url: 'naver',  // 백엔드의 /naver 엔드포인트 호출
+        type: 'GET',    // HTTP 메소드
+        contentType: 'application/json;charset:UTF-8', // 반환받을 데이터의 타입
+        data: { query: query },  // 서버로 보낼 데이터
+        success: function(response) {
+          //  console.log("서버로부터의 응답:", response);
+            innerHtml=""
+            	
+            for(let i = 0; i<response.items.length;i++){
+            	var url = ensureCompleteUrl(response.items[i].link);
+            	innerHtml +="<tr>"
+            	innerHtml += "<td></td>"
+            	innerHtml += "<td><h3><a onclick='modalOpen(\"" + url + "\")'>" + response.items[i].title + "</a></h3>";
+            	innerHtml += "<a onclick='modalOpen(\"" + url + "\")'>" + response.items[i].description + "</a></td>";
+            	innerHtml +="<tr>"
+            }
+            	
+            $("#searchResult").html(innerHtml)
+        },
+        error: function(xhr, status, error) {
+            console.error("에러 발생:", error);
+        }
+    });
+}
+
+
+function ensureCompleteUrl(url) { //네이버 검색으로 받아온 link 변환
+	  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+	    return 'https://' + url; // 기본적으로 https를 사용하거나 필요에 따라 조정
+	  }
+	  return url;
+	}
+
+
+function modalOpen(link) {
+    $('#naverModal').modal("show");
+    $('#naverIframe').attr('src', link); // iFrame의 src 속성 설정
+}
+
+//-------------------------------------------------------------------------------------------
+ //GPT API 실행 
+ function gptSearch(){
+		var myData =$("#promptInput").val()
+    $.ajax({
+        url: 'chat',
+        type: 'POST',
+        contentType: 'application/json;charset:UTF-8',
+        data: JSON.stringify({ prompt: myData }),
+        success: function(response) {
+            console.log("서버로부터의 응답:", response);
+            $("#gptResponse").html(response)
+            $('#gptModal').modal("show");
+        },
+        error: function(xhr, status, error) {
+            console.error("에러 발생:", error);
+        }
+    });
+		
+		$("#promptInput").val("")
+}
+  
+
   </script>
 
 </body>

@@ -27,7 +27,7 @@
 
 <!-- body -->
 
-<body>
+<body class="scrollbar">
   <div id="particle-1"></div>
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main"
     style="padding: 1;">
