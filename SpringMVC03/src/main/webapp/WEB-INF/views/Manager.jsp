@@ -218,9 +218,9 @@ function makeView(data, pageNumber) {
     listHtml += "<thead><tr><th>기업코드</th><th>기업명</th><th>전화번호</th><th>이메일</th><th>주소</th><th>수정</th><th>삭제</th></tr></thead><tbody>";
    
     $.each(data, function(index, obj) {
-        listHtml += "<tr><td>" + obj.corp_key + "</td><td>" + obj.corp_name + "</td>";
-        listHtml += "<td>" + obj.corp_tel + "</td><td>" + obj.corp_email + "</td><td>" + obj.corp_addr + "</td>";
-        listHtml += "<td><button onclick='goUpdateForm(\"" + obj.corp_key + "\", " + pageNumber + ")'>수정</button></td>";
+        listHtml += "<tr><td>" + obj.corp_key + "</td><td  id=n"+obj.corp_key+">" + obj.corp_name + "</td>";
+        listHtml += "<td  id=t"+obj.corp_key+">" + obj.corp_tel + "</td><td id=e"+obj.corp_key+">" + obj.corp_email + "</td><td id=a"+obj.corp_key+">" + obj.corp_addr + "</td>";
+        listHtml += "<td id=ud"+obj.corp_key+"><button  onclick='goUpdateForm(\"" + obj.corp_key + "\", " + pageNumber + ")'>수정</button></td>";
         listHtml += "<td><button onclick='goDelete(\"" + obj.corp_key + "\", " + pageNumber + ")'>삭제</button></td></tr>";
     });
 
@@ -251,7 +251,7 @@ function makeView(data, pageNumber) {
 		var addrInput ="<input type='text' id ='ai"+key+"' value='"+addr+"'> "
 		$("#a"+key).html(addrInput)
 		
-		   var newButton = "<button class='btn btn-sm' onclick='goUpdate(\"" + key + "\", " + pageNumber + "\")'>수정</button>";
+		   var newButton = "<button class='btn btn-sm' onclick='goUpdate(\"" + key + "\", " + pageNumber + ")'>수정하기</button>";
 	    $("#ud" + key).html(newButton);
 	}
 	
@@ -261,14 +261,17 @@ function makeView(data, pageNumber) {
 		var corp_tel = $("#ti"+key).val();
 		var corp_email = $("#ei"+key).val();
 		var corp_addr = $("#ai"+key).val();
-		console.log(corp_name)
+		console.log(corp_name,corp_tel,corp_email,corp_addr)
 		
 		$.ajax({
 			url: "update",
 			type:"put",
 			contentType: "application/json; charset=UTF-8",
 			data:JSON.stringify({"corp_name":corp_name,"corp_tel":corp_tel, "corp_email":corp_email, "corp_addr":corp_addr,"corp_key":key}),
-			success:corpList(pageNumber),
+			success:function(){
+				alert("수정되었습니다")
+				corpList(pageNumber)
+			},
 			error:function(){
 				alert("error")
 			}

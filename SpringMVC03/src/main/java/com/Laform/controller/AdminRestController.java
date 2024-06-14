@@ -55,7 +55,8 @@ public class AdminRestController {
 	// 기업 수정하기
 	@PutMapping("update")
 	public void corpUpdate(@RequestBody tb_corperation corp) { // idx, title, content
-		System.out.println(corp.toString());
+		
+		System.out.println("수정하기"+corp.toString());
 		corpMapper.corpUpdate(corp);
 	}
 }
