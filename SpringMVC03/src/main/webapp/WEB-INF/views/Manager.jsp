@@ -124,7 +124,7 @@ body {
 
 
 			<!-- 기업목록 -->
-			<article id="elements" style="width: 1100px">
+			<article id="elements" style="width: 1300px">
 				<h2 class="major">기업목록</h2>
 
 				<section>

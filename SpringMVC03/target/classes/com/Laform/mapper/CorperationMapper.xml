@@ -9,7 +9,7 @@
 	
 	<!-- 기업 목록 출력 -->
 	<select id="corpList" resultType="com.Laform.entity.tb_corperation">
-			select * from tb_corperation order by joined_at desc
+			select * from tb_corperation where corp_key not in ('admin') order by joined_at desc
 	</select>
 	
 	<!-- 기업 정보 -->
@@ -35,9 +35,10 @@
 	<!-- 페이징을 포함한 기업 목록 출력 -->
 <select id="getCorpListWithPaging" resultType="com.Laform.entity.tb_corperation" parameterType="int">
     SELECT *
-    FROM tb_corperation
-    ORDER BY joined_at DESC
-    LIMIT 5 OFFSET #{pageNum}
+FROM tb_corperation
+WHERE corp_key != 'admin'
+ORDER BY joined_at DESC
+LIMIT 5 OFFSET #{pageNum};
 </select>
 
 
