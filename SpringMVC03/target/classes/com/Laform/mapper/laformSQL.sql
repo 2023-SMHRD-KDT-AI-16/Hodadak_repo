@@ -18,4 +18,8 @@ insert into tb_corperation (corp_name,corp_tel,corp_email,corp_addr,joined_at) V
 
 update tb_review set review_name= SUBSTRING(review_name, 5);
 
-select * from tb_review;
+select * from tb_corperation;
+
+select * from tb_product;
+
+delete from tb_product where prod_idx=14;

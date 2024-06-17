@@ -40,7 +40,7 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./Addproduct.do">
+      <a class="navbar-brand pt-0" href="dashboard.do">
         <img src="/controller/resources/img/배너2.png" class="navbar-brand-img" alt="...">
       </a>
 
@@ -63,7 +63,7 @@
               <h6 class="text-overflow m-0">Welcome!</h6>
             </div>
             <div class="dropdown-divider"></div>
-            <a href="Main.do" class="dropdown-item">
+            <a href="logout.do" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
             </a>
@@ -83,7 +83,7 @@
           <div class="navbar-collapse-header d-md-none">
             <div class="row">
               <div class="col-6 collapse-brand">
-                <a href="./Addproduct.">
+                <a href="dashboard.do">
                   <img src="assets/img/배너2.png">
                 </a>
               </div>
@@ -112,17 +112,17 @@
           <!-- Navigation -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link hover12" href="./Dashboard.do">
+              <a class="nav-link hover12" href="dashboard.do">
                 <i class="ni ni-chart-bar-32 text-red "></i> La Form 트렌드 분석
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link hover12 active" href="./productAnalysis.do">
+              <a class="nav-link hover12 active" href="productAnalysis.do">
                 <i class="ni ni-check-bold text-black"></i> Check'O 제품 분석
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link hover12" href="./Suggest.do">
+              <a class="nav-link hover12" href="suggest.do">
                 <i class="ni ni-basket text-orange"></i> La Form 제안서
                 <span class="badge badge-pill badge-dark"
                   style="background-color: #4B0082; color: #FFD700; border: 2px solid #FFD700;">AI</span>
@@ -142,7 +142,7 @@
       <div class="container-fluid">
 
         <!-- Brand -->
-        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="./Addproduct.do">제품 추가</a>
+        <a class="h1 mb-0 text-black text-uppercase d-none d-lg-inline-block" href="Addproduct.do">제품 추가</a>
 
 
         <!-- 위쪽 버튼------------------------------------------------------------------------------------------------------>
@@ -202,7 +202,7 @@
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
               <div class="dropdown-divider"></div>
-              <a href="Main.do" class="dropdown-item">
+              <a href="logout.do" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
               </a>
@@ -304,15 +304,15 @@
     </div>
   </div>
   <!--   Core   -->
-  <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
-  <script src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/jquery/dist/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!--   Optional JS   -->
-  <script src="./assets/js/plugins/chart.js/dist/Chart.min.js"></script>
-  <script src="./assets/js/plugins/chart.js/dist/Chart.extension.js"></script><!--차트-->
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/chart.js/dist/Chart.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/plugins/chart.js/dist/Chart.extension.js"></script><!--차트-->
   <!--   Argon JS   -->
-  <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/argon-dashboard.min.js?v=1.1.2"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-  <script src="assets/js/sakura.js" text="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/sakura.js" text="text/javascript"></script>
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script>
     //---------------------------------------------------------------------------------------
