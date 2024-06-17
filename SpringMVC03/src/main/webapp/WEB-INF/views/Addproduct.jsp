@@ -479,12 +479,18 @@
       }, 2000);
     }
     
+    //콤마 제거 
+    function removeCommas(str) {
+    	  return str.replace(/,/g, '');
+    	}
+    
+    
     function uploadvv() {
-       console.log('테스트테스트가나다라마바사')
+      // console.log('테스트테스트가나다라마바사')
       var productName = document.getElementById("productNameInput").value; /* 제품이름 */
-      var productPrice = document.getElementById("productPriceInput").value; /* 제품가격*/
+      var productPrice = removeCommas(document.getElementById("productPriceInput").value); /* 제품가격*/
       var productDesc = document.getElementById("productDescriptionInput").value;/*제품성분*/
-      console.log(productName)
+      console.log(productPrice)
        var fileInput = document.getElementById('productImageInput'); /*이미지정보*/
        var corpkey = "HDDAK-2024-400857923030220807";
         var file = fileInput.files[0];
@@ -519,6 +525,8 @@
         document.querySelector(".imagePreview").innerHTML = "";
   		fileInput.value = ""; // 파일 선택 input 초기화
 
+    	  const productList = document.querySelector('.productList');
+          productList.innerHTML = '';
   
 
 }
